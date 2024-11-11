@@ -1,0 +1,21 @@
+{
+  "name": "randusers",
+  "version": "0.1.0",
+  "description": "Api that serves a set of random users from Pakistan you can play with as a part of API testing",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.21.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "users",
+    "pakistani",
+    "random",
+    "noauth"
+  ],
+  "author": "github.com/Abbaskhurram255",
+  "license": "MIT"
+}
