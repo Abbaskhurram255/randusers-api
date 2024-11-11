@@ -1,0 +1,26 @@
+{
+  "name": "randusers",
+  "version": "0.1.0",
+  "description": "Api that serves a set of random users from Pakistan you can play with as a part of API testing",
+  "main": "app.js",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  },
+  "scripts": {
+    "test": "test",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [
+    "users",
+    "pakistani",
+    "random",
+    "noauth"
+  ],
+  "author": "github.com/Abbaskhurram255",
+  "license": "MIT"
+}
