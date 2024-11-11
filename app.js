@@ -30,6 +30,10 @@ app.all("/:number", (req, res) => {
     }
 });
 
+app.get("/", (req, res) => {
+    res.status(206).send("Please type something awesome!");
+});
+
 app.use((err, res) => {
     console.error(err.stack);
     res.status(500).send("Internal Server Error!");
