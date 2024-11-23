@@ -1817,7 +1817,7 @@ app.all("/:number", (req, res) => {
             }
         } else if (age) {
             let filteredUsers = foreigners.filter(
-                (u) => u.age === parseInt(req.query.age, "i")
+                (u) => u.age === parseInt(req.query.age)
             );
             if (filteredUsers.length) {
                 if (filteredUsers.length > number)
@@ -1862,7 +1862,7 @@ app.get("/", (req, res) => {
         else res.status(404).send("No users found for this state!");
     } else if (age) {
         let filteredUsers = foreigners.filter(
-            (u) => u.age === parseInt(req.query.age, "i")
+            (u) => u.age === parseInt(req.query.age)
         );
         if (filteredUsers.length) res.json(filteredUsers);
         else res.status(404).send("No users found for this age!");
