@@ -1782,11 +1782,15 @@ app.all("/:number", (req, res) => {
     console.log(`Received a ${method} request on ${path}, acting accordingly!`);
     if (method === "GET") {
         let { country, city, state, age, religion, status, sex } = req.query;
+        if (status) status = status.toLowerCase();
+        if (sex) sex = sex.toLowerCase();
         if (status === "online") status = "active";
         else if (status === "offline") status = "inactive";
         //^this here, stays, to handle cases where the uses passes in "online" or "offline" instead of "active" or "inactive"
-        if (!!sex.match(/^m(an)?$/i)) sex = "male";
-        else if (!!sex.match(/^(f$|w)(oman$)?/i)) sex = "female";
+        if (!!String(sex).match(/^m(an)?$/i)) sex = "male";
+        else if (!!String(sex).match(/^(f$|w)(oman$)?/i)) sex = "female";
+        //cover cases where the user passes in [man|woman|[m|w]|[m|f]] instead
+        //using String() here, to force it to be a string, to handle null case
         if (country) {
             let filteredUsers = foreigners.filter(
                 (u) => !!u.country.match(RegExp(country, "i"))
@@ -1984,6 +1988,41 @@ app.all("/:number", (req, res) => {
             } else {
                 res.status(404).send("No users found for this age!");
             }
+            //CONTINUE HERE*
+        } else if (sex) {
+            let filteredUsers = foreigners.filter((u) => u.sex === sex);
+            if (country)
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!u.country.match(RegExp(country, "i"))
+                );
+            if (city)
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!u.city.match(RegExp(city, "i"))
+                );
+            if (state)
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!u.state.match(RegExp(state, "i"))
+                );
+            if (age)
+                filteredUsers = filteredUsers.filter(
+                    (u) => u.age === parseInt(age)
+                );
+            if (status)
+                filteredUsers = filteredUsers.filter(
+                    (u) =>
+                        !!u.status.match(RegExp(String.raw`^${status}$`, "i"))
+                );
+            if (religion)
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!u.religion.match(RegExp(religion, "i"))
+                );
+            if (filteredUsers.length) {
+                if (filteredUsers.length > number)
+                    filteredUsers = filteredUsers.slice(0, number);
+                res.send(filteredUsers);
+            } else {
+                res.status(404).send("No users found for this sex!");
+            }
         } else {
             res.send(foreigners.slice(0, number));
         }
@@ -2001,12 +2040,30 @@ app.get("/", (req, res) => {
     foreigners.sort(() => Math.random() - 0.5);
     //^no need to reassign it, since it mutates the original array
     let { country, city, state, age, religion, status, sex } = req.query;
+    // let objectKeysToLowerCase = function (input) {
+    //     if (typeof input !== "object") return input;
+    //     if (Array.isArray(input)) return input.map(objectKeysToLowerCase);
+    //     return Object.keys(input).reduce(function (newObj, key) {
+    //         let val = input[key];
+    //         let newVal =
+    //             typeof val === "object" && val !== null
+    //                 ? objectKeysToLo werCase(val)
+    //                 : val;
+    //         newObj[key.toLowerCase()] = newVal;
+    //         return newObj;
+    //     }, {});
+    // };
+    // req.query = objectKeysToLowerCase(req.query);
+
+    if (status) status = status.toLowerCase();
+    if (sex) sex = sex.toLowerCase();
     if (status === "online") status = "active";
     else if (status === "offline") status = "inactive";
     //^this here, stays, to handle cases where the uses passes in "online" or "offline" instead of "active" or "inactive"
-    if (!!sex.match(/^m(an)?$/i)) sex = "male";
-    else if (!!sex.match(/^(f$|w)(oman$)?/i)) sex = "female";
-    //cover cases where the user passes in [man|woman|m|w|m|f] instead
+    if (!!String(sex).match(/^m(an)?$/i)) sex = "male";
+    else if (!!String(sex).match(/^(f$|w)(oman$)?/i)) sex = "female";
+    //cover cases where the user passes in [man|woman|[m|w]|[m|f]] instead
+    //using String() here, to force it to be a string, to handle null case
     if (country) {
         let filteredUsers = foreigners.filter(
             (u) => !!u.country.match(RegExp(country, "i"))
