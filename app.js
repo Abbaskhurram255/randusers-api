@@ -2,7 +2,8 @@ const express = require("express");
 const dotenv = require("dotenv");
 //const fs = require("fs");
 
-const foreigners = [
+//the array below HAS to use let, since it'll later be modified, or shuffled to be specific
+let foreigners = [
     {
         name: {
             title: "Ms",
@@ -34,6 +35,7 @@ const foreigners = [
         status: "inactive",
         last_ip: "122.127.92.166",
         last_active: "25 days ago",
+        id: "A0",
     },
     {
         name: {
@@ -64,6 +66,7 @@ const foreigners = [
         date_registered: "Apr 5, 2007",
         img: ["./x.jpg"],
         status: "active",
+        id: "A1",
     },
     {
         name: {
@@ -96,6 +99,7 @@ const foreigners = [
         status: "inactive",
         last_ip: "78.247.180.19",
         last_active: "46 weeks, 37 day(s) ago",
+        id: "A2",
     },
     {
         name: {
@@ -128,6 +132,7 @@ const foreigners = [
         status: "inactive",
         last_ip: "129.43.168.195",
         last_active: "24 weeks, 49 day(s) ago",
+        id: "A3",
     },
     {
         name: {
@@ -158,6 +163,7 @@ const foreigners = [
         date_registered: "Jan 1, 2018",
         img: ["./x.jpg"],
         status: "active",
+        id: "A4",
     },
     {
         name: {
@@ -191,6 +197,7 @@ const foreigners = [
         status: "inactive",
         last_ip: "10.148.74.243",
         last_active: "16 weeks, 47 day(s) ago",
+        id: "A5",
     },
     {
         name: {
@@ -224,6 +231,7 @@ const foreigners = [
         status: "inactive",
         last_ip: "27.26.192.26",
         last_active: "2 hours, 50 minute(s) ago",
+        id: "A6",
     },
     {
         name: {
@@ -257,6 +265,7 @@ const foreigners = [
         status: "inactive",
         last_ip: "158.187.104.165",
         last_active: "35 days ago",
+        id: "A7",
     },
     {
         name: {
@@ -288,6 +297,7 @@ const foreigners = [
         date_registered: "Oct 27, 2006",
         img: ["./x.jpg"],
         status: "active",
+        id: "A8",
     },
     {
         name: {
@@ -321,6 +331,7 @@ const foreigners = [
         status: "inactive",
         last_ip: "127.178.152.222",
         last_active: "39 hours ago",
+        id: "A9",
     },
     {
         name: {
@@ -354,6 +365,7 @@ const foreigners = [
         status: "inactive",
         last_ip: "53.141.112.168",
         last_active: "45 minutes, 31 second(s) ago",
+        id: "B0",
     },
     {
         name: {
@@ -385,6 +397,7 @@ const foreigners = [
         date_registered: "Mar 19, 2019",
         img: ["./x.jpg"],
         status: "active",
+        id: "B1",
     },
     {
         name: {
@@ -416,6 +429,7 @@ const foreigners = [
         date_registered: "Jan 2, 2017",
         img: ["./x.jpg"],
         status: "active",
+        id: "B2",
     },
     {
         name: {
@@ -449,6 +463,7 @@ const foreigners = [
         status: "inactive",
         last_ip: "15.102.239.111",
         last_active: "44 minutes, 49 second(s) ago",
+        id: "B3",
     },
     {
         name: {
@@ -480,6 +495,7 @@ const foreigners = [
         date_registered: "May 24, 2013",
         img: ["./x.jpg"],
         status: "active",
+        id: "B4",
     },
     {
         name: {
@@ -513,6 +529,7 @@ const foreigners = [
         status: "inactive",
         last_ip: "59.236.51.89",
         last_active: "18 minutes ago",
+        id: "B5",
     },
     {
         name: {
@@ -544,6 +561,7 @@ const foreigners = [
         date_registered: "Jul 22, 2005",
         img: ["./x.jpg"],
         status: "active",
+        id: "B6",
     },
     {
         name: {
@@ -575,6 +593,7 @@ const foreigners = [
         date_registered: "Apr 17, 2009",
         img: ["./x.jpg"],
         status: "active",
+        id: "B7",
     },
     {
         name: {
@@ -608,6 +627,7 @@ const foreigners = [
         status: "inactive",
         last_ip: "27.9.159.95",
         last_active: "52 hours ago",
+        id: "B8",
     },
     {
         name: {
@@ -641,6 +661,7 @@ const foreigners = [
         status: "inactive",
         last_ip: "181.224.249.233",
         last_active: "27 hours, 28 minute(s) ago",
+        id: "B9",
     },
     {
         name: {
@@ -672,6 +693,7 @@ const foreigners = [
         date_registered: "Oct 6, 2017",
         img: ["./x.jpg"],
         status: "active",
+        id: "C0",
     },
     {
         name: {
@@ -703,6 +725,7 @@ const foreigners = [
         date_registered: "Feb 23, 2013",
         img: ["./x.jpg"],
         status: "active",
+        id: "C1",
     },
     {
         name: {
@@ -736,6 +759,7 @@ const foreigners = [
         status: "inactive",
         last_ip: "137.115.209.37",
         last_active: "6 minutes ago",
+        id: "C2",
     },
     {
         name: {
@@ -769,6 +793,7 @@ const foreigners = [
         status: "inactive",
         last_ip: "125.94.121.143",
         last_active: "12 weeks ago",
+        id: "C3",
     },
     {
         name: {
@@ -800,6 +825,7 @@ const foreigners = [
         date_registered: "Nov 11, 2012",
         img: ["./x.jpg"],
         status: "active",
+        id: "C4",
     },
     {
         name: {
@@ -833,6 +859,7 @@ const foreigners = [
         status: "inactive",
         last_ip: "84.201.83.204",
         last_active: "32 hours ago",
+        id: "C5",
     },
     {
         name: {
@@ -866,6 +893,7 @@ const foreigners = [
         status: "inactive",
         last_ip: "175.187.90.54",
         last_active: "36 hours, 17 minute(s) ago",
+        id: "C6",
     },
     {
         name: {
@@ -899,6 +927,7 @@ const foreigners = [
         status: "inactive",
         last_ip: "22.217.43.98",
         last_active: "10 minutes ago",
+        id: "C7",
     },
     {
         name: {
@@ -930,6 +959,7 @@ const foreigners = [
         date_registered: "Dec 15, 2002",
         img: ["./x.jpg"],
         status: "active",
+        id: "C8",
     },
     {
         name: {
@@ -961,6 +991,7 @@ const foreigners = [
         date_registered: "Aug 8, 2017",
         img: ["./x.jpg"],
         status: "active",
+        id: "C9",
     },
     {
         name: {
@@ -992,6 +1023,7 @@ const foreigners = [
         date_registered: "Mar 5, 2006",
         img: ["./x.jpg"],
         status: "active",
+        id: "D0",
     },
     {
         name: {
@@ -1025,6 +1057,7 @@ const foreigners = [
         status: "inactive",
         last_ip: "187.29.138.176",
         last_active: "21 minutes, 46 second(s) ago",
+        id: "D1",
     },
     {
         name: {
@@ -1058,6 +1091,7 @@ const foreigners = [
         status: "inactive",
         last_ip: "62.125.86.212",
         last_active: "16 weeks, 45 day(s) ago",
+        id: "D2",
     },
     {
         name: {
@@ -1091,6 +1125,7 @@ const foreigners = [
         status: "inactive",
         last_ip: "135.153.220.17",
         last_active: "45 minutes, 6 second(s) ago",
+        id: "D3",
     },
     {
         name: {
@@ -1122,6 +1157,7 @@ const foreigners = [
         date_registered: "Oct 26, 2020",
         img: ["./x.jpg"],
         status: "active",
+        id: "D4",
     },
     {
         name: {
@@ -1155,6 +1191,7 @@ const foreigners = [
         status: "inactive",
         last_ip: "73.91.145.134",
         last_active: "51 days ago",
+        id: "D5",
     },
     {
         name: {
@@ -1188,6 +1225,7 @@ const foreigners = [
         status: "inactive",
         last_ip: "94.127.93.62",
         last_active: "41 minutes, 4 second(s) ago",
+        id: "D6",
     },
     {
         name: {
@@ -1221,6 +1259,7 @@ const foreigners = [
         status: "inactive",
         last_ip: "151.69.172.197",
         last_active: "10 weeks, 47 day(s) ago",
+        id: "D7",
     },
     {
         name: {
@@ -1252,6 +1291,7 @@ const foreigners = [
         date_registered: "Sep 7, 2006",
         img: ["./x.jpg"],
         status: "active",
+        id: "D8",
     },
     {
         name: {
@@ -1285,6 +1325,7 @@ const foreigners = [
         status: "inactive",
         last_ip: "153.59.254.205",
         last_active: "41 hours ago",
+        id: "D9",
     },
     {
         name: {
@@ -1316,6 +1357,7 @@ const foreigners = [
         date_registered: "Apr 10, 2005",
         img: ["./x.jpg"],
         status: "active",
+        id: "E0",
     },
     {
         name: {
@@ -1347,6 +1389,7 @@ const foreigners = [
         date_registered: "Apr 1, 2018",
         img: ["./x.jpg"],
         status: "active",
+        id: "E1",
     },
     {
         name: {
@@ -1380,6 +1423,7 @@ const foreigners = [
         status: "inactive",
         last_ip: "87.88.96.80",
         last_active: "58 days ago",
+        id: "E2",
     },
     {
         name: {
@@ -1413,6 +1457,7 @@ const foreigners = [
         status: "inactive",
         last_ip: "225.17.148.72",
         last_active: "15 hours, 31 minute(s) ago",
+        id: "E3",
     },
     {
         name: {
@@ -1446,6 +1491,7 @@ const foreigners = [
         status: "inactive",
         last_ip: "101.149.172.57",
         last_active: "21 weeks ago",
+        id: "E4",
     },
     {
         name: {
@@ -1477,6 +1523,7 @@ const foreigners = [
         date_registered: "Oct 24, 2007",
         img: ["./x.jpg"],
         status: "active",
+        id: "E5",
     },
     {
         name: {
@@ -1510,6 +1557,7 @@ const foreigners = [
         status: "inactive",
         last_ip: "168.77.196.33",
         last_active: "34 hours ago",
+        id: "E6",
     },
     {
         name: {
@@ -1541,6 +1589,7 @@ const foreigners = [
         date_registered: "Jan 24, 2012",
         img: ["./x.jpg"],
         status: "active",
+        id: "E7",
     },
     {
         name: {
@@ -1574,6 +1623,7 @@ const foreigners = [
         status: "inactive",
         last_ip: "177.199.4.164",
         last_active: "49 minutes, 53 second(s) ago",
+        id: "E8",
     },
     {
         name: {
@@ -1609,6 +1659,7 @@ const foreigners = [
         status: "inactive",
         last_ip: "60.115.61.26",
         last_active: "17 hours ago",
+        id: "E9",
     },
 ];
 
@@ -1753,10 +1804,29 @@ const array = [
     },
 ];
 
-foreigners.forEach((u) => {
+foreigners.forEach((u, i) => {
     Object.assign(u, {
         get age() {
-            return new Date().getFullYear() - new Date(u.dob).getFullYear();
+            let x = new Date() - new Date(u.dob);
+            return Math.floor(
+                x / 3600 / 24 / 365 / 1000 > 0
+                    ? x / 3600 / 24 / 365 / 1000
+                    : x / 360 / 24 / 365 / 1000
+            );
+            //complex means more accurate, for instance if it is Nov 26 2024 today, and the user was born a Dec 25 2006, it'll return 17 and not 18
+            //a little less complicated, inaccurate way would have been to use,
+            //foreigners.forEach((u) => u.age = new Date().getFullYear() - parseInt(u.dob.slice(-4)));
+            //Remember: we're here to be accurate, not save lines!
+        },
+        get id() {
+            let [a, b] = ["ABCDEFGHIJKLMNOPQRSTUVWXYZ", "0123456789"];
+            let collected = [];
+            for (i in a) {
+                for (j in b) {
+                    collected.push(`${a[i]}${b[j]}`);
+                }
+            }
+            return collected[foreigners.indexOf(u)];
         },
     });
 });
@@ -1769,7 +1839,6 @@ app.use(express.urlencoded({ extended: false }));
 
 //NON-ROOT ROUTES
 app.all("/:number", (req, res) => {
-    foreigners.sort(() => Math.random() - 0.5);
     let { path, method, params, query } = req;
     let { number } = params;
     number = Number(number);
@@ -1781,7 +1850,14 @@ app.all("/:number", (req, res) => {
     }
     console.log(`Received a ${method} request on ${path}, acting accordingly!`);
     if (method === "GET") {
-        let { country, city, state, age, religion, status, sex } = req.query;
+        let { country, city, state, age, religion, status, sex, id, sorted } =
+            req.query;
+        let [sorted_foreigners, shuffled_foreigners] = [
+            foreigners.slice(),
+            foreigners.slice().sort(() => Math.random() - 0.5),
+        ];
+        if (String(sorted).match(/true|yes/i)) foreigners = sorted_foreigners;
+        else foreigners = shuffled_foreigners;
         if (status) status = status.toLowerCase();
         if (sex) sex = sex.toLowerCase();
         if (status === "online") status = "active";
@@ -1807,10 +1883,28 @@ app.all("/:number", (req, res) => {
                 filteredUsers = filteredUsers.filter(
                     (u) => !!u.religion.match(RegExp(religion, "i"))
                 );
-            if (age)
-                filteredUsers = filteredUsers.filter(
-                    (u) => u.age === parseInt(age)
-                );
+            if (age) {
+                if (String(age).match(/>/)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter((u) => u.age >= age);
+                } else if (String(age).match(/</)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter((u) => u.age <= age);
+                } else if (String(age).match(/~/)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter(
+                        (u) =>
+                            u.age === age + 2 ||
+                            u.age === age - 2 ||
+                            u.age === age + 1 ||
+                            u.age === age - 1 ||
+                            u.age === age
+                    );
+                } else {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter((u) => u.age === age);
+                }
+            }
             if (sex) filteredUsers = filteredUsers.filter((u) => u.sex === sex);
             if (status)
                 filteredUsers = filteredUsers.filter(
@@ -1840,10 +1934,28 @@ app.all("/:number", (req, res) => {
                 filteredUsers = filteredUsers.filter(
                     (u) => !!u.religion.match(RegExp(religion, "i"))
                 );
-            if (age)
-                filteredUsers = filteredUsers.filter(
-                    (u) => u.age === parseInt(age)
-                );
+            if (age) {
+                if (String(age).match(/>/)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter((u) => u.age >= age);
+                } else if (String(age).match(/</)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter((u) => u.age <= age);
+                } else if (String(age).match(/~/)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter(
+                        (u) =>
+                            u.age === age + 2 ||
+                            u.age === age - 2 ||
+                            u.age === age + 1 ||
+                            u.age === age - 1 ||
+                            u.age === age
+                    );
+                } else {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter((u) => u.age === age);
+                }
+            }
             if (sex) filteredUsers = filteredUsers.filter((u) => u.sex === sex);
             if (status)
                 filteredUsers = filteredUsers.filter(
@@ -1869,10 +1981,28 @@ app.all("/:number", (req, res) => {
                 filteredUsers = filteredUsers.filter(
                     (u) => !!u.city.match(RegExp(city, "i"))
                 );
-            if (age)
-                filteredUsers = filteredUsers.filter(
-                    (u) => u.age === parseInt(age)
-                );
+            if (age) {
+                if (String(age).match(/>/)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter((u) => u.age >= age);
+                } else if (String(age).match(/</)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter((u) => u.age <= age);
+                } else if (String(age).match(/~/)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter(
+                        (u) =>
+                            u.age === age + 2 ||
+                            u.age === age - 2 ||
+                            u.age === age + 1 ||
+                            u.age === age - 1 ||
+                            u.age === age
+                    );
+                } else {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter((u) => u.age === age);
+                }
+            }
             if (sex) filteredUsers = filteredUsers.filter((u) => u.sex === sex);
             if (status)
                 filteredUsers = filteredUsers.filter(
@@ -1906,10 +2036,28 @@ app.all("/:number", (req, res) => {
                 filteredUsers = filteredUsers.filter(
                     (u) => !!u.state.match(RegExp(state, "i"))
                 );
-            if (age)
-                filteredUsers = filteredUsers.filter(
-                    (u) => u.age === parseInt(age)
-                );
+            if (age) {
+                if (String(age).match(/>/)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter((u) => u.age >= age);
+                } else if (String(age).match(/</)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter((u) => u.age <= age);
+                } else if (String(age).match(/~/)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter(
+                        (u) =>
+                            u.age === age + 2 ||
+                            u.age === age - 2 ||
+                            u.age === age + 1 ||
+                            u.age === age - 1 ||
+                            u.age === age
+                    );
+                } else {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter((u) => u.age === age);
+                }
+            }
             if (sex) filteredUsers = filteredUsers.filter((u) => u.sex === sex);
             if (status)
                 filteredUsers = filteredUsers.filter(
@@ -1939,10 +2087,28 @@ app.all("/:number", (req, res) => {
                 filteredUsers = filteredUsers.filter(
                     (u) => !!u.state.match(RegExp(state, "i"))
                 );
-            if (age)
-                filteredUsers = filteredUsers.filter(
-                    (u) => u.age === parseInt(age)
-                );
+            if (age) {
+                if (String(age).match(/>/)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter((u) => u.age >= age);
+                } else if (String(age).match(/</)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter((u) => u.age <= age);
+                } else if (String(age).match(/~/)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter(
+                        (u) =>
+                            u.age === age + 2 ||
+                            u.age === age - 2 ||
+                            u.age === age + 1 ||
+                            u.age === age - 1 ||
+                            u.age === age
+                    );
+                } else {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter((u) => u.age === age);
+                }
+            }
             if (sex) filteredUsers = filteredUsers.filter((u) => u.sex === sex);
             if (religion)
                 filteredUsers = filteredUsers.filter(
@@ -1956,9 +2122,29 @@ app.all("/:number", (req, res) => {
                 res.status(404).send("No users found for this status!");
             }
         } else if (age) {
-            let filteredUsers = foreigners.filter(
-                (u) => u.age === parseInt(age)
-            );
+            let filteredUsers = [];
+            if (age) {
+                if (String(age).match(/>/)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = foreigners.filter((u) => u.age >= age);
+                } else if (String(age).match(/</)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = foreigners.filter((u) => u.age <= age);
+                } else if (String(age).match(/~/)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = foreigners.filter(
+                        (u) =>
+                            u.age === age + 2 ||
+                            u.age === age - 2 ||
+                            u.age === age + 1 ||
+                            u.age === age - 1 ||
+                            u.age === age
+                    );
+                } else {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = foreigners.filter((u) => u.age === age);
+                }
+            }
             if (country)
                 filteredUsers = filteredUsers.filter(
                     (u) => !!u.country.match(RegExp(country, "i"))
@@ -2003,10 +2189,28 @@ app.all("/:number", (req, res) => {
                 filteredUsers = filteredUsers.filter(
                     (u) => !!u.state.match(RegExp(state, "i"))
                 );
-            if (age)
-                filteredUsers = filteredUsers.filter(
-                    (u) => u.age === parseInt(age)
-                );
+            if (age) {
+                if (String(age).match(/>/)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter((u) => u.age >= age);
+                } else if (String(age).match(/</)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter((u) => u.age <= age);
+                } else if (String(age).match(/~/)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter(
+                        (u) =>
+                            u.age === age + 2 ||
+                            u.age === age - 2 ||
+                            u.age === age + 1 ||
+                            u.age === age - 1 ||
+                            u.age === age
+                    );
+                } else {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter((u) => u.age === age);
+                }
+            }
             if (status)
                 filteredUsers = filteredUsers.filter(
                     (u) =>
@@ -2037,9 +2241,14 @@ app.all("/:number", (req, res) => {
 
 //ROOT ROUTES
 app.get("/", (req, res) => {
-    foreigners.sort(() => Math.random() - 0.5);
-    //^no need to reassign it, since it mutates the original array
-    let { country, city, state, age, religion, status, sex } = req.query;
+    let { country, city, state, age, religion, status, sex, id, sorted } =
+        req.query;
+    let [sorted_foreigners, shuffled_foreigners] = [
+        foreigners.slice(),
+        foreigners.slice().sort(() => Math.random() - 0.5),
+    ];
+    if (String(sorted).match(/true|yes/i)) foreigners = sorted_foreigners;
+    else foreigners = shuffled_foreigners;
     // let objectKeysToLowerCase = function (input) {
     //     if (typeof input !== "object") return input;
     //     if (Array.isArray(input)) return input.map(objectKeysToLowerCase);
@@ -2047,7 +2256,7 @@ app.get("/", (req, res) => {
     //         let val = input[key];
     //         let newVal =
     //             typeof val === "object" && val !== null
-    //                 ? objectKeysToLo werCase(val)
+    //                 ? objectKeysToLowerCase(val)
     //                 : val;
     //         newObj[key.toLowerCase()] = newVal;
     //         return newObj;
@@ -2080,10 +2289,28 @@ app.get("/", (req, res) => {
             filteredUsers = filteredUsers.filter(
                 (u) => !!u.religion.match(RegExp(religion, "i"))
             );
-        if (age)
-            filteredUsers = filteredUsers.filter(
-                (u) => u.age === parseInt(age)
-            );
+        if (age) {
+            if (String(age).match(/>/)) {
+                age = parseInt(String(age).replace(/\D/g, ""));
+                filteredUsers = filteredUsers.filter((u) => u.age >= age);
+            } else if (String(age).match(/</)) {
+                age = parseInt(String(age).replace(/\D/g, ""));
+                filteredUsers = filteredUsers.filter((u) => u.age <= age);
+            } else if (String(age).match(/~/)) {
+                age = parseInt(String(age).replace(/\D/g, ""));
+                filteredUsers = filteredUsers.filter(
+                    (u) =>
+                        u.age === age + 2 ||
+                        u.age === age - 2 ||
+                        u.age === age + 1 ||
+                        u.age === age - 1 ||
+                        u.age === age
+                );
+            } else {
+                age = parseInt(String(age).replace(/\D/g, ""));
+                filteredUsers = filteredUsers.filter((u) => u.age === age);
+            }
+        }
         if (sex) filteredUsers = filteredUsers.filter((u) => u.sex === sex);
         if (status)
             filteredUsers = filteredUsers.filter(
@@ -2107,10 +2334,28 @@ app.get("/", (req, res) => {
             filteredUsers = filteredUsers.filter(
                 (u) => !!u.religion.match(RegExp(religion, "i"))
             );
-        if (age)
-            filteredUsers = filteredUsers.filter(
-                (u) => u.age === parseInt(age)
-            );
+        if (age) {
+            if (String(age).match(/>/)) {
+                age = parseInt(String(age).replace(/\D/g, ""));
+                filteredUsers = filteredUsers.filter((u) => u.age >= age);
+            } else if (String(age).match(/</)) {
+                age = parseInt(String(age).replace(/\D/g, ""));
+                filteredUsers = filteredUsers.filter((u) => u.age <= age);
+            } else if (String(age).match(/~/)) {
+                age = parseInt(String(age).replace(/\D/g, ""));
+                filteredUsers = filteredUsers.filter(
+                    (u) =>
+                        u.age === age + 2 ||
+                        u.age === age - 2 ||
+                        u.age === age + 1 ||
+                        u.age === age - 1 ||
+                        u.age === age
+                );
+            } else {
+                age = parseInt(String(age).replace(/\D/g, ""));
+                filteredUsers = filteredUsers.filter((u) => u.age === age);
+            }
+        }
         if (sex) filteredUsers = filteredUsers.filter((u) => u.sex === sex);
         if (status)
             filteredUsers = filteredUsers.filter(
@@ -2130,10 +2375,28 @@ app.get("/", (req, res) => {
             filteredUsers = filteredUsers.filter(
                 (u) => !!u.city.match(RegExp(city, "i"))
             );
-        if (age)
-            filteredUsers = filteredUsers.filter(
-                (u) => u.age === parseInt(age)
-            );
+        if (age) {
+            if (String(age).match(/>/)) {
+                age = parseInt(String(age).replace(/\D/g, ""));
+                filteredUsers = filteredUsers.filter((u) => u.age >= age);
+            } else if (String(age).match(/</)) {
+                age = parseInt(String(age).replace(/\D/g, ""));
+                filteredUsers = filteredUsers.filter((u) => u.age <= age);
+            } else if (String(age).match(/~/)) {
+                age = parseInt(String(age).replace(/\D/g, ""));
+                filteredUsers = filteredUsers.filter(
+                    (u) =>
+                        u.age === age + 2 ||
+                        u.age === age - 2 ||
+                        u.age === age + 1 ||
+                        u.age === age - 1 ||
+                        u.age === age
+                );
+            } else {
+                age = parseInt(String(age).replace(/\D/g, ""));
+                filteredUsers = filteredUsers.filter((u) => u.age === age);
+            }
+        }
         if (sex) filteredUsers = filteredUsers.filter((u) => u.sex === sex);
         if (status)
             filteredUsers = filteredUsers.filter(
@@ -2157,10 +2420,28 @@ app.get("/", (req, res) => {
             filteredUsers = filteredUsers.filter(
                 (u) => !!u.city.match(RegExp(city, "i"))
             );
-        if (age)
-            filteredUsers = filteredUsers.filter(
-                (u) => u.age === parseInt(age)
-            );
+        if (age) {
+            if (String(age).match(/>/)) {
+                age = parseInt(String(age).replace(/\D/g, ""));
+                filteredUsers = filteredUsers.filter((u) => u.age >= age);
+            } else if (String(age).match(/</)) {
+                age = parseInt(String(age).replace(/\D/g, ""));
+                filteredUsers = filteredUsers.filter((u) => u.age <= age);
+            } else if (String(age).match(/~/)) {
+                age = parseInt(String(age).replace(/\D/g, ""));
+                filteredUsers = filteredUsers.filter(
+                    (u) =>
+                        u.age === age + 2 ||
+                        u.age === age - 2 ||
+                        u.age === age + 1 ||
+                        u.age === age - 1 ||
+                        u.age === age
+                );
+            } else {
+                age = parseInt(String(age).replace(/\D/g, ""));
+                filteredUsers = filteredUsers.filter((u) => u.age === age);
+            }
+        }
         if (sex) filteredUsers = filteredUsers.filter((u) => u.sex === sex);
         if (state)
             filteredUsers = filteredUsers.filter(
@@ -2184,10 +2465,28 @@ app.get("/", (req, res) => {
             filteredUsers = filteredUsers.filter(
                 (u) => !!u.city.match(RegExp(city, "i"))
             );
-        if (age)
-            filteredUsers = filteredUsers.filter(
-                (u) => u.age === parseInt(age)
-            );
+        if (age) {
+            if (String(age).match(/>/)) {
+                age = parseInt(String(age).replace(/\D/g, ""));
+                filteredUsers = filteredUsers.filter((u) => u.age >= age);
+            } else if (String(age).match(/</)) {
+                age = parseInt(String(age).replace(/\D/g, ""));
+                filteredUsers = filteredUsers.filter((u) => u.age <= age);
+            } else if (String(age).match(/~/)) {
+                age = parseInt(String(age).replace(/\D/g, ""));
+                filteredUsers = filteredUsers.filter(
+                    (u) =>
+                        u.age === age + 2 ||
+                        u.age === age - 2 ||
+                        u.age === age + 1 ||
+                        u.age === age - 1 ||
+                        u.age === age
+                );
+            } else {
+                age = parseInt(String(age).replace(/\D/g, ""));
+                filteredUsers = filteredUsers.filter((u) => u.age === age);
+            }
+        }
         if (sex) filteredUsers = filteredUsers.filter((u) => u.sex === sex);
         if (state)
             filteredUsers = filteredUsers.filter(
@@ -2200,7 +2499,29 @@ app.get("/", (req, res) => {
         if (filteredUsers.length) res.json(filteredUsers);
         else res.status(404).send("No users found for this activity status!");
     } else if (age) {
-        let filteredUsers = foreigners.filter((u) => u.age === parseInt(age));
+        let filteredUsers = [];
+        if (age) {
+            if (String(age).match(/>/)) {
+                age = parseInt(String(age).replace(/\D/g, ""));
+                filteredUsers = foreigners.filter((u) => u.age >= age);
+            } else if (String(age).match(/</)) {
+                age = parseInt(String(age).replace(/\D/g, ""));
+                filteredUsers = foreigners.filter((u) => u.age <= age);
+            } else if (String(age).match(/~/)) {
+                age = parseInt(String(age).replace(/\D/g, ""));
+                filteredUsers = foreigners.filter(
+                    (u) =>
+                        u.age === age + 2 ||
+                        u.age === age - 2 ||
+                        u.age === age + 1 ||
+                        u.age === age - 1 ||
+                        u.age === age
+                );
+            } else {
+                age = parseInt(String(age).replace(/\D/g, ""));
+                filteredUsers = foreigners.filter((u) => u.age === age);
+            }
+        }
         if (country)
             filteredUsers = filteredUsers.filter(
                 (u) => !!u.country.match(RegExp(country, "i"))
@@ -2225,6 +2546,61 @@ app.get("/", (req, res) => {
             );
         if (filteredUsers.length) res.json(filteredUsers);
         else res.status(404).send("No users found for this age!");
+    } else if (sex) {
+        let filteredUsers = foreigners.filter((u) => u.sex === sex);
+        if (country)
+            filteredUsers = filteredUsers.filter(
+                (u) => !!u.country.match(RegExp(country, "i"))
+            );
+        if (city)
+            filteredUsers = filteredUsers.filter(
+                (u) => !!u.city.match(RegExp(city, "i"))
+            );
+        if (age) {
+            if (String(age).match(/>/)) {
+                age = parseInt(String(age).replace(/\D/g, ""));
+                filteredUsers = filteredUsers.filter((u) => u.age >= age);
+            } else if (String(age).match(/</)) {
+                age = parseInt(String(age).replace(/\D/g, ""));
+                filteredUsers = filteredUsers.filter((u) => u.age <= age);
+            } else if (String(age).match(/~/)) {
+                age = parseInt(String(age).replace(/\D/g, ""));
+                filteredUsers = filteredUsers.filter(
+                    (u) =>
+                        u.age === age + 2 ||
+                        u.age === age - 2 ||
+                        u.age === age + 1 ||
+                        u.age === age - 1 ||
+                        u.age === age
+                );
+            } else {
+                age = parseInt(String(age).replace(/\D/g, ""));
+                filteredUsers = filteredUsers.filter((u) => u.age === age);
+            }
+        }
+        if (state)
+            filteredUsers = filteredUsers.filter(
+                (u) => !!u.state.match(RegExp(state, "i"))
+            );
+        if (status)
+            filteredUsers = filteredUsers.filter(
+                (u) => !!u.status.match(RegExp(String.raw`^${status}$`, "i"))
+            );
+        //String.raw here fixes a bug
+        if (religion)
+            filteredUsers = filteredUsers.filter(
+                (u) => !!u.religion.match(RegExp(religion, "i"))
+            );
+        if (filteredUsers.length) res.json(filteredUsers);
+        else res.status(404).send("No users found for this sex!");
+    } else if (id) {
+        id = RegExp(
+            String.raw`^${id}|${id.split("").reverse().join("")}$`,
+            "i"
+        );
+        let filteredUsers = foreigners.filter((u) => !!String(u.id).match(id));
+        if (filteredUsers.length) res.json(filteredUsers);
+        else res.status(404).send("No users found for this id!");
     } else {
         res.json(foreigners);
     }
