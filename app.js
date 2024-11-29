@@ -31,7 +31,7 @@ let foreigners = [
         city: "بجنورد",
         street: "2374 پارک 17 شهریور",
         date_registered: "May 22, 2004",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "inactive",
         last_ip: "122.127.92.166",
         last_active: "25 days ago",
@@ -57,14 +57,14 @@ let foreigners = [
             rating: "⭐⭐⭐⭐",
             score: "94%",
         },
-        country: "New Zealand",
+        country: "India",
         sex: "female",
-        religion: "Christianity",
+        religion: "Hindu",
         state: "Manawatu-Wanganui",
         city: "Napier",
         street: "9897 Kamo Road",
         date_registered: "Apr 5, 2007",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "active",
         id: "A1",
     },
@@ -95,7 +95,7 @@ let foreigners = [
         city: "اسلام‌شهر",
         street: "2147 شهید ثانی",
         date_registered: "May 24, 2020",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "inactive",
         last_ip: "78.247.180.19",
         last_active: "46 weeks, 37 day(s) ago",
@@ -128,7 +128,7 @@ let foreigners = [
         city: "نجف‌آباد",
         street: "3811 خرمشهر",
         date_registered: "Aug 21, 2008",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "inactive",
         last_ip: "129.43.168.195",
         last_active: "24 weeks, 49 day(s) ago",
@@ -161,7 +161,7 @@ let foreigners = [
         city: "Montreuil",
         street: "9619 Rue des Cuirassiers",
         date_registered: "Jan 1, 2018",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "active",
         id: "A4",
     },
@@ -193,7 +193,7 @@ let foreigners = [
         street: "9008 استاد نجات‌اللهی",
         son_of: "Ms بهار احمدی",
         date_registered: "Aug 31, 2012",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "inactive",
         last_ip: "10.148.74.243",
         last_active: "16 weeks, 47 day(s) ago",
@@ -227,7 +227,7 @@ let foreigners = [
         street: "9818 Boghall Road",
         daughter_of: "Ms Matilda Rice",
         date_registered: "Sep 7, 2006",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "inactive",
         last_ip: "27.26.192.26",
         last_active: "2 hours, 50 minute(s) ago",
@@ -261,7 +261,7 @@ let foreigners = [
         street: "1864 Pirkankatu",
         daughter_of: "Ms پارمیس Kivi",
         date_registered: "Jan 11, 2020",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "inactive",
         last_ip: "158.187.104.165",
         last_active: "35 days ago",
@@ -295,7 +295,7 @@ let foreigners = [
         street: "9541 Lessingstraße",
         daughter_of: "Mr پوریا Bruder",
         date_registered: "Oct 27, 2006",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "active",
         id: "A8",
     },
@@ -327,7 +327,7 @@ let foreigners = [
         street: "1435 Sitabuldi Main Rd",
         daughter_of: "Ms Alyssia Kulkarni",
         date_registered: "Sep 21, 2019",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "inactive",
         last_ip: "127.178.152.222",
         last_active: "39 hours ago",
@@ -361,7 +361,7 @@ let foreigners = [
         street: "8255 Rue de L'Abbé-Carton",
         daughter_of: "Mr میلاد Bertrand",
         date_registered: "May 11, 2022",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "inactive",
         last_ip: "53.141.112.168",
         last_active: "45 minutes, 31 second(s) ago",
@@ -395,7 +395,7 @@ let foreigners = [
         street: "2460 St. Catherine St",
         son_of: "Miss Debra Johnson",
         date_registered: "Mar 19, 2019",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "active",
         id: "B1",
     },
@@ -427,7 +427,7 @@ let foreigners = [
         street: "6423 Ploshcha Slavi",
         son_of: "Mrs Alisa Goshovski",
         date_registered: "Jan 2, 2017",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "active",
         id: "B2",
     },
@@ -459,7 +459,7 @@ let foreigners = [
         street: "8730 College Ave",
         son_of: "Miss Sophia Lo",
         date_registered: "Jan 25, 2019",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "inactive",
         last_ip: "15.102.239.111",
         last_active: "44 minutes, 49 second(s) ago",
@@ -493,7 +493,7 @@ let foreigners = [
         street: "9623 میدان شهیدان رحیمی",
         daughter_of: "Ms Praneetha کریمی",
         date_registered: "May 24, 2013",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "active",
         id: "B4",
     },
@@ -525,7 +525,7 @@ let foreigners = [
         street: "4576 Cooperatieweg",
         daughter_of: "Ms Angèle Nieuwenhuis",
         date_registered: "Sep 13, 2004",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "inactive",
         last_ip: "59.236.51.89",
         last_active: "18 minutes ago",
@@ -559,7 +559,7 @@ let foreigners = [
         street: "9989 Rue Desaix",
         son_of: "Mr Ethan Lefevre",
         date_registered: "Jul 22, 2005",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "active",
         id: "B6",
     },
@@ -591,7 +591,7 @@ let foreigners = [
         street: "794 Lundvej",
         son_of: "Mr Zhivoslav Poulsen",
         date_registered: "Apr 17, 2009",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "active",
         id: "B7",
     },
@@ -623,7 +623,7 @@ let foreigners = [
         street: "3787 Rautatienkatu",
         son_of: "Mr Etienne Koivisto",
         date_registered: "Mar 27, 2006",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "inactive",
         last_ip: "27.9.159.95",
         last_active: "52 hours ago",
@@ -657,7 +657,7 @@ let foreigners = [
         street: "4583 Nyvang",
         daughter_of: "Miss عسل Jensen",
         date_registered: "May 3, 2012",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "inactive",
         last_ip: "181.224.249.233",
         last_active: "27 hours, 28 minute(s) ago",
@@ -691,7 +691,7 @@ let foreigners = [
         street: "5653 Buckleys Road",
         daughter_of: "Ms Aïda Taylor",
         date_registered: "Oct 6, 2017",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "active",
         id: "C0",
     },
@@ -723,7 +723,7 @@ let foreigners = [
         street: "1532 Birkenweg",
         son_of: "Monsieur Guillaume Merkl",
         date_registered: "Feb 23, 2013",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "active",
         id: "C1",
     },
@@ -755,7 +755,7 @@ let foreigners = [
         street: "9098 Portsmouth Drive",
         son_of: "Mr Silas Martin",
         date_registered: "Aug 27, 2011",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "inactive",
         last_ip: "137.115.209.37",
         last_active: "6 minutes ago",
@@ -789,7 +789,7 @@ let foreigners = [
         street: "1537 Bahnhofstraße",
         daughter_of: "Mr Nooa Kaminski",
         date_registered: "Dec 25, 2007",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "inactive",
         last_ip: "125.94.121.143",
         last_active: "12 weeks ago",
@@ -823,7 +823,7 @@ let foreigners = [
         street: "6173 DragolЈuba Jeličića",
         son_of: "Miss Amalie Kojić",
         date_registered: "Nov 11, 2012",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "active",
         id: "C4",
     },
@@ -855,7 +855,7 @@ let foreigners = [
         street: "7199 Chester Road",
         daughter_of: "Miss Olivia Payne",
         date_registered: "May 18, 2005",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "inactive",
         last_ip: "84.201.83.204",
         last_active: "32 hours ago",
@@ -889,7 +889,7 @@ let foreigners = [
         street: "483 Springfield Road",
         daughter_of: "Mr Sami Simmons",
         date_registered: "Oct 12, 2015",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "inactive",
         last_ip: "175.187.90.54",
         last_active: "36 hours, 17 minute(s) ago",
@@ -923,7 +923,7 @@ let foreigners = [
         street: "2395 Harrison Ct",
         daughter_of: "Mr Archer Kim",
         date_registered: "May 12, 2013",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "inactive",
         last_ip: "22.217.43.98",
         last_active: "10 minutes ago",
@@ -957,7 +957,7 @@ let foreigners = [
         street: "1815 Northaven Rd",
         daughter_of: "Miss Rebekkah Schmidt",
         date_registered: "Dec 15, 2002",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "active",
         id: "C8",
     },
@@ -989,7 +989,7 @@ let foreigners = [
         street: "390 Vatan Cd",
         daughter_of: "Miss Susanna Mertoğlu",
         date_registered: "Aug 8, 2017",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "active",
         id: "C9",
     },
@@ -1021,7 +1021,7 @@ let foreigners = [
         street: "7370 E Sandy Lake Rd",
         son_of: "Ms Magdalena Stewart",
         date_registered: "Mar 5, 2006",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "active",
         id: "D0",
     },
@@ -1053,7 +1053,7 @@ let foreigners = [
         street: "8299 Nikole Tesle",
         daughter_of: "Miss Elsbeth Simonović",
         date_registered: "Jun 15, 2011",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "inactive",
         last_ip: "187.29.138.176",
         last_active: "21 minutes, 46 second(s) ago",
@@ -1087,7 +1087,7 @@ let foreigners = [
         street: "8700 Oscars gate",
         son_of: "Mr Mirko Furuseth",
         date_registered: "Sep 13, 2007",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "inactive",
         last_ip: "62.125.86.212",
         last_active: "16 weeks, 45 day(s) ago",
@@ -1121,7 +1121,7 @@ let foreigners = [
         street: "6521 دکتر لواسانی",
         son_of: "Miss Ellie نكو نظر",
         date_registered: "May 12, 2017",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "inactive",
         last_ip: "135.153.220.17",
         last_active: "45 minutes, 6 second(s) ago",
@@ -1155,7 +1155,7 @@ let foreigners = [
         street: "4034 John Fordstrook",
         son_of: "Mrs Susie Salman",
         date_registered: "Oct 26, 2020",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "active",
         id: "D4",
     },
@@ -1187,7 +1187,7 @@ let foreigners = [
         street: "228 Johanniterhof",
         son_of: "Mrs Brianna Pham",
         date_registered: "Sep 29, 2017",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "inactive",
         last_ip: "73.91.145.134",
         last_active: "51 days ago",
@@ -1221,7 +1221,7 @@ let foreigners = [
         street: "5925 Berliner Straße",
         son_of: "Mrs Stefana Kreuz",
         date_registered: "Jun 9, 2006",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "inactive",
         last_ip: "94.127.93.62",
         last_active: "41 minutes, 4 second(s) ago",
@@ -1255,7 +1255,7 @@ let foreigners = [
         street: "2558 Alatirska",
         daughter_of: "Mr Askil Chishko",
         date_registered: "Oct 4, 2016",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "inactive",
         last_ip: "151.69.172.197",
         last_active: "10 weeks, 47 day(s) ago",
@@ -1289,7 +1289,7 @@ let foreigners = [
         street: "7641 Country Club Rd",
         daughter_of: "Mr سورنا Ruiz",
         date_registered: "Sep 7, 2006",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "active",
         id: "D8",
     },
@@ -1321,7 +1321,7 @@ let foreigners = [
         street: "4060 Rua Vinte de Setembro",
         daughter_of: "Mr Yaron da Conceição",
         date_registered: "Jun 12, 2004",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "inactive",
         last_ip: "153.59.254.205",
         last_active: "41 hours ago",
@@ -1355,7 +1355,7 @@ let foreigners = [
         street: "5055 Maple Ave",
         daughter_of: "Mr Remko Jones",
         date_registered: "Apr 10, 2005",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "active",
         id: "E0",
     },
@@ -1387,7 +1387,7 @@ let foreigners = [
         street: "9332 Emila Zole",
         son_of: "Mr Peter Nenadović",
         date_registered: "Apr 1, 2018",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "active",
         id: "E1",
     },
@@ -1419,7 +1419,7 @@ let foreigners = [
         street: "7093 Visiokatu",
         son_of: "Mrs Ladomira Halonen",
         date_registered: "Mar 26, 2011",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "inactive",
         last_ip: "87.88.96.80",
         last_active: "58 days ago",
@@ -1453,7 +1453,7 @@ let foreigners = [
         street: "4309 Rue Denfert-Rochereau",
         son_of: "Miss Arianna Da Silva",
         date_registered: "Jun 30, 2003",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "inactive",
         last_ip: "225.17.148.72",
         last_active: "15 hours, 31 minute(s) ago",
@@ -1487,7 +1487,7 @@ let foreigners = [
         street: "2944 Calle de Arturo Soria",
         daughter_of: "Miss Verena Bravo",
         date_registered: "Jan 3, 2014",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "inactive",
         last_ip: "101.149.172.57",
         last_active: "21 weeks ago",
@@ -1521,7 +1521,7 @@ let foreigners = [
         street: "2526 Victoria Street",
         son_of: "Mr Milan Lane",
         date_registered: "Oct 24, 2007",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "active",
         id: "E5",
     },
@@ -1553,7 +1553,7 @@ let foreigners = [
         street: "6854 Rua Boa Vista",
         daughter_of: "Mr Viljami Oliveira",
         date_registered: "Apr 18, 2005",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "inactive",
         last_ip: "168.77.196.33",
         last_active: "34 hours ago",
@@ -1587,7 +1587,7 @@ let foreigners = [
         street: "5984 Visiokatu",
         son_of: "Monsieur Lionel Halonen",
         date_registered: "Jan 24, 2012",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "active",
         id: "E7",
     },
@@ -1619,7 +1619,7 @@ let foreigners = [
         street: "541 Højtoftevej",
         son_of: "Mrs Mónica Madsen",
         date_registered: "Jul 5, 2009",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "inactive",
         last_ip: "177.199.4.164",
         last_active: "49 minutes, 53 second(s) ago",
@@ -1655,7 +1655,7 @@ let foreigners = [
         street: "34481 Southwest, 100th Court",
         daughter_of: "Miss Dorothy Casper",
         date_registered: "Nov 25, 2018",
-        img: ["./x.jpg"],
+        img: ["./img/sorted/x.webp"],
         status: "inactive",
         last_ip: "60.115.61.26",
         last_active: "17 hours ago",
@@ -1671,7 +1671,7 @@ const array = [
             last: "Parveen",
             full: "Miss Neha Parveen",
         },
-        img: ["./images/randUsers/1.jpg"],
+        img: ["./img/sorted/1.webp"],
         city: "Islamabad",
         state: "Punjab",
     },
@@ -1683,7 +1683,7 @@ const array = [
             full: "Miss Hania Bashir",
             pronunciation: "mis haneeya bashIr",
         },
-        img: ["./images/randUsers/2.jpg"],
+        img: ["./img/sorted/2.webp"],
         city: "Karachi",
         state: "Sindh",
     },
@@ -1697,7 +1697,7 @@ const array = [
             pronunciation: "mis oozmia ehma:d taahir",
             alias: "Uzmi",
         },
-        img: ["./images/randUsers/3.jpg"],
+        img: ["./img/sorted/3.webp"],
         city: "Dera Ghazi Kahn",
         state: "Punjab",
     },
@@ -1708,7 +1708,7 @@ const array = [
             last: "Rania",
             full: "Miss Shamshad Rania",
         },
-        img: ["./images/randUsers/4.jpg"],
+        img: ["./img/sorted/4.webp"],
         city: "Quetta",
         state: "KPK",
     },
@@ -1719,7 +1719,7 @@ const array = [
             last: "Malik",
             full: "Mrs Asghar Malik",
         },
-        img: ["./images/randUsers/5.jpg"],
+        img: ["./img/sorted/5.webp"],
         city: "Hyderabad",
         state: "Sindh",
     },
@@ -1732,7 +1732,7 @@ const array = [
             alias: "Kanga",
             pronunciation: "mis kuhngana keisar",
         },
-        img: ["./images/randUsers/6.jpg"],
+        img: ["./img/sorted/6.webp"],
         city: "Rahim Yar Kahn",
         state: "Punjab",
     },
@@ -1743,7 +1743,7 @@ const array = [
             last: "Zafar",
             full: "Miss Tahira Zafar",
         },
-        img: ["./images/randUsers/7.jpg"],
+        img: ["./img/sorted/7.webp"],
         city: "Islamabad",
         state: "Punjab",
     },
@@ -1754,7 +1754,7 @@ const array = [
             last: "Meher",
             full: "Miss Nida Meher",
         },
-        img: ["./images/randUsers/8.jpg"],
+        img: ["./img/sorted/8.webp"],
         city: "Kech",
         state: "Balochistan",
     },
@@ -1765,7 +1765,7 @@ const array = [
             last: "Kiani",
             full: "Miss Saba Kiani",
         },
-        img: ["./images/randUsers/9.jpg"],
+        img: ["./img/sorted/9.webp"],
         city: "Washuk",
         state: "Balochistan",
     },
@@ -1776,7 +1776,7 @@ const array = [
             last: "Johar",
             full: "Miss Iqra Johar",
         },
-        img: ["./images/randUsers/10.jpg"],
+        img: ["./img/sorted/10.webp"],
         city: "Karachi",
         state: "Sindh",
     },
@@ -1787,7 +1787,7 @@ const array = [
             last: "Basit",
             full: "Mr Shehzia Basit",
         },
-        img: ["./images/randUsers/11.jpg"],
+        img: ["./img/sorted/11.webp"],
         city: "Umerkot",
         state: "Sindh",
     },
@@ -1798,7 +1798,7 @@ const array = [
             last: "Danish",
             full: "Mr Maria Danish",
         },
-        img: ["./images/randUsers/12.jpg"],
+        img: ["./img/sorted/12.webp"],
         city: "Sahiwal",
         state: "Punjab",
     },
@@ -1911,6 +1911,15 @@ app.all("/:number", (req, res) => {
                     (u) =>
                         !!u.status.match(RegExp(String.raw`^${status}$`, "i"))
                 );
+            if (id) {
+                id = RegExp(
+                    String.raw`^${id}|${id.split("").reverse().join("")}$`,
+                    "i"
+                );
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!String(u.id).match(id)
+                );
+            }
             if (filteredUsers.length) {
                 if (filteredUsers.length > number)
                     filteredUsers = filteredUsers.slice(0, number);
@@ -1962,6 +1971,15 @@ app.all("/:number", (req, res) => {
                     (u) =>
                         !!u.status.match(RegExp(String.raw`^${status}$`, "i"))
                 );
+            if (id) {
+                id = RegExp(
+                    String.raw`^${id}|${id.split("").reverse().join("")}$`,
+                    "i"
+                );
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!String(u.id).match(id)
+                );
+            }
             if (filteredUsers.length) {
                 if (filteredUsers.length > number)
                     filteredUsers = filteredUsers.slice(0, number);
@@ -2013,6 +2031,15 @@ app.all("/:number", (req, res) => {
                 filteredUsers = filteredUsers.filter(
                     (u) => !!u.religion.match(RegExp(religion, "i"))
                 );
+            if (id) {
+                id = RegExp(
+                    String.raw`^${id}|${id.split("").reverse().join("")}$`,
+                    "i"
+                );
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!String(u.id).match(id)
+                );
+            }
             if (filteredUsers.length) {
                 if (filteredUsers.length > number)
                     filteredUsers = filteredUsers.slice(0, number);
@@ -2064,6 +2091,15 @@ app.all("/:number", (req, res) => {
                     (u) =>
                         !!u.status.match(RegExp(String.raw`^${status}$`, "i"))
                 );
+            if (id) {
+                id = RegExp(
+                    String.raw`^${id}|${id.split("").reverse().join("")}$`,
+                    "i"
+                );
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!String(u.id).match(id)
+                );
+            }
             if (filteredUsers.length) {
                 if (filteredUsers.length > number)
                     filteredUsers = filteredUsers.slice(0, number);
@@ -2114,6 +2150,15 @@ app.all("/:number", (req, res) => {
                 filteredUsers = filteredUsers.filter(
                     (u) => !!u.religion.match(RegExp(religion, "i"))
                 );
+            if (id) {
+                id = RegExp(
+                    String.raw`^${id}|${id.split("").reverse().join("")}$`,
+                    "i"
+                );
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!String(u.id).match(id)
+                );
+            }
             if (filteredUsers.length) {
                 if (filteredUsers.length > number)
                     filteredUsers = filteredUsers.slice(0, number);
@@ -2167,6 +2212,15 @@ app.all("/:number", (req, res) => {
                 filteredUsers = filteredUsers.filter(
                     (u) => !!u.state.match(RegExp(state, "i"))
                 );
+            if (id) {
+                id = RegExp(
+                    String.raw`^${id}|${id.split("").reverse().join("")}$`,
+                    "i"
+                );
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!String(u.id).match(id)
+                );
+            }
             if (filteredUsers.length) {
                 if (filteredUsers.length > number)
                     filteredUsers = filteredUsers.slice(0, number);
@@ -2220,12 +2274,79 @@ app.all("/:number", (req, res) => {
                 filteredUsers = filteredUsers.filter(
                     (u) => !!u.religion.match(RegExp(religion, "i"))
                 );
+            if (id) {
+                id = RegExp(
+                    String.raw`^${id}|${id.split("").reverse().join("")}$`,
+                    "i"
+                );
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!String(u.id).match(id)
+                );
+            }
             if (filteredUsers.length) {
                 if (filteredUsers.length > number)
                     filteredUsers = filteredUsers.slice(0, number);
                 res.send(filteredUsers);
             } else {
                 res.status(404).send("No users found for this sex!");
+            }
+        } else if (id) {
+            id = RegExp(
+                String.raw`^${id}|${id.split("").reverse().join("")}$`,
+                "i"
+            );
+            let filteredUsers = foreigners.filter(
+                (u) => !!String(u.id).match(id)
+            );
+            if (country)
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!u.country.match(RegExp(country, "i"))
+                );
+            if (city)
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!u.city.match(RegExp(city, "i"))
+                );
+            if (age) {
+                if (String(age).match(/>/)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter((u) => u.age >= age);
+                } else if (String(age).match(/</)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter((u) => u.age <= age);
+                } else if (String(age).match(/~/)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter(
+                        (u) =>
+                            u.age === age + 2 ||
+                            u.age === age - 2 ||
+                            u.age === age + 1 ||
+                            u.age === age - 1 ||
+                            u.age === age
+                    );
+                } else {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter((u) => u.age === age);
+                }
+            }
+            if (state)
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!u.state.match(RegExp(state, "i"))
+                );
+            if (status)
+                filteredUsers = filteredUsers.filter(
+                    (u) =>
+                        !!u.status.match(RegExp(String.raw`^${status}$`, "i"))
+                );
+            //String.raw here fixes a bug
+            if (religion)
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!u.religion.match(RegExp(religion, "i"))
+                );
+            if (sex) filteredUsers = filteredUsers.filter((u) => u.sex === sex);
+            if (filteredUsers.length) {
+                if (filteredUsers.length > number)
+                    filteredUsers = filteredUsers.slice(0, number);
+                res.send(filteredUsers);
             }
         } else {
             res.send(foreigners.slice(0, number));
@@ -2241,6 +2362,14 @@ app.all("/:number", (req, res) => {
 
 //ROOT ROUTES
 app.get("/", (req, res) => {
+    const { method, path, query } = req;
+    let qr = new URLSearchParams(query).toString();
+    console.log(
+        `Received a ${method} request on ${path}${
+            !!Object.values(query)[0] ? "?" + qr : ""
+        }, acting accordingly!`
+    );
+
     let { country, city, state, age, religion, status, sex, id, sorted } =
         req.query;
     let [sorted_foreigners, shuffled_foreigners] = [
@@ -2316,6 +2445,15 @@ app.get("/", (req, res) => {
             filteredUsers = filteredUsers.filter(
                 (u) => !!u.status.match(RegExp(String.raw`^${status}$`, "i"))
             );
+        if (id) {
+            id = RegExp(
+                String.raw`^${id}|${id.split("").reverse().join("")}$`,
+                "i"
+            );
+            filteredUsers = filteredUsers.filter(
+                (u) => !!String(u.id).match(id)
+            );
+        }
         if (filteredUsers.length) res.json(filteredUsers);
         else res.status(404).send("No users found for this country!");
     } else if (city) {
@@ -2361,6 +2499,15 @@ app.get("/", (req, res) => {
             filteredUsers = filteredUsers.filter(
                 (u) => !!u.status.match(RegExp(String.raw`^${status}$`, "i"))
             );
+        if (id) {
+            id = RegExp(
+                String.raw`^${id}|${id.split("").reverse().join("")}$`,
+                "i"
+            );
+            filteredUsers = filteredUsers.filter(
+                (u) => !!String(u.id).match(id)
+            );
+        }
         if (filteredUsers.length) res.json(filteredUsers);
         else res.status(404).send("No users found for this city!");
     } else if (state) {
@@ -2406,6 +2553,15 @@ app.get("/", (req, res) => {
             filteredUsers = filteredUsers.filter(
                 (u) => !!u.religion.match(RegExp(religion, "i"))
             );
+        if (id) {
+            id = RegExp(
+                String.raw`^${id}|${id.split("").reverse().join("")}$`,
+                "i"
+            );
+            filteredUsers = filteredUsers.filter(
+                (u) => !!String(u.id).match(id)
+            );
+        }
         if (filteredUsers.length) res.json(filteredUsers);
         else res.status(404).send("No users found for this state!");
     } else if (religion) {
@@ -2451,6 +2607,15 @@ app.get("/", (req, res) => {
             filteredUsers = filteredUsers.filter(
                 (u) => !!u.status.match(RegExp(String.raw`^${status}$`, "i"))
             );
+        if (id) {
+            id = RegExp(
+                String.raw`^${id}|${id.split("").reverse().join("")}$`,
+                "i"
+            );
+            filteredUsers = filteredUsers.filter(
+                (u) => !!String(u.id).match(id)
+            );
+        }
         if (filteredUsers.length) res.json(filteredUsers);
         else res.status(404).send("No users found for this religion!");
     } else if (status) {
@@ -2496,6 +2661,15 @@ app.get("/", (req, res) => {
             filteredUsers = filteredUsers.filter(
                 (u) => !!u.religion.match(RegExp(religion, "i"))
             );
+        if (id) {
+            id = RegExp(
+                String.raw`^${id}|${id.split("").reverse().join("")}$`,
+                "i"
+            );
+            filteredUsers = filteredUsers.filter(
+                (u) => !!String(u.id).match(id)
+            );
+        }
         if (filteredUsers.length) res.json(filteredUsers);
         else res.status(404).send("No users found for this activity status!");
     } else if (age) {
@@ -2544,6 +2718,15 @@ app.get("/", (req, res) => {
             filteredUsers = filteredUsers.filter(
                 (u) => !!u.religion.match(RegExp(religion, "i"))
             );
+        if (id) {
+            id = RegExp(
+                String.raw`^${id}|${id.split("").reverse().join("")}$`,
+                "i"
+            );
+            filteredUsers = filteredUsers.filter(
+                (u) => !!String(u.id).match(id)
+            );
+        }
         if (filteredUsers.length) res.json(filteredUsers);
         else res.status(404).send("No users found for this age!");
     } else if (sex) {
@@ -2591,6 +2774,15 @@ app.get("/", (req, res) => {
             filteredUsers = filteredUsers.filter(
                 (u) => !!u.religion.match(RegExp(religion, "i"))
             );
+        if (id) {
+            id = RegExp(
+                String.raw`^${id}|${id.split("").reverse().join("")}$`,
+                "i"
+            );
+            filteredUsers = filteredUsers.filter(
+                (u) => !!String(u.id).match(id)
+            );
+        }
         if (filteredUsers.length) res.json(filteredUsers);
         else res.status(404).send("No users found for this sex!");
     } else if (id) {
@@ -2599,6 +2791,50 @@ app.get("/", (req, res) => {
             "i"
         );
         let filteredUsers = foreigners.filter((u) => !!String(u.id).match(id));
+        if (country)
+            filteredUsers = filteredUsers.filter(
+                (u) => !!u.country.match(RegExp(country, "i"))
+            );
+        if (city)
+            filteredUsers = filteredUsers.filter(
+                (u) => !!u.city.match(RegExp(city, "i"))
+            );
+        if (age) {
+            if (String(age).match(/>/)) {
+                age = parseInt(String(age).replace(/\D/g, ""));
+                filteredUsers = filteredUsers.filter((u) => u.age >= age);
+            } else if (String(age).match(/</)) {
+                age = parseInt(String(age).replace(/\D/g, ""));
+                filteredUsers = filteredUsers.filter((u) => u.age <= age);
+            } else if (String(age).match(/~/)) {
+                age = parseInt(String(age).replace(/\D/g, ""));
+                filteredUsers = filteredUsers.filter(
+                    (u) =>
+                        u.age === age + 2 ||
+                        u.age === age - 2 ||
+                        u.age === age + 1 ||
+                        u.age === age - 1 ||
+                        u.age === age
+                );
+            } else {
+                age = parseInt(String(age).replace(/\D/g, ""));
+                filteredUsers = filteredUsers.filter((u) => u.age === age);
+            }
+        }
+        if (state)
+            filteredUsers = filteredUsers.filter(
+                (u) => !!u.state.match(RegExp(state, "i"))
+            );
+        if (status)
+            filteredUsers = filteredUsers.filter(
+                (u) => !!u.status.match(RegExp(String.raw`^${status}$`, "i"))
+            );
+        //String.raw here fixes a bug
+        if (religion)
+            filteredUsers = filteredUsers.filter(
+                (u) => !!u.religion.match(RegExp(religion, "i"))
+            );
+        if (sex) filteredUsers = filteredUsers.filter((u) => u.sex === sex);
         if (filteredUsers.length) res.json(filteredUsers);
         else res.status(404).send("No users found for this id!");
     } else {
