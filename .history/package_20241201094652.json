@@ -12,9 +12,7 @@
     },
     "scripts": {
         "start": "start",
-        "dev": "dev",
-        "deploy": "deploy",
-        "push": "push"
+        "dev": "dev"
     },
     "keywords": [
         "users",

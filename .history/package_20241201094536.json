@@ -12,21 +12,15 @@
     },
     "scripts": {
         "start": "start",
-        "dev": "dev",
-        "deploy": "deploy",
-        "push": "push"
+        "dev": "dev"
     },
     "keywords": [
         "users",
         "pakistani",
         "random",
-        "noauth",
-        "noapikey"
+        "noauth"
     ],
     "author": "github.com/Abbaskhurram255",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/Abbaskhurram255/randusers-api.git"
-    },
+    "repository": "github.com/Abbaskhurram255",
     "license": "MIT"
 }

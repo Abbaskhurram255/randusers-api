@@ -13,8 +13,7 @@
     "scripts": {
         "start": "start",
         "dev": "dev",
-        "deploy": "deploy",
-        "push": "push"
+        "deploy": "deploy"
     },
     "keywords": [
         "users",
