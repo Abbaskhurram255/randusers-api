@@ -4,7 +4,7 @@ const path = require("path");
 let cdn = {
     protocol: "https://",
     host: "randusers-api.up.railway.app",
-    path: "/img/sorted",
+    path: "/img/sorted/",
 };
 cdn = Object.values(cdn).join("");
 //const fs = require("fs");

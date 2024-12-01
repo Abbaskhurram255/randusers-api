@@ -4,9 +4,9 @@ const path = require("path");
 let cdn = {
     protocol: "https://",
     host: "randusers-api.up.railway.app",
-    path: "/img/sorted",
+    path: "/img/sorted/",
 };
-cdn = Object.values(cdn).join("");
+cdn = Object.values(cdn).join();
 //const fs = require("fs");
 
 //the array below HAS to use let, since it'll later be modified, or shuffled to be specific

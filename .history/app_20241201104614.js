@@ -1,12 +1,11 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const path = require("path");
-let cdn = {
-    protocol: "https://",
+const cdn = {
+    protocol: "https",
     host: "randusers-api.up.railway.app",
-    path: "/img/sorted",
+    path: "/img/",
 };
-cdn = Object.values(cdn).join("");
 //const fs = require("fs");
 
 //the array below HAS to use let, since it'll later be modified, or shuffled to be specific
