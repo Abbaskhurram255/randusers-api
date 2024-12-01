@@ -1684,7 +1684,7 @@ const array = [
             full: "Miss Hania Bashir",
             pronunciation: "mis haneeya bashIr",
         },
-        img: [`${path.join(__dirname, "img/sorted")}/2.webp`],
+        img: [`${path.join(__dirname, "img/sorted")}/x.webp`],
         city: "Karachi",
         state: "Sindh",
     },
