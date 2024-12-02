@@ -19,10 +19,10 @@ let cdn2 = make_cdn("pk");
 let foreigners = [
     {
         name: {
-            title: "Ms",
+            title: "Ms.",
             first: "بهار",
             last: "محمدخان",
-            full: "Ms بهار محمدخان",
+            full: "Ms. بهار محمدخان",
         },
         email: "bhr.mhmdkhn@icloud.com",
         login: {
@@ -52,10 +52,10 @@ let foreigners = [
     },
     {
         name: {
-            title: "Ms",
+            title: "Ms.",
             first: "Pooja",
             last: "Kumaari",
-            full: "Ms Pooja Kumaari",
+            full: "Ms. Pooja Kumaari",
         },
         email: "pooja.kumaari@outlook.com",
         login: {
@@ -83,10 +83,10 @@ let foreigners = [
     },
     {
         name: {
-            title: "Ms",
+            title: "Ms.",
             first: "پارمیس",
             last: "رضاییان",
-            full: "Ms پارمیس رضاییان",
+            full: "Ms. پارمیس رضاییان",
         },
         email: "prmys.rdyyn@yahoo.com",
         login: {
@@ -116,10 +116,10 @@ let foreigners = [
     },
     {
         name: {
-            title: "Mr",
+            title: "Mr.",
             first: "پوریا",
             last: "قاسمی",
-            full: "Mr پوریا قاسمی",
+            full: "Mr. پوریا قاسمی",
         },
         email: "pwry.qsmy@outlook.com",
         login: {
@@ -149,10 +149,10 @@ let foreigners = [
     },
     {
         name: {
-            title: "Ms",
+            title: "Ms.",
             first: "Alyssia",
             last: "Lopez",
-            full: "Ms Alyssia Lopez",
+            full: "Ms. Alyssia Lopez",
         },
         email: "alyssia.lopez@hotmail.com",
         login: {
@@ -180,10 +180,10 @@ let foreigners = [
     },
     {
         name: {
-            title: "Mr",
+            title: "Mr.",
             first: "میلاد",
             last: "احمدی",
-            full: "Mr میلاد احمدی",
+            full: "Mr. میلاد احمدی",
         },
         email: "myld.hmdy@hotmail.com",
         login: {
@@ -204,7 +204,7 @@ let foreigners = [
         state: "یزد",
         city: "خربد",
         street: "9008 استاد نجات‌اللهی",
-        son_of: "Ms بهار احمدی",
+        son_of: "Ms. بهار احمدی",
         date_registered: "Aug 31, 2012",
         img: [`${cdn1}/x.webp`],
         status: "inactive",
@@ -238,7 +238,7 @@ let foreigners = [
         state: "Dublin City",
         city: "Midleton",
         street: "9818 Boghall Road",
-        daughter_of: "Ms Matilda Rice",
+        daughter_of: "Ms. Matilda Rice",
         date_registered: "Sep 7, 2006",
         img: [`${cdn1}/x.webp`],
         status: "inactive",
@@ -248,10 +248,10 @@ let foreigners = [
     },
     {
         name: {
-            title: "Mrs",
+            title: "Mrs.",
             first: "Alisa",
             last: "Kivi",
-            full: "Mrs Alisa Kivi",
+            full: "Mrs. Alisa Kivi",
         },
         email: "alisa.kivi@hotmail.com",
         login: {
@@ -272,7 +272,7 @@ let foreigners = [
         state: "Tavastia Proper",
         city: "Enonkoski",
         street: "1864 Pirkankatu",
-        daughter_of: "Ms پارمیس Kivi",
+        daughter_of: "Ms. پارمیس Kivi",
         date_registered: "Jan 11, 2020",
         img: [`${cdn1}/x.webp`],
         status: "inactive",
@@ -306,7 +306,7 @@ let foreigners = [
         state: "Bremen",
         city: "Calw",
         street: "9541 Lessingstraße",
-        daughter_of: "Mr پوریا Bruder",
+        daughter_of: "Mr. پوریا Bruder",
         date_registered: "Oct 27, 2006",
         img: [`${cdn1}/x.webp`],
         status: "active",
@@ -314,10 +314,10 @@ let foreigners = [
     },
     {
         name: {
-            title: "Ms",
+            title: "Ms.",
             first: "Praneetha",
             last: "Kulkarni",
-            full: "Ms Praneetha Kulkarni",
+            full: "Ms. Praneetha Kulkarni",
         },
         email: "praneetha.kulkarni@yahoo.com",
         login: {
@@ -338,7 +338,7 @@ let foreigners = [
         state: "Puducherry",
         city: "Katni",
         street: "1435 Sitabuldi Main Rd",
-        daughter_of: "Ms Alyssia Kulkarni",
+        daughter_of: "Ms. Alyssia Kulkarni",
         date_registered: "Sep 21, 2019",
         img: [`${cdn1}/x.webp`],
         status: "inactive",
@@ -348,10 +348,10 @@ let foreigners = [
     },
     {
         name: {
-            title: "Ms",
+            title: "Ms.",
             first: "Angèle",
             last: "Bertrand",
-            full: "Ms Angèle Bertrand",
+            full: "Ms. Angèle Bertrand",
         },
         email: "angele.bertrand@gmail.com",
         login: {
@@ -372,7 +372,7 @@ let foreigners = [
         state: "Val-de-Marne",
         city: "Tours",
         street: "8255 Rue de L'Abbé-Carton",
-        daughter_of: "Mr میلاد Bertrand",
+        daughter_of: "Mr. میلاد Bertrand",
         date_registered: "May 11, 2022",
         img: [`${cdn1}/x.webp`],
         status: "inactive",
@@ -382,10 +382,10 @@ let foreigners = [
     },
     {
         name: {
-            title: "Mr",
+            title: "Mr.",
             first: "Ethan",
             last: "Johnson",
-            full: "Mr Ethan Johnson",
+            full: "Mr. Ethan Johnson",
         },
         email: "ethan.johnson@icloud.com",
         login: {
@@ -414,10 +414,10 @@ let foreigners = [
     },
     {
         name: {
-            title: "Mr",
+            title: "Mr.",
             first: "Zhivoslav",
             last: "Goshovski",
-            full: "Mr Zhivoslav Goshovski",
+            full: "Mr. Zhivoslav Goshovski",
         },
         email: "zhivoslav.goshovski@outlook.com",
         login: {
@@ -438,7 +438,7 @@ let foreigners = [
         state: "Poltavska",
         city: "Korostishiv",
         street: "6423 Ploshcha Slavi",
-        son_of: "Mrs Alisa Goshovski",
+        son_of: "Mrs. Alisa Goshovski",
         date_registered: "Jan 2, 2017",
         img: [`${cdn1}/x.webp`],
         status: "active",
@@ -446,10 +446,10 @@ let foreigners = [
     },
     {
         name: {
-            title: "Mr",
+            title: "Mr.",
             first: "Etienne",
             last: "Lo",
-            full: "Mr Etienne Lo",
+            full: "Mr. Etienne Lo",
         },
         email: "etienne.lo@yahoo.com",
         login: {
@@ -504,7 +504,7 @@ let foreigners = [
         state: "کهگیلویه و بویراحمد",
         city: "نجف‌آباد",
         street: "9623 میدان شهیدان رحیمی",
-        daughter_of: "Ms Praneetha کریمی",
+        daughter_of: "Ms. Praneetha کریمی",
         date_registered: "May 24, 2013",
         img: [`${cdn1}/x.webp`],
         status: "active",
@@ -512,10 +512,10 @@ let foreigners = [
     },
     {
         name: {
-            title: "Ms",
+            title: "Ms.",
             first: "Aïda",
             last: "Nieuwenhuis",
-            full: "Ms Aïda Nieuwenhuis",
+            full: "Ms. Aïda Nieuwenhuis",
         },
         email: "aida.nieuwenhuis@hotmail.com",
         login: {
@@ -536,7 +536,7 @@ let foreigners = [
         state: "Utrecht",
         city: "Elburg",
         street: "4576 Cooperatieweg",
-        daughter_of: "Ms Angèle Nieuwenhuis",
+        daughter_of: "Ms. Angèle Nieuwenhuis",
         date_registered: "Sep 13, 2004",
         img: [`${cdn1}/x.webp`],
         status: "inactive",
@@ -570,7 +570,7 @@ let foreigners = [
         state: "Zug",
         city: "Diepoldsau",
         street: "9989 Rue Desaix",
-        son_of: "Mr Ethan Lefevre",
+        son_of: "Mr. Ethan Lefevre",
         date_registered: "Jul 22, 2005",
         img: [`${cdn1}/x.webp`],
         status: "active",
@@ -578,10 +578,10 @@ let foreigners = [
     },
     {
         name: {
-            title: "Mr",
+            title: "Mr.",
             first: "Silas",
             last: "Poulsen",
-            full: "Mr Silas Poulsen",
+            full: "Mr. Silas Poulsen",
         },
         email: "silas.poulsen@yahoo.com",
         login: {
@@ -602,7 +602,7 @@ let foreigners = [
         state: "Sjælland",
         city: "Støvring",
         street: "794 Lundvej",
-        son_of: "Mr Zhivoslav Poulsen",
+        son_of: "Mr. Zhivoslav Poulsen",
         date_registered: "Apr 17, 2009",
         img: [`${cdn1}/x.webp`],
         status: "active",
@@ -610,10 +610,10 @@ let foreigners = [
     },
     {
         name: {
-            title: "Mr",
+            title: "Mr.",
             first: "Nooa",
             last: "Koivisto",
-            full: "Mr Nooa Koivisto",
+            full: "Mr. Nooa Koivisto",
         },
         email: "nooa.koivisto@hotmail.com",
         login: {
@@ -634,7 +634,7 @@ let foreigners = [
         state: "Ostrobothnia",
         city: "Humppila",
         street: "3787 Rautatienkatu",
-        son_of: "Mr Etienne Koivisto",
+        son_of: "Mr. Etienne Koivisto",
         date_registered: "Mar 27, 2006",
         img: [`${cdn1}/x.webp`],
         status: "inactive",
@@ -702,7 +702,7 @@ let foreigners = [
         state: "Auckland",
         city: "Tauranga",
         street: "5653 Buckleys Road",
-        daughter_of: "Ms Aïda Taylor",
+        daughter_of: "Ms. Aïda Taylor",
         date_registered: "Oct 6, 2017",
         img: [`${cdn1}/x.webp`],
         status: "active",
@@ -710,10 +710,10 @@ let foreigners = [
     },
     {
         name: {
-            title: "Mr",
+            title: "Mr.",
             first: "Sami",
             last: "Merkl",
-            full: "Mr Sami Merkl",
+            full: "Mr. Sami Merkl",
         },
         email: "sami.merkl@outlook.com",
         login: {
@@ -742,10 +742,10 @@ let foreigners = [
     },
     {
         name: {
-            title: "Mr",
+            title: "Mr.",
             first: "Archer",
             last: "Martin",
-            full: "Mr Archer Martin",
+            full: "Mr. Archer Martin",
         },
         email: "archer.martin@hotmail.com",
         login: {
@@ -766,7 +766,7 @@ let foreigners = [
         state: "West Coast",
         city: "Upper Hutt",
         street: "9098 Portsmouth Drive",
-        son_of: "Mr Silas Martin",
+        son_of: "Mr. Silas Martin",
         date_registered: "Aug 27, 2011",
         img: [`${cdn1}/x.webp`],
         status: "inactive",
@@ -800,7 +800,7 @@ let foreigners = [
         state: "Schleswig-Holstein",
         city: "Friedland",
         street: "1537 Bahnhofstraße",
-        daughter_of: "Mr Nooa Kaminski",
+        daughter_of: "Mr. Nooa Kaminski",
         date_registered: "Dec 25, 2007",
         img: [`${cdn1}/x.webp`],
         status: "inactive",
@@ -810,10 +810,10 @@ let foreigners = [
     },
     {
         name: {
-            title: "Mr",
+            title: "Mr.",
             first: "Mirko",
             last: "Kojić",
-            full: "Mr Mirko Kojić",
+            full: "Mr. Mirko Kojić",
         },
         email: "mirko.kojic@icloud.com",
         login: {
@@ -876,10 +876,10 @@ let foreigners = [
     },
     {
         name: {
-            title: "Mrs",
+            title: "Mrs.",
             first: "Susie",
             last: "Simmons",
-            full: "Mrs Susie Simmons",
+            full: "Mrs. Susie Simmons",
         },
         email: "susie.simmons@icloud.com",
         login: {
@@ -900,7 +900,7 @@ let foreigners = [
         state: "Northamptonshire",
         city: "Oxford",
         street: "483 Springfield Road",
-        daughter_of: "Mr Sami Simmons",
+        daughter_of: "Mr. Sami Simmons",
         date_registered: "Oct 12, 2015",
         img: [`${cdn1}/x.webp`],
         status: "inactive",
@@ -910,10 +910,10 @@ let foreigners = [
     },
     {
         name: {
-            title: "Mrs",
+            title: "Mrs.",
             first: "Brianna",
             last: "Kim",
-            full: "Mrs Brianna Kim",
+            full: "Mrs. Brianna Kim",
         },
         email: "brianna.kim@gmail.com",
         login: {
@@ -934,7 +934,7 @@ let foreigners = [
         state: "Rhode Island",
         city: "Escondido",
         street: "2395 Harrison Ct",
-        daughter_of: "Mr Archer Kim",
+        daughter_of: "Mr. Archer Kim",
         date_registered: "May 12, 2013",
         img: [`${cdn1}/x.webp`],
         status: "inactive",
@@ -1008,10 +1008,10 @@ let foreigners = [
     },
     {
         name: {
-            title: "Mr",
+            title: "Mr.",
             first: "Leslie",
             last: "Stewart",
-            full: "Mr Leslie Stewart",
+            full: "Mr. Leslie Stewart",
         },
         email: "leslie.stewart@yahoo.com",
         login: {
@@ -1032,7 +1032,7 @@ let foreigners = [
         state: "Idaho",
         city: "Indianapolis",
         street: "7370 E Sandy Lake Rd",
-        son_of: "Ms Magdalena Stewart",
+        son_of: "Ms. Magdalena Stewart",
         date_registered: "Mar 5, 2006",
         img: [`${cdn1}/x.webp`],
         status: "active",
@@ -1040,10 +1040,10 @@ let foreigners = [
     },
     {
         name: {
-            title: "Mrs",
+            title: "Mrs.",
             first: "Stefana",
             last: "Simonović",
-            full: "Mrs Stefana Simonović",
+            full: "Mrs. Stefana Simonović",
         },
         email: "stefana.simonovic@yahoo.com",
         login: {
@@ -1074,10 +1074,10 @@ let foreigners = [
     },
     {
         name: {
-            title: "Mr",
+            title: "Mr.",
             first: "Askil",
             last: "Furuseth",
-            full: "Mr Askil Furuseth",
+            full: "Mr. Askil Furuseth",
         },
         email: "askil.furuseth@outlook.com",
         login: {
@@ -1098,7 +1098,7 @@ let foreigners = [
         state: "Trøndelag",
         city: "Drammen",
         street: "8700 Oscars gate",
-        son_of: "Mr Mirko Furuseth",
+        son_of: "Mr. Mirko Furuseth",
         date_registered: "Sep 13, 2007",
         img: [`${cdn1}/x.webp`],
         status: "inactive",
@@ -1108,10 +1108,10 @@ let foreigners = [
     },
     {
         name: {
-            title: "Mr",
+            title: "Mr.",
             first: "سورنا",
             last: "نكو نظر",
-            full: "Mr سورنا نكو نظر",
+            full: "Mr. سورنا نكو نظر",
         },
         email: "swrn.nkwnzr@icloud.com",
         login: {
@@ -1142,10 +1142,10 @@ let foreigners = [
     },
     {
         name: {
-            title: "Mr",
+            title: "Mr.",
             first: "Yaron",
             last: "Salman",
-            full: "Mr Yaron Salman",
+            full: "Mr. Yaron Salman",
         },
         email: "yaron.salman@icloud.com",
         login: {
@@ -1166,7 +1166,7 @@ let foreigners = [
         state: "Zeeland",
         city: "Garijp",
         street: "4034 John Fordstrook",
-        son_of: "Mrs Susie Salman",
+        son_of: "Mrs. Susie Salman",
         date_registered: "Oct 26, 2020",
         img: [`${cdn1}/x.webp`],
         status: "active",
@@ -1174,10 +1174,10 @@ let foreigners = [
     },
     {
         name: {
-            title: "Mr",
+            title: "Mr.",
             first: "Remko",
             last: "Pham",
-            full: "Mr Remko Pham",
+            full: "Mr. Remko Pham",
         },
         email: "remko.pham@yahoo.com",
         login: {
@@ -1198,7 +1198,7 @@ let foreigners = [
         state: "Friesland",
         city: "Tirns",
         street: "228 Johanniterhof",
-        son_of: "Mrs Brianna Pham",
+        son_of: "Mrs. Brianna Pham",
         date_registered: "Sep 29, 2017",
         img: [`${cdn1}/x.webp`],
         status: "inactive",
@@ -1208,10 +1208,10 @@ let foreigners = [
     },
     {
         name: {
-            title: "Mr",
+            title: "Mr.",
             first: "Peter",
             last: "Kreuz",
-            full: "Mr Peter Kreuz",
+            full: "Mr. Peter Kreuz",
         },
         email: "peter.kreuz@outlook.com",
         login: {
@@ -1232,7 +1232,7 @@ let foreigners = [
         state: "Rheinland-Pfalz",
         city: "Gundelsheim",
         street: "5925 Berliner Straße",
-        son_of: "Mrs Stefana Kreuz",
+        son_of: "Mrs. Stefana Kreuz",
         date_registered: "Jun 9, 2006",
         img: [`${cdn1}/x.webp`],
         status: "inactive",
@@ -1242,10 +1242,10 @@ let foreigners = [
     },
     {
         name: {
-            title: "Mrs",
+            title: "Mrs.",
             first: "Ladomira",
             last: "Chishko",
-            full: "Mrs Ladomira Chishko",
+            full: "Mrs. Ladomira Chishko",
         },
         email: "ladomira.chishko@gmail.com",
         login: {
@@ -1266,7 +1266,7 @@ let foreigners = [
         state: "Harkivska",
         city: "Fastiv",
         street: "2558 Alatirska",
-        daughter_of: "Mr Askil Chishko",
+        daughter_of: "Mr. Askil Chishko",
         date_registered: "Oct 4, 2016",
         img: [`${cdn1}/x.webp`],
         status: "inactive",
@@ -1300,7 +1300,7 @@ let foreigners = [
         state: "Australian Capital Territory",
         city: "Rockhampton",
         street: "7641 Country Club Rd",
-        daughter_of: "Mr سورنا Ruiz",
+        daughter_of: "Mr. سورنا Ruiz",
         date_registered: "Sep 7, 2006",
         img: [`${cdn1}/x.webp`],
         status: "active",
@@ -1332,7 +1332,7 @@ let foreigners = [
         state: "Roraima",
         city: "Sorocaba",
         street: "4060 Rua Vinte de Setembro",
-        daughter_of: "Mr Yaron da Conceição",
+        daughter_of: "Mr. Yaron da Conceição",
         date_registered: "Jun 12, 2004",
         img: [`${cdn1}/x.webp`],
         status: "inactive",
@@ -1342,10 +1342,10 @@ let foreigners = [
     },
     {
         name: {
-            title: "Ms",
+            title: "Ms.",
             first: "Jasmine",
             last: "Jones",
-            full: "Ms Jasmine Jones",
+            full: "Ms. Jasmine Jones",
         },
         email: "jasmine.jones@yahoo.com",
         login: {
@@ -1366,7 +1366,7 @@ let foreigners = [
         state: "Newfoundland and Labrador",
         city: "Hampstead",
         street: "5055 Maple Ave",
-        daughter_of: "Mr Remko Jones",
+        daughter_of: "Mr. Remko Jones",
         date_registered: "Apr 10, 2005",
         img: [`${cdn1}/x.webp`],
         status: "active",
@@ -1374,10 +1374,10 @@ let foreigners = [
     },
     {
         name: {
-            title: "Mr",
+            title: "Mr.",
             first: "Milan",
             last: "Nenadović",
-            full: "Mr Milan Nenadović",
+            full: "Mr. Milan Nenadović",
         },
         email: "milan.nenadovic@gmail.com",
         login: {
@@ -1398,7 +1398,7 @@ let foreigners = [
         state: "Pčinja",
         city: "Priština",
         street: "9332 Emila Zole",
-        son_of: "Mr Peter Nenadović",
+        son_of: "Mr. Peter Nenadović",
         date_registered: "Apr 1, 2018",
         img: [`${cdn1}/x.webp`],
         status: "active",
@@ -1406,10 +1406,10 @@ let foreigners = [
     },
     {
         name: {
-            title: "Mr",
+            title: "Mr.",
             first: "Viljami",
             last: "Halonen",
-            full: "Mr Viljami Halonen",
+            full: "Mr. Viljami Halonen",
         },
         email: "viljami.halonen@outlook.com",
         login: {
@@ -1430,7 +1430,7 @@ let foreigners = [
         state: "Uusimaa",
         city: "Forssa",
         street: "7093 Visiokatu",
-        son_of: "Mrs Ladomira Halonen",
+        son_of: "Mrs. Ladomira Halonen",
         date_registered: "Mar 26, 2011",
         img: [`${cdn1}/x.webp`],
         status: "inactive",
@@ -1474,10 +1474,10 @@ let foreigners = [
     },
     {
         name: {
-            title: "Mrs",
+            title: "Mrs.",
             first: "Mónica",
             last: "Bravo",
-            full: "Mrs Mónica Bravo",
+            full: "Mrs. Mónica Bravo",
         },
         email: "monica.bravo@gmail.com",
         login: {
@@ -1508,10 +1508,10 @@ let foreigners = [
     },
     {
         name: {
-            title: "Mr",
+            title: "Mr.",
             first: "Eddie",
             last: "Lane",
-            full: "Mr Eddie Lane",
+            full: "Mr. Eddie Lane",
         },
         email: "eddie.lane@yahoo.com",
         login: {
@@ -1532,7 +1532,7 @@ let foreigners = [
         state: "Powys",
         city: "Dundee",
         street: "2526 Victoria Street",
-        son_of: "Mr Milan Lane",
+        son_of: "Mr. Milan Lane",
         date_registered: "Oct 24, 2007",
         img: [`${cdn1}/x.webp`],
         status: "active",
@@ -1540,10 +1540,10 @@ let foreigners = [
     },
     {
         name: {
-            title: "Mrs",
+            title: "Mrs.",
             first: "Clem",
             last: "Oliveira",
-            full: "Mrs Clem Oliveira",
+            full: "Mrs. Clem Oliveira",
         },
         email: "clem.oliveira@hotmail.com",
         login: {
@@ -1564,7 +1564,7 @@ let foreigners = [
         state: "Alagoas",
         city: "Americana",
         street: "6854 Rua Boa Vista",
-        daughter_of: "Mr Viljami Oliveira",
+        daughter_of: "Mr. Viljami Oliveira",
         date_registered: "Apr 18, 2005",
         img: [`${cdn1}/x.webp`],
         status: "inactive",
@@ -1574,10 +1574,10 @@ let foreigners = [
     },
     {
         name: {
-            title: "Mr",
+            title: "Mr.",
             first: "Aleksi",
             last: "Halonen",
-            full: "Mr Aleksi Halonen",
+            full: "Mr. Aleksi Halonen",
         },
         email: "aleksi.halonen@gmail.com",
         login: {
@@ -1606,10 +1606,10 @@ let foreigners = [
     },
     {
         name: {
-            title: "Mr",
+            title: "Mr.",
             first: "Silas",
             last: "Madsen",
-            full: "Mr Silas Madsen",
+            full: "Mr. Silas Madsen",
         },
         email: "silas.madsen@gmail.com",
         login: {
@@ -1630,7 +1630,7 @@ let foreigners = [
         state: "Syddanmark",
         city: "Gørløse",
         street: "541 Højtoftevej",
-        son_of: "Mrs Mónica Madsen",
+        son_of: "Mrs. Mónica Madsen",
         date_registered: "Jul 5, 2009",
         img: [`${cdn1}/x.webp`],
         status: "inactive",
@@ -1640,11 +1640,11 @@ let foreigners = [
     },
     {
         name: {
-            title: "Mrs",
+            title: "Mrs.",
             first: "Smith",
             middle: "Halmond",
             last: "Parks",
-            full: "Mrs Smith-Halmond Parks",
+            full: "Mrs. Smith-Halmond Parks",
             pronunciation: "missus smith hemmund :pakks",
         },
         email: "a.florida.butterfly.in.a.love.triangle@icloud.com",
@@ -1690,7 +1690,7 @@ const array = [
     },
     {
         name: {
-            title: "Ms",
+            title: "Ms.",
             first: "Hania",
             last: "Bashir",
             full: "Miss Hania Bashir",
@@ -1727,10 +1727,10 @@ const array = [
     },
     {
         name: {
-            title: "Mrs",
+            title: "Mrs.",
             first: "Asghar",
             last: "Malik",
-            full: "Mrs Asghar Malik",
+            full: "Mrs. Asghar Malik",
         },
         img: [`${cdn2}/5.webp`],
         city: "Hyderabad",
@@ -1738,10 +1738,10 @@ const array = [
     },
     {
         name: {
-            title: "Ms",
+            title: "Ms.",
             first: "Kangana",
             last: "Qaisar",
-            full: "Ms Kangana Qaisar",
+            full: "Ms. Kangana Qaisar",
             alias: "Kanga",
             pronunciation: "mis kuhngana keisar",
         },
@@ -1798,7 +1798,7 @@ const array = [
             title: "Miss",
             first: "Shahzia",
             last: "Basit",
-            full: "Ms Shehzia Basit",
+            full: "Mr. Shehzia Basit",
         },
         img: [`${cdn2}/11.webp`],
         city: "Umerkot",
@@ -1809,7 +1809,7 @@ const array = [
             title: "Miss",
             first: "Maria",
             last: "Danish",
-            full: "Ms Maria Danish",
+            full: "Ms. Maria Danish",
         },
         img: [`${cdn2}/12.webp`],
         city: "Sahiwal",

@@ -1798,7 +1798,7 @@ const array = [
             title: "Miss",
             first: "Shahzia",
             last: "Basit",
-            full: "Ms Shehzia Basit",
+            full: "Mr Shehzia Basit",
         },
         img: [`${cdn2}/11.webp`],
         city: "Umerkot",

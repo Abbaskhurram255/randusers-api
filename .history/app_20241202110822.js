@@ -8,7 +8,7 @@ let make_cdn = (_for) => {
         host: "randusers-api.up.railway.app",
         path: "/img",
     };
-    return `${Object.values(_this).join("")}${
+    return `${Object.values(_this).slice(-2).join("")}${
         _for === "pk" ? "/sorted" : "/new"
     }`;
 };
@@ -1798,7 +1798,7 @@ const array = [
             title: "Miss",
             first: "Shahzia",
             last: "Basit",
-            full: "Ms Shehzia Basit",
+            full: "Mr Shehzia Basit",
         },
         img: [`${cdn2}/11.webp`],
         city: "Umerkot",
@@ -1809,7 +1809,7 @@ const array = [
             title: "Miss",
             first: "Maria",
             last: "Danish",
-            full: "Ms Maria Danish",
+            full: "Mr Maria Danish",
         },
         img: [`${cdn2}/12.webp`],
         city: "Sahiwal",
