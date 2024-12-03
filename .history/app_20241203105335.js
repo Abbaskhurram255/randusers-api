@@ -1852,10 +1852,6 @@ app.use(express.urlencoded({ extended: false }));
 
 //NON-ROOT ROUTES
 app.all("/:number", (req, res) => {
-    res.set({
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-    });
     let { path, method, params, query } = req;
     let { number } = params;
     number = Number(number);
@@ -1940,7 +1936,7 @@ app.all("/:number", (req, res) => {
             if (filteredUsers.length) {
                 if (filteredUsers.length > number)
                     filteredUsers = filteredUsers.slice(0, number);
-                res.status(200).json(filteredUsers);
+                res.send(filteredUsers);
             } else {
                 res.status(404).send("No users found for this country!");
             }
@@ -2000,7 +1996,7 @@ app.all("/:number", (req, res) => {
             if (filteredUsers.length) {
                 if (filteredUsers.length > number)
                     filteredUsers = filteredUsers.slice(0, number);
-                res.status(200).json(filteredUsers);
+                res.send(filteredUsers);
             } else {
                 res.status(404).send("No users found for this city!");
             }
@@ -2060,7 +2056,7 @@ app.all("/:number", (req, res) => {
             if (filteredUsers.length) {
                 if (filteredUsers.length > number)
                     filteredUsers = filteredUsers.slice(0, number);
-                res.status(200).json(filteredUsers);
+                res.send(filteredUsers);
             } else {
                 res.status(404).send("No users found for this state!");
             }
@@ -2120,7 +2116,7 @@ app.all("/:number", (req, res) => {
             if (filteredUsers.length) {
                 if (filteredUsers.length > number)
                     filteredUsers = filteredUsers.slice(0, number);
-                res.status(200).json(filteredUsers);
+                res.send(filteredUsers);
             } else {
                 res.status(404).send("No users found for this religion!");
             }
@@ -2179,7 +2175,7 @@ app.all("/:number", (req, res) => {
             if (filteredUsers.length) {
                 if (filteredUsers.length > number)
                     filteredUsers = filteredUsers.slice(0, number);
-                res.status(200).json(filteredUsers);
+                res.send(filteredUsers);
             } else {
                 res.status(404).send("No users found for this status!");
             }
@@ -2241,7 +2237,7 @@ app.all("/:number", (req, res) => {
             if (filteredUsers.length) {
                 if (filteredUsers.length > number)
                     filteredUsers = filteredUsers.slice(0, number);
-                res.status(200).json(filteredUsers);
+                res.send(filteredUsers);
             } else {
                 res.status(404).send("No users found for this age!");
             }
@@ -2303,7 +2299,7 @@ app.all("/:number", (req, res) => {
             if (filteredUsers.length) {
                 if (filteredUsers.length > number)
                     filteredUsers = filteredUsers.slice(0, number);
-                res.status(200).json(filteredUsers);
+                res.send(filteredUsers);
             } else {
                 res.status(404).send("No users found for this sex!");
             }
@@ -2363,10 +2359,10 @@ app.all("/:number", (req, res) => {
             if (filteredUsers.length) {
                 if (filteredUsers.length > number)
                     filteredUsers = filteredUsers.slice(0, number);
-                res.status(200).json(filteredUsers);
+                res.send(filteredUsers);
             }
         } else {
-            res.status(200).json(foreigners.slice(0, number));
+            res.send(foreigners.slice(0, number));
         }
         // } else if (method === "POST") {
         //     res.send(req.body);
