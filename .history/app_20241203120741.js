@@ -1874,6 +1874,7 @@ app.all("/:number", (req, res) => {
         let { country, city, state, age, religion, status, sex, id, sorted } =
             req.query;
         //shuffle, by default
+        shuffled_foreigners = foreigners.slice().sort(() => 0.5 - Math.random());
         for (let i = shuffled_foreigners.length - 1; i > 0; i--) {
             let j = Math.floor(Math.random() * i);
             let temp = shuffled_foreigners[i];
@@ -2392,6 +2393,7 @@ app.get("/", (req, res) => {
         "Access-Control-Allow-Origin": "*",
     });
     //shuffle, by default
+    shuffled_foreigners = foreigners.slice().sort(() => 0.5 - Math.random());
     for (let i = shuffled_foreigners.length - 1; i > 0; i--) {
         let j = Math.floor(Math.random() * i);
         let temp = shuffled_foreigners[i];

@@ -1872,9 +1872,8 @@ app.all("/:number", (req, res) => {
     console.log(`Received a ${method} request on ${path}, acting accordingly!`);
     if (method === "GET") {
         let { country, city, state, age, religion, status, sex, id, sorted } =
-            req.query;
-        //shuffle, by default
-        for (let i = shuffled_foreigners.length - 1; i > 0; i--) {
+            req.query;;
+        for (let i = str.length - 1; i > 0; i--) {
             let j = Math.floor(Math.random() * i);
             let temp = shuffled_foreigners[i];
             shuffled_foreigners[i] = shuffled_foreigners[j];
@@ -2391,13 +2390,7 @@ app.get("/", (req, res) => {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
     });
-    //shuffle, by default
-    for (let i = shuffled_foreigners.length - 1; i > 0; i--) {
-        let j = Math.floor(Math.random() * i);
-        let temp = shuffled_foreigners[i];
-        shuffled_foreigners[i] = shuffled_foreigners[j];
-        shuffled_foreigners[j] = temp;
-    }
+    shuffled_foreigners = foreigners.slice().sort(() => 0.5 - Math.random());
     const { method, path, query } = req;
     let qr = new URLSearchParams(query).toString();
     console.log(
@@ -2408,7 +2401,7 @@ app.get("/", (req, res) => {
 
     let { country, city, state, age, religion, status, sex, id, sorted } =
         req.query;
-
+    
     if (String(sorted).match(/true|yes/i)) foreigners = sorted_foreigners;
     else foreigners = shuffled_foreigners;
     // let objectKeysToLowerCase = function (input) {

@@ -1850,7 +1850,7 @@ dotenv.config();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-//save the unsorted array for later shuffling
+
 let shuffled_foreigners,
     sorted_foreigners = foreigners.slice().sort((a, b) => a.id - b.id);
 
@@ -1873,13 +1873,10 @@ app.all("/:number", (req, res) => {
     if (method === "GET") {
         let { country, city, state, age, religion, status, sex, id, sorted } =
             req.query;
-        //shuffle, by default
-        for (let i = shuffled_foreigners.length - 1; i > 0; i--) {
-            let j = Math.floor(Math.random() * i);
-            let temp = shuffled_foreigners[i];
-            shuffled_foreigners[i] = shuffled_foreigners[j];
-            shuffled_foreigners[j] = temp;
-        }
+        let [sorted_foreigners, shuffled_foreigners] = [
+            foreigners.slice(),
+            foreigners.slice().sort(() => Math.random() - 0.5),
+        ];
         if (String(sorted).match(/true|yes/i)) foreigners = sorted_foreigners;
         else foreigners = shuffled_foreigners;
         if (status) status = status.toLowerCase();
@@ -2391,13 +2388,7 @@ app.get("/", (req, res) => {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
     });
-    //shuffle, by default
-    for (let i = shuffled_foreigners.length - 1; i > 0; i--) {
-        let j = Math.floor(Math.random() * i);
-        let temp = shuffled_foreigners[i];
-        shuffled_foreigners[i] = shuffled_foreigners[j];
-        shuffled_foreigners[j] = temp;
-    }
+    shuffled_foreigners = foreigners.slice().sort(() => 0.5 - Math.random());
     const { method, path, query } = req;
     let qr = new URLSearchParams(query).toString();
     console.log(
@@ -2408,7 +2399,7 @@ app.get("/", (req, res) => {
 
     let { country, city, state, age, religion, status, sex, id, sorted } =
         req.query;
-
+    
     if (String(sorted).match(/true|yes/i)) foreigners = sorted_foreigners;
     else foreigners = shuffled_foreigners;
     // let objectKeysToLowerCase = function (input) {
