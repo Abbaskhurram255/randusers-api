@@ -1849,6 +1849,14 @@ const app = express();
 dotenv.config();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use((req, res, next) => {
+    res.set({
+        "Accept": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET"
+    });
+    next();
+})
 
 //save the unsorted array for later shuffling
 let shuffled_foreigners,
@@ -1856,10 +1864,6 @@ let shuffled_foreigners,
 
 //NON-ROOT ROUTES
 app.all("/:number", (req, res) => {
-    res.set({
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-    });
     let { path, method, params, query } = req;
     let { number } = params;
     number = Number(number);
@@ -1948,9 +1952,14 @@ app.all("/:number", (req, res) => {
             if (filteredUsers.length) {
                 if (filteredUsers.length > number)
                     filteredUsers = filteredUsers.slice(0, number);
-                res.status(200).json(filteredUsers);
+                res.status(200).json({ users: filteredUsers, length: filteredUsers.length, success: true });
             } else {
-                res.status(404).send("No users found for this country!");
+                res.status(404).json({
+                    error: {
+                        message: "No users found for this country!",
+                        success: false,
+                    },
+                });
             }
         } else if (city) {
             let filteredUsers = foreigners.filter(
@@ -2008,9 +2017,9 @@ app.all("/:number", (req, res) => {
             if (filteredUsers.length) {
                 if (filteredUsers.length > number)
                     filteredUsers = filteredUsers.slice(0, number);
-                res.status(200).json(filteredUsers);
+                res.status(200).json({ users: filteredUsers, length: filteredUsers.length, success: true });
             } else {
-                res.status(404).send("No users found for this city!");
+                res.status(404).json({ error: { message: "No users found for this city!", "success": false } });
             }
         } else if (state) {
             let filteredUsers = foreigners.filter(
@@ -2068,9 +2077,9 @@ app.all("/:number", (req, res) => {
             if (filteredUsers.length) {
                 if (filteredUsers.length > number)
                     filteredUsers = filteredUsers.slice(0, number);
-                res.status(200).json(filteredUsers);
+                res.status(200).json({ users: filteredUsers, length: filteredUsers.length, success: true });
             } else {
-                res.status(404).send("No users found for this state!");
+                res.status(404).json({ error: { message: "No users found for this state/provice/region!", "success": false } });
             }
         } else if (religion) {
             let filteredUsers = foreigners.filter(
@@ -2128,9 +2137,9 @@ app.all("/:number", (req, res) => {
             if (filteredUsers.length) {
                 if (filteredUsers.length > number)
                     filteredUsers = filteredUsers.slice(0, number);
-                res.status(200).json(filteredUsers);
+                res.status(200).json({ users: filteredUsers, length: filteredUsers.length, success: true });
             } else {
-                res.status(404).send("No users found for this religion!");
+                res.status(404).json({ error: { message: "No users found for this religion!", "success": false } });
             }
         } else if (status) {
             let filteredUsers = foreigners.filter(
@@ -2187,9 +2196,9 @@ app.all("/:number", (req, res) => {
             if (filteredUsers.length) {
                 if (filteredUsers.length > number)
                     filteredUsers = filteredUsers.slice(0, number);
-                res.status(200).json(filteredUsers);
+                res.status(200).json({ users: filteredUsers, length: filteredUsers.length, success: true });
             } else {
-                res.status(404).send("No users found for this status!");
+                res.status(404).json({ error: { message: "No users found for this activity status!", "success": false } });
             }
         } else if (age) {
             let filteredUsers = [];
@@ -2249,9 +2258,9 @@ app.all("/:number", (req, res) => {
             if (filteredUsers.length) {
                 if (filteredUsers.length > number)
                     filteredUsers = filteredUsers.slice(0, number);
-                res.status(200).json(filteredUsers);
+                res.status(200).json({ users: filteredUsers, length: filteredUsers.length, success: true });
             } else {
-                res.status(404).send("No users found for this age!");
+                res.status(404).json({ error: { message: "No users found for this age!", "success": false } });
             }
             //CONTINUE HERE*
         } else if (sex) {
@@ -2311,9 +2320,9 @@ app.all("/:number", (req, res) => {
             if (filteredUsers.length) {
                 if (filteredUsers.length > number)
                     filteredUsers = filteredUsers.slice(0, number);
-                res.status(200).json(filteredUsers);
+                res.status(200).json({ users: filteredUsers, length: filteredUsers.length, success: true });
             } else {
-                res.status(404).send("No users found for this sex!");
+                res.status(404).json({ error: { message: "No users found for this sex!", "success": false } });
             }
         } else if (id) {
             id = RegExp(
@@ -2371,7 +2380,9 @@ app.all("/:number", (req, res) => {
             if (filteredUsers.length) {
                 if (filteredUsers.length > number)
                     filteredUsers = filteredUsers.slice(0, number);
-                res.status(200).json(filteredUsers);
+                res.status(200).json({ users: filteredUsers, length: filteredUsers.length, success: true });
+            } else {
+                res.status(404).json({ error: { message: "No users found for this id!", "success": false } });
             }
         } else {
             res.status(200).json(foreigners.slice(0, number));
@@ -2388,10 +2399,6 @@ app.all("/:number", (req, res) => {
 
 //ROOT ROUTES
 app.get("/", (req, res) => {
-    res.set({
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-    });
     //shuffle, by default
     shuffled_foreigners = foreigners.slice().sort(() => 0.5 - Math.random());
     for (let i = shuffled_foreigners.length - 1; i > 0; i--) {
@@ -2489,8 +2496,8 @@ app.get("/", (req, res) => {
                 (u) => !!String(u.id).match(id)
             );
         }
-        if (filteredUsers.length) res.json(filteredUsers);
-        else res.status(404).send("No users found for this country!");
+        if (filteredUsers.length) res.status(200).json({ users: filteredUsers, length: filteredUsers.length, success: true });
+        else res.status(404).json({ error: { message: "No users found for this country!", "success": false } });
     } else if (city) {
         let filteredUsers = foreigners.filter(
             (u) => !!u.city.match(RegExp(city, "i"))
@@ -2543,8 +2550,13 @@ app.get("/", (req, res) => {
                 (u) => !!String(u.id).match(id)
             );
         }
-        if (filteredUsers.length) res.json(filteredUsers);
-        else res.status(404).send("No users found for this city!");
+        if (filteredUsers.length) res.status(200).json({ users: filteredUsers, length: filteredUsers.length, success: true });
+        else res.status(404).json({
+            error: {
+                message: "No users found for this city!",
+                success: false,
+            },
+        });
     } else if (state) {
         let filteredUsers = foreigners.filter(
             (u) => !!u.state.match(RegExp(state, "i"))
@@ -2597,8 +2609,13 @@ app.get("/", (req, res) => {
                 (u) => !!String(u.id).match(id)
             );
         }
-        if (filteredUsers.length) res.json(filteredUsers);
-        else res.status(404).send("No users found for this state!");
+        if (filteredUsers.length) res.status(200).json({ users: filteredUsers, length: filteredUsers.length, success: true });
+        else res.status(404).json({
+            error: {
+                message: "No users found for this state/provision!",
+                success: false,
+            },
+        });
     } else if (religion) {
         let filteredUsers = foreigners.filter(
             (u) => !!u.religion.match(RegExp(religion, "i"))
@@ -2651,8 +2668,13 @@ app.get("/", (req, res) => {
                 (u) => !!String(u.id).match(id)
             );
         }
-        if (filteredUsers.length) res.json(filteredUsers);
-        else res.status(404).send("No users found for this religion!");
+        if (filteredUsers.length) res.status(200).json({ users: filteredUsers, length: filteredUsers.length, success: true });
+        else res.status(404).json({
+            error: {
+                message: "No users found for this religion!",
+                success: false,
+            },
+        });
     } else if (status) {
         let filteredUsers = foreigners.filter(
             (u) => !!u.status.match(RegExp(String.raw`^${status}$`, "i"))
@@ -2705,8 +2727,13 @@ app.get("/", (req, res) => {
                 (u) => !!String(u.id).match(id)
             );
         }
-        if (filteredUsers.length) res.json(filteredUsers);
-        else res.status(404).send("No users found for this activity status!");
+        if (filteredUsers.length) res.status(200).json({ users: filteredUsers, length: filteredUsers.length, success: true });
+        else res.status(404).json({
+            error: {
+                message: "No users found for this activity status!",
+                success: false,
+            },
+        });
     } else if (age) {
         let filteredUsers = [];
         if (age) {
@@ -2762,8 +2789,13 @@ app.get("/", (req, res) => {
                 (u) => !!String(u.id).match(id)
             );
         }
-        if (filteredUsers.length) res.json(filteredUsers);
-        else res.status(404).send("No users found for this age!");
+        if (filteredUsers.length) res.status(200).json({ users: filteredUsers, length: filteredUsers.length, success: true });
+        else res.status(404).json({
+            error: {
+                message: "No users found for this age!",
+                success: false,
+            },
+        });
     } else if (sex) {
         let filteredUsers = foreigners.filter((u) => u.sex === sex);
         if (country)
@@ -2818,8 +2850,13 @@ app.get("/", (req, res) => {
                 (u) => !!String(u.id).match(id)
             );
         }
-        if (filteredUsers.length) res.json(filteredUsers);
-        else res.status(404).send("No users found for this sex!");
+        if (filteredUsers.length) res.status(200).json({ users: filteredUsers, length: filteredUsers.length, success: true });
+        else res.status(404).json({
+            error: {
+                message: "No users found for this sex!",
+                success: false,
+            },
+        });
     } else if (id) {
         id = RegExp(
             String.raw`^${id}|${id.split("").reverse().join("")}$`,
@@ -2870,8 +2907,13 @@ app.get("/", (req, res) => {
                 (u) => !!u.religion.match(RegExp(religion, "i"))
             );
         if (sex) filteredUsers = filteredUsers.filter((u) => u.sex === sex);
-        if (filteredUsers.length) res.json(filteredUsers);
-        else res.status(404).send("No users found for this id!");
+        if (filteredUsers.length) res.status(200).json({ users: filteredUsers, length: filteredUsers.length, success: true });
+        else res.status(404).json({
+            error: {
+                message: "No users found for this id!",
+                success: false,
+            },
+        });
     } else {
         res.json(foreigners);
     }
