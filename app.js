@@ -2483,43 +2483,76 @@ app.all("/:number", (req, res) => {
         non_parsed_number = non_parsed_number.match(/\W/)
             ? non_parsed_number.split(/\W+/g)
             : non_parsed_number;
-        let user_with_specified_id = foreigners.find((u) =>
-            non_parsed_number.match(
-                RegExp(
-                    String.raw`^(${u.id}|${u.id
-                        .split("")
-                        .reverse()
-                        .join("")})$`,
-                    "i"
+        let [users_with_specified_ids, user_with_specified_id] = [[], ""];
+        if (!Array.isArray(non_parsed_number)) {
+            user_with_specified_id = foreigners.find((u) =>
+                non_parsed_number.match(
+                    RegExp(
+                        String.raw`^(${u.id}|${u.id
+                            .split("")
+                            .reverse()
+                            .join("")})$`,
+                        "i"
+                    )
                 )
-            )
-        );
-        Object.entries(req.body).forEach(([key, value]) => {
-            if (user_with_specified_id) {
-                if (key === "id") {
-                    res.status(403).json({
+            );
+            Object.entries(req.body).forEach(([key, value]) => {
+                if (user_with_specified_id) {
+                    if (key === "id") {
+                        res.status(403).json({
+                            error: {
+                                code: 403,
+                                message: "Forbidden. You are unauthorized to modify the default id of a user. Remove the 'id' property/key to continue!",
+                            },
+                            success: false,
+                        });
+                        return;
+                    }
+                    user_with_specified_id[key] = value;
+                } else {
+                    res.status(404).json({
                         error: {
-                            code: 403,
-                            message: "Forbidden. You are unauthorized to modify the default id of a user. Remove the 'id' property/key to continue!",
+                            code: 404,
+                            message: "No such user found with this id!",
                         },
                         success: false,
                     });
-                    return;
                 }
-                user_with_specified_id[key] = value;
-            } else {
-                res.status(404).json({
-                    error: {
-                        code: 404,
-                        message: "No such user found with this id!",
-                    },
-                    success: false,
+            });
+        } else {
+            users_with_specified_ids = foreigners.filter((u) =>
+                non_parsed_number.some((n) =>
+                    n.match(
+                        RegExp(
+                            String.raw`^(${u.id}|${u.id
+                                .split("")
+                                .reverse()
+                                .join("")})$`,
+                            "i"
+                        )
+                    )
+                )
+            );
+            Object.entries(req.body).forEach(([key, value]) => {
+                users_with_specified_ids.forEach((u) => {
+                    if (key === "id") {
+                        res.status(403).json({
+                            error: {
+                                code: 403,
+                                message: "Forbidden. You are unauthorized to modify the default id of a user. Remove the 'id' property/key to continue!",
+                            },
+                            success: false,
+                        });
+                        return;
+                    }
+                    u[key] = value;
                 });
-            }
-        });
+            });
+            
+        }
         res.status(200).json({
             message: `Updated user(s) with specified ids, and their values, as per the request. Here comes the modified user:`,
-            modifiedUser: user_with_specified_id,
+            modifiedUser: users_with_specified_ids.length ? users_with_specified_ids : user_with_specified_id,
             success: true,
         });
     } else if (method === "PUT") {
