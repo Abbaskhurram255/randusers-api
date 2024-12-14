@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const path = require("path");
 
 let make_cdn = (_for) => {
+    if (typeof _for !== "string" || !String(_for).trim().length) return;
     let _this = {
         protocol: "https://",
         host: "randusers-api.up.railway.app",
@@ -21,7 +22,8 @@ let foreigners = [
         name: {
             title: "Ms",
             first: "بهار",
-            last: "محمدخان",
+            middle: "محمد",
+            last: "خان",
             full: "Ms بهار محمدخان",
         },
         email: "bhr.mhmdkhn@icloud.com",
@@ -1851,12 +1853,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use((req, res, next) => {
     res.set({
-        "Accept": "application/json",
+        Accept: "application/json",
         "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET"
+        "Access-Control-Allow-Methods": "GET",
     });
     next();
-})
+});
 
 //save the unsorted array for later shuffling
 let shuffled_foreigners,
@@ -1866,19 +1868,25 @@ let shuffled_foreigners,
 app.all("/:number", (req, res) => {
     let { path, method, params, query } = req;
     let { number } = params;
-    number = Number(number);
+    let non_parsed_number = String(number);
+    number = Number(non_parsed_number.replace(/\D+/g, ""));
     if (Object.values(query).length && "country" in query) {
         country = query.country;
     }
-    if (number % 1 || number < 1 || !isFinite(number)) {
-        return res.status(400).send("Invalid request!");
+    if (
+        (number % 1 || number < 1 || !isFinite(number)) &&
+        !String(non_parsed_number).match(/\d[a-yA-Y]|[a-yA-Y]\d/i)
+    ) {
+        return res.status(400).json({ message: "Invalid request!" });
     }
     console.log(`Received a ${method} request on ${path}, acting accordingly!`);
     if (method === "GET") {
         let { country, city, state, age, religion, status, sex, id, sorted } =
             req.query;
         //shuffle, by default
-        shuffled_foreigners = foreigners.slice().sort(() => 0.5 - Math.random());
+        shuffled_foreigners = foreigners
+            .slice()
+            .sort(() => 0.5 - Math.random());
         for (let i = shuffled_foreigners.length - 1; i > 0; i--) {
             let j = Math.floor(Math.random() * i);
             let temp = shuffled_foreigners[i];
@@ -1942,7 +1950,7 @@ app.all("/:number", (req, res) => {
                 );
             if (id) {
                 id = RegExp(
-                    String.raw`^${id}|${id.split("").reverse().join("")}$`,
+                    String.raw`^(${id}|${id.split("").reverse().join("")})$`,
                     "i"
                 );
                 filteredUsers = filteredUsers.filter(
@@ -1952,13 +1960,18 @@ app.all("/:number", (req, res) => {
             if (filteredUsers.length) {
                 if (filteredUsers.length > number)
                     filteredUsers = filteredUsers.slice(0, number);
-                res.status(200).json({ users: filteredUsers, length: filteredUsers.length, success: true });
+                res.status(200).json({
+                    users: filteredUsers,
+                    length: filteredUsers.length,
+                    success: true,
+                });
             } else {
                 res.status(404).json({
                     error: {
+                        code: 404,
                         message: "No users found for this country!",
-                        success: false,
                     },
+                    success: false,
                 });
             }
         } else if (city) {
@@ -2007,7 +2020,7 @@ app.all("/:number", (req, res) => {
                 );
             if (id) {
                 id = RegExp(
-                    String.raw`^${id}|${id.split("").reverse().join("")}$`,
+                    String.raw`^(${id}|${id.split("").reverse().join("")})$`,
                     "i"
                 );
                 filteredUsers = filteredUsers.filter(
@@ -2017,9 +2030,19 @@ app.all("/:number", (req, res) => {
             if (filteredUsers.length) {
                 if (filteredUsers.length > number)
                     filteredUsers = filteredUsers.slice(0, number);
-                res.status(200).json({ users: filteredUsers, length: filteredUsers.length, success: true });
+                res.status(200).json({
+                    users: filteredUsers,
+                    length: filteredUsers.length,
+                    success: true,
+                });
             } else {
-                res.status(404).json({ error: { message: "No users found for this city!", "success": false } });
+                res.status(404).json({
+                    error: {
+                        code: 404,
+                        message: "No users found for this city!",
+                    },
+                    success: false,
+                });
             }
         } else if (state) {
             let filteredUsers = foreigners.filter(
@@ -2067,7 +2090,7 @@ app.all("/:number", (req, res) => {
                 );
             if (id) {
                 id = RegExp(
-                    String.raw`^${id}|${id.split("").reverse().join("")}$`,
+                    String.raw`^(${id}|${id.split("").reverse().join("")})$`,
                     "i"
                 );
                 filteredUsers = filteredUsers.filter(
@@ -2077,9 +2100,20 @@ app.all("/:number", (req, res) => {
             if (filteredUsers.length) {
                 if (filteredUsers.length > number)
                     filteredUsers = filteredUsers.slice(0, number);
-                res.status(200).json({ users: filteredUsers, length: filteredUsers.length, success: true });
+                res.status(200).json({
+                    users: filteredUsers,
+                    length: filteredUsers.length,
+                    success: true,
+                });
             } else {
-                res.status(404).json({ error: { message: "No users found for this state/provice/region!", "success": false } });
+                res.status(404).json({
+                    error: {
+                        code: 404,
+                        message:
+                            "No users found for this state/provice/region!",
+                    },
+                    success: false,
+                });
             }
         } else if (religion) {
             let filteredUsers = foreigners.filter(
@@ -2127,7 +2161,7 @@ app.all("/:number", (req, res) => {
                 );
             if (id) {
                 id = RegExp(
-                    String.raw`^${id}|${id.split("").reverse().join("")}$`,
+                    String.raw`^(${id}|${id.split("").reverse().join("")})$`,
                     "i"
                 );
                 filteredUsers = filteredUsers.filter(
@@ -2137,9 +2171,19 @@ app.all("/:number", (req, res) => {
             if (filteredUsers.length) {
                 if (filteredUsers.length > number)
                     filteredUsers = filteredUsers.slice(0, number);
-                res.status(200).json({ users: filteredUsers, length: filteredUsers.length, success: true });
+                res.status(200).json({
+                    users: filteredUsers,
+                    length: filteredUsers.length,
+                    success: true,
+                });
             } else {
-                res.status(404).json({ error: { message: "No users found for this religion!", "success": false } });
+                res.status(404).json({
+                    error: {
+                        code: 404,
+                        message: "No users found for this religion!",
+                    },
+                    success: false,
+                });
             }
         } else if (status) {
             let filteredUsers = foreigners.filter(
@@ -2186,7 +2230,7 @@ app.all("/:number", (req, res) => {
                 );
             if (id) {
                 id = RegExp(
-                    String.raw`^${id}|${id.split("").reverse().join("")}$`,
+                    String.raw`^(${id}|${id.split("").reverse().join("")})$`,
                     "i"
                 );
                 filteredUsers = filteredUsers.filter(
@@ -2196,9 +2240,19 @@ app.all("/:number", (req, res) => {
             if (filteredUsers.length) {
                 if (filteredUsers.length > number)
                     filteredUsers = filteredUsers.slice(0, number);
-                res.status(200).json({ users: filteredUsers, length: filteredUsers.length, success: true });
+                res.status(200).json({
+                    users: filteredUsers,
+                    length: filteredUsers.length,
+                    success: true,
+                });
             } else {
-                res.status(404).json({ error: { message: "No users found for this activity status!", "success": false } });
+                res.status(404).json({
+                    error: {
+                        code: 404,
+                        message: "No users found for this activity status!",
+                    },
+                    success: false,
+                });
             }
         } else if (age) {
             let filteredUsers = [];
@@ -2248,7 +2302,7 @@ app.all("/:number", (req, res) => {
                 );
             if (id) {
                 id = RegExp(
-                    String.raw`^${id}|${id.split("").reverse().join("")}$`,
+                    String.raw`^(${id}|${id.split("").reverse().join("")})$`,
                     "i"
                 );
                 filteredUsers = filteredUsers.filter(
@@ -2258,9 +2312,19 @@ app.all("/:number", (req, res) => {
             if (filteredUsers.length) {
                 if (filteredUsers.length > number)
                     filteredUsers = filteredUsers.slice(0, number);
-                res.status(200).json({ users: filteredUsers, length: filteredUsers.length, success: true });
+                res.status(200).json({
+                    users: filteredUsers,
+                    length: filteredUsers.length,
+                    success: true,
+                });
             } else {
-                res.status(404).json({ error: { message: "No users found for this age!", "success": false } });
+                res.status(404).json({
+                    error: {
+                        code: 404,
+                        message: "No users found for this age!",
+                    },
+                    success: false,
+                });
             }
             //CONTINUE HERE*
         } else if (sex) {
@@ -2310,7 +2374,7 @@ app.all("/:number", (req, res) => {
                 );
             if (id) {
                 id = RegExp(
-                    String.raw`^${id}|${id.split("").reverse().join("")}$`,
+                    String.raw`^(${id}|${id.split("").reverse().join("")})$`,
                     "i"
                 );
                 filteredUsers = filteredUsers.filter(
@@ -2320,13 +2384,23 @@ app.all("/:number", (req, res) => {
             if (filteredUsers.length) {
                 if (filteredUsers.length > number)
                     filteredUsers = filteredUsers.slice(0, number);
-                res.status(200).json({ users: filteredUsers, length: filteredUsers.length, success: true });
+                res.status(200).json({
+                    users: filteredUsers,
+                    length: filteredUsers.length,
+                    success: true,
+                });
             } else {
-                res.status(404).json({ error: { message: "No users found for this sex!", "success": false } });
+                res.status(404).json({
+                    error: {
+                        code: 404,
+                        message: "No users found for this sex!",
+                    },
+                    success: false,
+                });
             }
         } else if (id) {
             id = RegExp(
-                String.raw`^${id}|${id.split("").reverse().join("")}$`,
+                String.raw`^(${id}|${id.split("").reverse().join("")})$`,
                 "i"
             );
             let filteredUsers = foreigners.filter(
@@ -2380,22 +2454,84 @@ app.all("/:number", (req, res) => {
             if (filteredUsers.length) {
                 if (filteredUsers.length > number)
                     filteredUsers = filteredUsers.slice(0, number);
-                res.status(200).json({ users: filteredUsers, length: filteredUsers.length, success: true });
+                res.status(200).json({
+                    users: filteredUsers,
+                    length: filteredUsers.length,
+                    success: true,
+                });
             } else {
-                res.status(404).json({ error: { message: "No users found for this id!", "success": false } });
+                res.status(404).json({
+                    error: {
+                        code: 404,
+                        message: "No users found for this id!",
+                    },
+                    success: false,
+                });
             }
         } else {
-            res.status(200).json(foreigners.slice(0, number));
+            let sliced_foreigners = foreigners.slice(0, number);
+            res.status(200).json({
+                users: sliced_foreigners,
+                length: sliced_foreigners.length,
+                success: true,
+            });
         }
         // } else if (method === "POST") {
         //     res.send(req.body);
         // } else if (method === "PUT") {
         //     res.send(req.body);
-        // } else if (method === "DELETE") {
-        //     res.send(`Deleted ${number} from request!`);
+    } else if (method === "DELETE") {
+        non_parsed_number = non_parsed_number.toUpperCase();
+        non_parsed_number = non_parsed_number.match(/\W/)
+            ? non_parsed_number.split(/\W/g)
+            : non_parsed_number;
+        let filteredUsers;
+        if (!Array.isArray(non_parsed_number)) {
+            filteredUsers = foreigners.filter(
+                (u) =>
+                    !non_parsed_number.match(
+                        RegExp(
+                            String.raw`^(${u.id}|${u.id
+                                .split("")
+                                .reverse()
+                                .join("")})$`,
+                            "i"
+                        )
+                    )
+            );
+        } else {
+            filteredUsers = foreigners.filter(
+                (u) =>
+                    non_parsed_number.every(
+                        (n) =>
+                            !n.match(
+                                RegExp(
+                                    String.raw`^(${u.id}|${u.id
+                                        .split("")
+                                        .reverse()
+                                        .join("")})$`,
+                                    "i"
+                                )
+                            )
+                    )
+            );
+        }
+        if (filteredUsers.length !== foreigners.length)
+            res.status(200).json({
+                message: `Deleted user(s) with id ${non_parsed_number}, as per the request. Here is the rest of the array:`,
+                filteredArray: filteredUsers,
+                success: true,
+            });
+        else
+            res.status(404).json({
+                error: {
+                    code: 404,
+                    message: "Such an id does not exist on the server!",
+                },
+                success: false,
+            });
     }
 });
-
 
 //ROOT ROUTES
 app.get("/", (req, res) => {
@@ -2489,15 +2625,27 @@ app.get("/", (req, res) => {
             );
         if (id) {
             id = RegExp(
-                String.raw`^${id}|${id.split("").reverse().join("")}$`,
+                String.raw`^(${id}|${id.split("").reverse().join("")})$`,
                 "i"
             );
             filteredUsers = filteredUsers.filter(
                 (u) => !!String(u.id).match(id)
             );
         }
-        if (filteredUsers.length) res.status(200).json({ users: filteredUsers, length: filteredUsers.length, success: true });
-        else res.status(404).json({ error: { message: "No users found for this country!", "success": false } });
+        if (filteredUsers.length)
+            res.status(200).json({
+                users: filteredUsers,
+                length: filteredUsers.length,
+                success: true,
+            });
+        else
+            res.status(404).json({
+                error: {
+                    code: 404,
+                    message: "No users found for this country!",
+                },
+                success: false,
+            });
     } else if (city) {
         let filteredUsers = foreigners.filter(
             (u) => !!u.city.match(RegExp(city, "i"))
@@ -2543,20 +2691,27 @@ app.get("/", (req, res) => {
             );
         if (id) {
             id = RegExp(
-                String.raw`^${id}|${id.split("").reverse().join("")}$`,
+                String.raw`^(${id}|${id.split("").reverse().join("")})$`,
                 "i"
             );
             filteredUsers = filteredUsers.filter(
                 (u) => !!String(u.id).match(id)
             );
         }
-        if (filteredUsers.length) res.status(200).json({ users: filteredUsers, length: filteredUsers.length, success: true });
-        else res.status(404).json({
-            error: {
-                message: "No users found for this city!",
+        if (filteredUsers.length)
+            res.status(200).json({
+                users: filteredUsers,
+                length: filteredUsers.length,
+                success: true,
+            });
+        else
+            res.status(404).json({
+                error: {
+                    code: 404,
+                    message: "No users found for this city!",
+                },
                 success: false,
-            },
-        });
+            });
     } else if (state) {
         let filteredUsers = foreigners.filter(
             (u) => !!u.state.match(RegExp(state, "i"))
@@ -2602,20 +2757,27 @@ app.get("/", (req, res) => {
             );
         if (id) {
             id = RegExp(
-                String.raw`^${id}|${id.split("").reverse().join("")}$`,
+                String.raw`^(${id}|${id.split("").reverse().join("")})$`,
                 "i"
             );
             filteredUsers = filteredUsers.filter(
                 (u) => !!String(u.id).match(id)
             );
         }
-        if (filteredUsers.length) res.status(200).json({ users: filteredUsers, length: filteredUsers.length, success: true });
-        else res.status(404).json({
-            error: {
-                message: "No users found for this state/provision!",
+        if (filteredUsers.length)
+            res.status(200).json({
+                users: filteredUsers,
+                length: filteredUsers.length,
+                success: true,
+            });
+        else
+            res.status(404).json({
+                error: {
+                    code: 404,
+                    message: "No users found for this state/provision!",
+                },
                 success: false,
-            },
-        });
+            });
     } else if (religion) {
         let filteredUsers = foreigners.filter(
             (u) => !!u.religion.match(RegExp(religion, "i"))
@@ -2661,20 +2823,27 @@ app.get("/", (req, res) => {
             );
         if (id) {
             id = RegExp(
-                String.raw`^${id}|${id.split("").reverse().join("")}$`,
+                String.raw`^(${id}|${id.split("").reverse().join("")})$`,
                 "i"
             );
             filteredUsers = filteredUsers.filter(
                 (u) => !!String(u.id).match(id)
             );
         }
-        if (filteredUsers.length) res.status(200).json({ users: filteredUsers, length: filteredUsers.length, success: true });
-        else res.status(404).json({
-            error: {
-                message: "No users found for this religion!",
+        if (filteredUsers.length)
+            res.status(200).json({
+                users: filteredUsers,
+                length: filteredUsers.length,
+                success: true,
+            });
+        else
+            res.status(404).json({
+                error: {
+                    code: 404,
+                    message: "No users found for this religion!",
+                },
                 success: false,
-            },
-        });
+            });
     } else if (status) {
         let filteredUsers = foreigners.filter(
             (u) => !!u.status.match(RegExp(String.raw`^${status}$`, "i"))
@@ -2720,20 +2889,27 @@ app.get("/", (req, res) => {
             );
         if (id) {
             id = RegExp(
-                String.raw`^${id}|${id.split("").reverse().join("")}$`,
+                String.raw`^(${id}|${id.split("").reverse().join("")})$`,
                 "i"
             );
             filteredUsers = filteredUsers.filter(
                 (u) => !!String(u.id).match(id)
             );
         }
-        if (filteredUsers.length) res.status(200).json({ users: filteredUsers, length: filteredUsers.length, success: true });
-        else res.status(404).json({
-            error: {
-                message: "No users found for this activity status!",
+        if (filteredUsers.length)
+            res.status(200).json({
+                users: filteredUsers,
+                length: filteredUsers.length,
+                success: true,
+            });
+        else
+            res.status(404).json({
+                error: {
+                    code: 404,
+                    message: "No users found for this activity status!",
+                },
                 success: false,
-            },
-        });
+            });
     } else if (age) {
         let filteredUsers = [];
         if (age) {
@@ -2782,20 +2958,27 @@ app.get("/", (req, res) => {
             );
         if (id) {
             id = RegExp(
-                String.raw`^${id}|${id.split("").reverse().join("")}$`,
+                String.raw`^(${id}|${id.split("").reverse().join("")})$`,
                 "i"
             );
             filteredUsers = filteredUsers.filter(
                 (u) => !!String(u.id).match(id)
             );
         }
-        if (filteredUsers.length) res.status(200).json({ users: filteredUsers, length: filteredUsers.length, success: true });
-        else res.status(404).json({
-            error: {
-                message: "No users found for this age!",
+        if (filteredUsers.length)
+            res.status(200).json({
+                users: filteredUsers,
+                length: filteredUsers.length,
+                success: true,
+            });
+        else
+            res.status(404).json({
+                error: {
+                    code: 404,
+                    message: "No users found for this age!",
+                },
                 success: false,
-            },
-        });
+            });
     } else if (sex) {
         let filteredUsers = foreigners.filter((u) => u.sex === sex);
         if (country)
@@ -2843,23 +3026,30 @@ app.get("/", (req, res) => {
             );
         if (id) {
             id = RegExp(
-                String.raw`^${id}|${id.split("").reverse().join("")}$`,
+                String.raw`^(${id}|${id.split("").reverse().join("")})$`,
                 "i"
             );
             filteredUsers = filteredUsers.filter(
                 (u) => !!String(u.id).match(id)
             );
         }
-        if (filteredUsers.length) res.status(200).json({ users: filteredUsers, length: filteredUsers.length, success: true });
-        else res.status(404).json({
-            error: {
-                message: "No users found for this sex!",
+        if (filteredUsers.length)
+            res.status(200).json({
+                users: filteredUsers,
+                length: filteredUsers.length,
+                success: true,
+            });
+        else
+            res.status(404).json({
+                error: {
+                    code: 404,
+                    message: "No users found for this sex!",
+                },
                 success: false,
-            },
-        });
+            });
     } else if (id) {
         id = RegExp(
-            String.raw`^${id}|${id.split("").reverse().join("")}$`,
+            String.raw`^(${id}|${id.split("").reverse().join("")})$`,
             "i"
         );
         let filteredUsers = foreigners.filter((u) => !!String(u.id).match(id));
@@ -2907,15 +3097,26 @@ app.get("/", (req, res) => {
                 (u) => !!u.religion.match(RegExp(religion, "i"))
             );
         if (sex) filteredUsers = filteredUsers.filter((u) => u.sex === sex);
-        if (filteredUsers.length) res.status(200).json({ users: filteredUsers, length: filteredUsers.length, success: true });
-        else res.status(404).json({
-            error: {
-                message: "No users found for this id!",
+        if (filteredUsers.length)
+            res.status(200).json({
+                users: filteredUsers,
+                length: filteredUsers.length,
+                success: true,
+            });
+        else
+            res.status(404).json({
+                error: {
+                    code: 404,
+                    message: "No users found for this id!",
+                },
                 success: false,
-            },
-        });
+            });
     } else {
-        res.json(foreigners);
+        res.status(200).json({
+            users: foreigners,
+            length: foreigners.length,
+            success: true,
+        });
     }
 });
 
