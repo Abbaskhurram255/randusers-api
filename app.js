@@ -2399,13 +2399,34 @@ app.all("/:number", (req, res) => {
                 });
             }
         } else if (id) {
-            id = RegExp(
-                String.raw`^(${id}|${id.split("").reverse().join("")})$`,
-                "i"
-            );
-            let filteredUsers = foreigners.filter(
-                (u) => !!String(u.id).match(id)
-            );
+            id = id.toUpperCase();
+            id = id.match(/\W/)
+            ? id.split(/\W+/g)
+                : id;
+            let filteredUsers;
+            if (!Array.isArray(id)) {
+                id = RegExp(
+                    String.raw`^(${id}|${id.split("").reverse().join("")})$`,
+                    "i"
+                );
+                filteredUsers = foreigners.filter(
+                    (u) => !!String(u.id).match(id)
+                );
+            } else {
+                filteredUsers = foreigners.filter((u) =>
+                    id.some((n) =>
+                        n.match(
+                            RegExp(
+                                String.raw`^(${u.id}|${u.id
+                                    .split("")
+                                    .reverse()
+                                    .join("")})$`,
+                                "i"
+                            )
+                        )
+                    )
+                );
+            }
             if (country)
                 filteredUsers = filteredUsers.filter(
                     (u) => !!u.country.match(RegExp(country, "i"))
@@ -3124,11 +3145,30 @@ app.get("/", (req, res) => {
                 success: false,
             });
     } else if (id) {
-        id = RegExp(
-            String.raw`^(${id}|${id.split("").reverse().join("")})$`,
-            "i"
-        );
-        let filteredUsers = foreigners.filter((u) => !!String(u.id).match(id));
+        id = id.toUpperCase();
+        id = id.match(/\W/) ? id.split(/\W+/g) : id;
+        let filteredUsers;
+        if (!Array.isArray(id)) {
+            id = RegExp(
+                String.raw`^(${id}|${id.split("").reverse().join("")})$`,
+                "i"
+            );
+            filteredUsers = foreigners.filter((u) => !!String(u.id).match(id));
+        } else {
+            filteredUsers = foreigners.filter((u) =>
+                id.some((n) =>
+                    n.match(
+                        RegExp(
+                            String.raw`^(${u.id}|${u.id
+                                .split("")
+                                .reverse()
+                                .join("")})$`,
+                            "i"
+                        )
+                    )
+                )
+            );
+        }
         if (country)
             filteredUsers = filteredUsers.filter(
                 (u) => !!u.country.match(RegExp(country, "i"))
