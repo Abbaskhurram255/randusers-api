@@ -2483,7 +2483,7 @@ app.all("/:number", (req, res) => {
     } else if (method === "DELETE") {
         non_parsed_number = non_parsed_number.toUpperCase();
         non_parsed_number = non_parsed_number.match(/\W/)
-            ? non_parsed_number.split(/\W/g)
+            ? non_parsed_number.split(/\W+/g)
             : non_parsed_number;
         let filteredUsers;
         if (!Array.isArray(non_parsed_number)) {
