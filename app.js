@@ -1921,13 +1921,13 @@ app.all("/:number", (req, res) => {
                     (u) => !!u.religion.match(RegExp(religion, "i"))
                 );
             if (age) {
-                if (String(age).match(/>/)) {
+                if (String(age).match(/[>\^]/)) {
                     age = parseInt(String(age).replace(/\D/g, ""));
                     filteredUsers = filteredUsers.filter((u) => u.age >= age);
                 } else if (String(age).match(/</)) {
                     age = parseInt(String(age).replace(/\D/g, ""));
                     filteredUsers = filteredUsers.filter((u) => u.age <= age);
-                } else if (String(age).match(/~/)) {
+                } else if (String(age).match(/[\~\*]/)) {
                     age = parseInt(String(age).replace(/\D/g, ""));
                     filteredUsers = filteredUsers.filter(
                         (u) =>
@@ -1991,13 +1991,13 @@ app.all("/:number", (req, res) => {
                     (u) => !!u.religion.match(RegExp(religion, "i"))
                 );
             if (age) {
-                if (String(age).match(/>/)) {
+                if (String(age).match(/[>\^]/)) {
                     age = parseInt(String(age).replace(/\D/g, ""));
                     filteredUsers = filteredUsers.filter((u) => u.age >= age);
                 } else if (String(age).match(/</)) {
                     age = parseInt(String(age).replace(/\D/g, ""));
                     filteredUsers = filteredUsers.filter((u) => u.age <= age);
-                } else if (String(age).match(/~/)) {
+                } else if (String(age).match(/[\~\*]/)) {
                     age = parseInt(String(age).replace(/\D/g, ""));
                     filteredUsers = filteredUsers.filter(
                         (u) =>
@@ -2057,13 +2057,13 @@ app.all("/:number", (req, res) => {
                     (u) => !!u.city.match(RegExp(city, "i"))
                 );
             if (age) {
-                if (String(age).match(/>/)) {
+                if (String(age).match(/[>\^]/)) {
                     age = parseInt(String(age).replace(/\D/g, ""));
                     filteredUsers = filteredUsers.filter((u) => u.age >= age);
                 } else if (String(age).match(/</)) {
                     age = parseInt(String(age).replace(/\D/g, ""));
                     filteredUsers = filteredUsers.filter((u) => u.age <= age);
-                } else if (String(age).match(/~/)) {
+                } else if (String(age).match(/[\~\*]/)) {
                     age = parseInt(String(age).replace(/\D/g, ""));
                     filteredUsers = filteredUsers.filter(
                         (u) =>
@@ -2132,13 +2132,13 @@ app.all("/:number", (req, res) => {
                     (u) => !!u.state.match(RegExp(state, "i"))
                 );
             if (age) {
-                if (String(age).match(/>/)) {
+                if (String(age).match(/[>\^]/)) {
                     age = parseInt(String(age).replace(/\D/g, ""));
                     filteredUsers = filteredUsers.filter((u) => u.age >= age);
                 } else if (String(age).match(/</)) {
                     age = parseInt(String(age).replace(/\D/g, ""));
                     filteredUsers = filteredUsers.filter((u) => u.age <= age);
-                } else if (String(age).match(/~/)) {
+                } else if (String(age).match(/[\~\*]/)) {
                     age = parseInt(String(age).replace(/\D/g, ""));
                     filteredUsers = filteredUsers.filter(
                         (u) =>
@@ -2202,13 +2202,13 @@ app.all("/:number", (req, res) => {
                     (u) => !!u.state.match(RegExp(state, "i"))
                 );
             if (age) {
-                if (String(age).match(/>/)) {
+                if (String(age).match(/[>\^]/)) {
                     age = parseInt(String(age).replace(/\D/g, ""));
                     filteredUsers = filteredUsers.filter((u) => u.age >= age);
                 } else if (String(age).match(/</)) {
                     age = parseInt(String(age).replace(/\D/g, ""));
                     filteredUsers = filteredUsers.filter((u) => u.age <= age);
-                } else if (String(age).match(/~/)) {
+                } else if (String(age).match(/[\~\*]/)) {
                     age = parseInt(String(age).replace(/\D/g, ""));
                     filteredUsers = filteredUsers.filter(
                         (u) =>
@@ -2256,27 +2256,25 @@ app.all("/:number", (req, res) => {
             }
         } else if (age) {
             let filteredUsers = [];
-            if (age) {
-                if (String(age).match(/>/)) {
-                    age = parseInt(String(age).replace(/\D/g, ""));
-                    filteredUsers = foreigners.filter((u) => u.age >= age);
-                } else if (String(age).match(/</)) {
-                    age = parseInt(String(age).replace(/\D/g, ""));
-                    filteredUsers = foreigners.filter((u) => u.age <= age);
-                } else if (String(age).match(/~/)) {
-                    age = parseInt(String(age).replace(/\D/g, ""));
-                    filteredUsers = foreigners.filter(
-                        (u) =>
-                            u.age === age + 2 ||
-                            u.age === age - 2 ||
-                            u.age === age + 1 ||
-                            u.age === age - 1 ||
-                            u.age === age
-                    );
-                } else {
-                    age = parseInt(String(age).replace(/\D/g, ""));
-                    filteredUsers = foreigners.filter((u) => u.age === age);
-                }
+            if (String(age).match(/[>\^]/)) {
+                age = parseInt(String(age).replace(/\D/g, ""));
+                filteredUsers = foreigners.filter((u) => u.age >= age);
+            } else if (String(age).match(/</)) {
+                age = parseInt(String(age).replace(/\D/g, ""));
+                filteredUsers = foreigners.filter((u) => u.age <= age);
+            } else if (String(age).match(/[\~\*]/)) {
+                age = parseInt(String(age).replace(/\D/g, ""));
+                filteredUsers = foreigners.filter(
+                    (u) =>
+                        u.age === age + 2 ||
+                        u.age === age - 2 ||
+                        u.age === age + 1 ||
+                        u.age === age - 1 ||
+                        u.age === age
+                );
+            } else {
+                age = parseInt(String(age).replace(/\D/g, ""));
+                filteredUsers = foreigners.filter((u) => u.age === age);
             }
             if (country)
                 filteredUsers = filteredUsers.filter(
@@ -2342,13 +2340,13 @@ app.all("/:number", (req, res) => {
                     (u) => !!u.state.match(RegExp(state, "i"))
                 );
             if (age) {
-                if (String(age).match(/>/)) {
+                if (String(age).match(/[>\^]/)) {
                     age = parseInt(String(age).replace(/\D/g, ""));
                     filteredUsers = filteredUsers.filter((u) => u.age >= age);
                 } else if (String(age).match(/</)) {
                     age = parseInt(String(age).replace(/\D/g, ""));
                     filteredUsers = filteredUsers.filter((u) => u.age <= age);
-                } else if (String(age).match(/~/)) {
+                } else if (String(age).match(/[\~\*]/)) {
                     age = parseInt(String(age).replace(/\D/g, ""));
                     filteredUsers = filteredUsers.filter(
                         (u) =>
@@ -2400,13 +2398,11 @@ app.all("/:number", (req, res) => {
             }
         } else if (id) {
             id = id.toUpperCase();
-            id = id.match(/\W/)
-            ? id.split(/\W+/g)
-                : id;
+            id = id.match(/[,;]/) ? id.split(/[,;]+/g) : id;
             let filteredUsers;
             if (!Array.isArray(id)) {
                 id = RegExp(
-                    String.raw`^(${id}|${id.split("").reverse().join("")})$`,
+                    String.raw`(${id}|${id.split("").reverse().join("")})`,
                     "i"
                 );
                 filteredUsers = foreigners.filter(
@@ -2436,13 +2432,13 @@ app.all("/:number", (req, res) => {
                     (u) => !!u.city.match(RegExp(city, "i"))
                 );
             if (age) {
-                if (String(age).match(/>/)) {
+                if (String(age).match(/[>\^]/)) {
                     age = parseInt(String(age).replace(/\D/g, ""));
                     filteredUsers = filteredUsers.filter((u) => u.age >= age);
                 } else if (String(age).match(/</)) {
                     age = parseInt(String(age).replace(/\D/g, ""));
                     filteredUsers = filteredUsers.filter((u) => u.age <= age);
-                } else if (String(age).match(/~/)) {
+                } else if (String(age).match(/[\~\*]/)) {
                     age = parseInt(String(age).replace(/\D/g, ""));
                     filteredUsers = filteredUsers.filter(
                         (u) =>
@@ -2523,7 +2519,8 @@ app.all("/:number", (req, res) => {
                         res.status(403).json({
                             error: {
                                 code: 403,
-                                message: "Forbidden. You are unauthorized to modify the default id of a user. Remove the 'id' property/key to continue!",
+                                message:
+                                    "Forbidden. You are unauthorized to modify the default id of a user. Remove the 'id' property/key to continue!",
                             },
                             success: false,
                         });
@@ -2560,7 +2557,8 @@ app.all("/:number", (req, res) => {
                         res.status(403).json({
                             error: {
                                 code: 403,
-                                message: "Forbidden. You are unauthorized to modify the default id of a user. Remove the 'id' property/key to continue!",
+                                message:
+                                    "Forbidden. You are unauthorized to modify the default id of a user. Remove the 'id' property/key to continue!",
                             },
                             success: false,
                         });
@@ -2569,11 +2567,12 @@ app.all("/:number", (req, res) => {
                     u[key] = value;
                 });
             });
-            
         }
         res.status(200).json({
             message: `Updated user(s) with specified ids, and their values, as per the request. Here comes the modified user:`,
-            modifiedUser: users_with_specified_ids.length ? users_with_specified_ids : user_with_specified_id,
+            modifiedUser: users_with_specified_ids.length
+                ? users_with_specified_ids
+                : user_with_specified_id,
             success: true,
         });
     } else if (method === "PUT") {
@@ -2694,13 +2693,13 @@ app.get("/", (req, res) => {
                 (u) => !!u.religion.match(RegExp(religion, "i"))
             );
         if (age) {
-            if (String(age).match(/>/)) {
+            if (String(age).match(/[>\^]/)) {
                 age = parseInt(String(age).replace(/\D/g, ""));
                 filteredUsers = filteredUsers.filter((u) => u.age >= age);
             } else if (String(age).match(/</)) {
                 age = parseInt(String(age).replace(/\D/g, ""));
                 filteredUsers = filteredUsers.filter((u) => u.age <= age);
-            } else if (String(age).match(/~/)) {
+            } else if (String(age).match(/[\~\*]/)) {
                 age = parseInt(String(age).replace(/\D/g, ""));
                 filteredUsers = filteredUsers.filter(
                     (u) =>
@@ -2760,13 +2759,13 @@ app.get("/", (req, res) => {
                 (u) => !!u.religion.match(RegExp(religion, "i"))
             );
         if (age) {
-            if (String(age).match(/>/)) {
+            if (String(age).match(/[>\^]/)) {
                 age = parseInt(String(age).replace(/\D/g, ""));
                 filteredUsers = filteredUsers.filter((u) => u.age >= age);
             } else if (String(age).match(/</)) {
                 age = parseInt(String(age).replace(/\D/g, ""));
                 filteredUsers = filteredUsers.filter((u) => u.age <= age);
-            } else if (String(age).match(/~/)) {
+            } else if (String(age).match(/[\~\*]/)) {
                 age = parseInt(String(age).replace(/\D/g, ""));
                 filteredUsers = filteredUsers.filter(
                     (u) =>
@@ -2822,13 +2821,13 @@ app.get("/", (req, res) => {
                 (u) => !!u.city.match(RegExp(city, "i"))
             );
         if (age) {
-            if (String(age).match(/>/)) {
+            if (String(age).match(/[>\^]/)) {
                 age = parseInt(String(age).replace(/\D/g, ""));
                 filteredUsers = filteredUsers.filter((u) => u.age >= age);
             } else if (String(age).match(/</)) {
                 age = parseInt(String(age).replace(/\D/g, ""));
                 filteredUsers = filteredUsers.filter((u) => u.age <= age);
-            } else if (String(age).match(/~/)) {
+            } else if (String(age).match(/[\~\*]/)) {
                 age = parseInt(String(age).replace(/\D/g, ""));
                 filteredUsers = filteredUsers.filter(
                     (u) =>
@@ -2888,13 +2887,13 @@ app.get("/", (req, res) => {
                 (u) => !!u.city.match(RegExp(city, "i"))
             );
         if (age) {
-            if (String(age).match(/>/)) {
+            if (String(age).match(/[>\^]/)) {
                 age = parseInt(String(age).replace(/\D/g, ""));
                 filteredUsers = filteredUsers.filter((u) => u.age >= age);
             } else if (String(age).match(/</)) {
                 age = parseInt(String(age).replace(/\D/g, ""));
                 filteredUsers = filteredUsers.filter((u) => u.age <= age);
-            } else if (String(age).match(/~/)) {
+            } else if (String(age).match(/[\~\*]/)) {
                 age = parseInt(String(age).replace(/\D/g, ""));
                 filteredUsers = filteredUsers.filter(
                     (u) =>
@@ -2954,13 +2953,13 @@ app.get("/", (req, res) => {
                 (u) => !!u.city.match(RegExp(city, "i"))
             );
         if (age) {
-            if (String(age).match(/>/)) {
+            if (String(age).match(/[>\^]/)) {
                 age = parseInt(String(age).replace(/\D/g, ""));
                 filteredUsers = filteredUsers.filter((u) => u.age >= age);
             } else if (String(age).match(/</)) {
                 age = parseInt(String(age).replace(/\D/g, ""));
                 filteredUsers = filteredUsers.filter((u) => u.age <= age);
-            } else if (String(age).match(/~/)) {
+            } else if (String(age).match(/[\~\*]/)) {
                 age = parseInt(String(age).replace(/\D/g, ""));
                 filteredUsers = filteredUsers.filter(
                     (u) =>
@@ -3009,27 +3008,25 @@ app.get("/", (req, res) => {
             });
     } else if (age) {
         let filteredUsers = [];
-        if (age) {
-            if (String(age).match(/>/)) {
-                age = parseInt(String(age).replace(/\D/g, ""));
-                filteredUsers = foreigners.filter((u) => u.age >= age);
-            } else if (String(age).match(/</)) {
-                age = parseInt(String(age).replace(/\D/g, ""));
-                filteredUsers = foreigners.filter((u) => u.age <= age);
-            } else if (String(age).match(/~/)) {
-                age = parseInt(String(age).replace(/\D/g, ""));
-                filteredUsers = foreigners.filter(
-                    (u) =>
-                        u.age === age + 2 ||
-                        u.age === age - 2 ||
-                        u.age === age + 1 ||
-                        u.age === age - 1 ||
-                        u.age === age
-                );
-            } else {
-                age = parseInt(String(age).replace(/\D/g, ""));
-                filteredUsers = foreigners.filter((u) => u.age === age);
-            }
+        if (String(age).match(/[>\^]/)) {
+            age = parseInt(String(age).replace(/\D/g, ""));
+            filteredUsers = foreigners.filter((u) => u.age >= age);
+        } else if (String(age).match(/</)) {
+            age = parseInt(String(age).replace(/\D/g, ""));
+            filteredUsers = foreigners.filter((u) => u.age <= age);
+        } else if (String(age).match(/[\~\*]/)) {
+            age = parseInt(String(age).replace(/\D/g, ""));
+            filteredUsers = foreigners.filter(
+                (u) =>
+                    u.age === age + 2 ||
+                    u.age === age - 2 ||
+                    u.age === age + 1 ||
+                    u.age === age - 1 ||
+                    u.age === age
+            );
+        } else {
+            age = parseInt(String(age).replace(/\D/g, ""));
+            filteredUsers = foreigners.filter((u) => u.age === age);
         }
         if (country)
             filteredUsers = filteredUsers.filter(
@@ -3087,13 +3084,13 @@ app.get("/", (req, res) => {
                 (u) => !!u.city.match(RegExp(city, "i"))
             );
         if (age) {
-            if (String(age).match(/>/)) {
+            if (String(age).match(/[>\^]/)) {
                 age = parseInt(String(age).replace(/\D/g, ""));
                 filteredUsers = filteredUsers.filter((u) => u.age >= age);
             } else if (String(age).match(/</)) {
                 age = parseInt(String(age).replace(/\D/g, ""));
                 filteredUsers = filteredUsers.filter((u) => u.age <= age);
-            } else if (String(age).match(/~/)) {
+            } else if (String(age).match(/[\~\*]/)) {
                 age = parseInt(String(age).replace(/\D/g, ""));
                 filteredUsers = filteredUsers.filter(
                     (u) =>
@@ -3146,11 +3143,11 @@ app.get("/", (req, res) => {
             });
     } else if (id) {
         id = id.toUpperCase();
-        id = id.match(/\W/) ? id.split(/\W+/g) : id;
+        id = id.match(/[,;]/) ? id.split(/[,;]+/g) : id;
         let filteredUsers;
         if (!Array.isArray(id)) {
             id = RegExp(
-                String.raw`^(${id}|${id.split("").reverse().join("")})$`,
+                String.raw`(${id}|${id.split("").reverse().join("")})`,
                 "i"
             );
             filteredUsers = foreigners.filter((u) => !!String(u.id).match(id));
@@ -3178,13 +3175,13 @@ app.get("/", (req, res) => {
                 (u) => !!u.city.match(RegExp(city, "i"))
             );
         if (age) {
-            if (String(age).match(/>/)) {
+            if (String(age).match(/[>\^]/)) {
                 age = parseInt(String(age).replace(/\D/g, ""));
                 filteredUsers = filteredUsers.filter((u) => u.age >= age);
             } else if (String(age).match(/</)) {
                 age = parseInt(String(age).replace(/\D/g, ""));
                 filteredUsers = filteredUsers.filter((u) => u.age <= age);
-            } else if (String(age).match(/~/)) {
+            } else if (String(age).match(/[\~\*]/)) {
                 age = parseInt(String(age).replace(/\D/g, ""));
                 filteredUsers = filteredUsers.filter(
                     (u) =>
