@@ -1950,7 +1950,7 @@ app.all("/:number", (req, res) => {
                 );
             if (id) {
                 id = RegExp(
-                    String.raw`^(${id}|${id.split("").reverse().join("")})$`,
+                    String.raw`(${id}|${id.split("").reverse().join("")})`,
                     "i"
                 );
                 filteredUsers = filteredUsers.filter(
@@ -2020,7 +2020,7 @@ app.all("/:number", (req, res) => {
                 );
             if (id) {
                 id = RegExp(
-                    String.raw`^(${id}|${id.split("").reverse().join("")})$`,
+                    String.raw`(${id}|${id.split("").reverse().join("")})`,
                     "i"
                 );
                 filteredUsers = filteredUsers.filter(
@@ -2090,7 +2090,7 @@ app.all("/:number", (req, res) => {
                 );
             if (id) {
                 id = RegExp(
-                    String.raw`^(${id}|${id.split("").reverse().join("")})$`,
+                    String.raw`(${id}|${id.split("").reverse().join("")})`,
                     "i"
                 );
                 filteredUsers = filteredUsers.filter(
@@ -2161,7 +2161,7 @@ app.all("/:number", (req, res) => {
                 );
             if (id) {
                 id = RegExp(
-                    String.raw`^(${id}|${id.split("").reverse().join("")})$`,
+                    String.raw`(${id}|${id.split("").reverse().join("")})`,
                     "i"
                 );
                 filteredUsers = filteredUsers.filter(
@@ -2230,7 +2230,7 @@ app.all("/:number", (req, res) => {
                 );
             if (id) {
                 id = RegExp(
-                    String.raw`^(${id}|${id.split("").reverse().join("")})$`,
+                    String.raw`(${id}|${id.split("").reverse().join("")})`,
                     "i"
                 );
                 filteredUsers = filteredUsers.filter(
@@ -2300,7 +2300,7 @@ app.all("/:number", (req, res) => {
                 );
             if (id) {
                 id = RegExp(
-                    String.raw`^(${id}|${id.split("").reverse().join("")})$`,
+                    String.raw`(${id}|${id.split("").reverse().join("")})`,
                     "i"
                 );
                 filteredUsers = filteredUsers.filter(
@@ -2372,7 +2372,7 @@ app.all("/:number", (req, res) => {
                 );
             if (id) {
                 id = RegExp(
-                    String.raw`^(${id}|${id.split("").reverse().join("")})$`,
+                    String.raw`(${id}|${id.split("").reverse().join("")})`,
                     "i"
                 );
                 filteredUsers = filteredUsers.filter(
@@ -2413,10 +2413,10 @@ app.all("/:number", (req, res) => {
                     id.some((n) =>
                         n.match(
                             RegExp(
-                                String.raw`^(${u.id}|${u.id
+                                String.raw`(${u.id}|${u.id
                                     .split("")
                                     .reverse()
-                                    .join("")})$`,
+                                    .join("")})`,
                                 "i"
                             )
                         )
@@ -2721,7 +2721,7 @@ app.get("/", (req, res) => {
             );
         if (id) {
             id = RegExp(
-                String.raw`^(${id}|${id.split("").reverse().join("")})$`,
+                String.raw`(${id}|${id.split("").reverse().join("")})`,
                 "i"
             );
             filteredUsers = filteredUsers.filter(
@@ -2787,7 +2787,7 @@ app.get("/", (req, res) => {
             );
         if (id) {
             id = RegExp(
-                String.raw`^(${id}|${id.split("").reverse().join("")})$`,
+                String.raw`(${id}|${id.split("").reverse().join("")})`,
                 "i"
             );
             filteredUsers = filteredUsers.filter(
@@ -2853,7 +2853,7 @@ app.get("/", (req, res) => {
             );
         if (id) {
             id = RegExp(
-                String.raw`^(${id}|${id.split("").reverse().join("")})$`,
+                String.raw`(${id}|${id.split("").reverse().join("")})`,
                 "i"
             );
             filteredUsers = filteredUsers.filter(
@@ -2919,7 +2919,7 @@ app.get("/", (req, res) => {
             );
         if (id) {
             id = RegExp(
-                String.raw`^(${id}|${id.split("").reverse().join("")})$`,
+                String.raw`(${id}|${id.split("").reverse().join("")})`,
                 "i"
             );
             filteredUsers = filteredUsers.filter(
@@ -2985,7 +2985,7 @@ app.get("/", (req, res) => {
             );
         if (id) {
             id = RegExp(
-                String.raw`^(${id}|${id.split("").reverse().join("")})$`,
+                String.raw`(${id}|${id.split("").reverse().join("")})`,
                 "i"
             );
             filteredUsers = filteredUsers.filter(
@@ -3052,7 +3052,7 @@ app.get("/", (req, res) => {
             );
         if (id) {
             id = RegExp(
-                String.raw`^(${id}|${id.split("").reverse().join("")})$`,
+                String.raw`(${id}|${id.split("").reverse().join("")})`,
                 "i"
             );
             filteredUsers = filteredUsers.filter(
@@ -3120,7 +3120,7 @@ app.get("/", (req, res) => {
             );
         if (id) {
             id = RegExp(
-                String.raw`^(${id}|${id.split("").reverse().join("")})$`,
+                String.raw`(${id}|${id.split("").reverse().join("")})`,
                 "i"
             );
             filteredUsers = filteredUsers.filter(
@@ -3156,10 +3156,10 @@ app.get("/", (req, res) => {
                 id.some((n) =>
                     n.match(
                         RegExp(
-                            String.raw`^(${u.id}|${u.id
+                            String.raw`(${u.id}|${u.id
                                 .split("")
                                 .reverse()
-                                .join("")})$`,
+                                .join("")})`,
                             "i"
                         )
                     )
