@@ -1905,6 +1905,35 @@ app.all("/:number", (req, res) => {
         //cover cases where the user passes in [man|woman|[m|w]|[m|f]] instead
         //using String() here, to force it to be a string, to handle null case
         if (country) {
+            let recognized_codes = {
+                us: "United States",
+                ca: "Canada",
+                rs: "Russia",
+                nl: "Netherlands",
+                fr: "France",
+                es: "Spain",
+                ch: "Switzerland",
+                gb: "United Kingdom",
+                uk: "United Kingdom",
+                dk: "Denmark",
+                no: "Norway",
+                de: "Germany",
+                mx: "Mexico",
+                br: "Brazil",
+                au: "Australia",
+                nz: "New Zealand",
+                tr: "Turkey",
+                in: "India",
+                pk: "Pakistan",
+                ir: "Iran",
+                ie: "Ireland",
+                fi: "Finland",
+                ua: "Urguay",
+            };
+            country = country.toLowerCase();
+            country = recognized_codes[country] || country;
+        }
+        if (country) {
             let filteredUsers = foreigners.filter(
                 (u) => !!u.country.match(RegExp(country, "i"))
             );
@@ -2678,6 +2707,35 @@ app.get("/", (req, res) => {
     else if (!!String(sex).match(/^(f$|w)(oman$)?/i)) sex = "female";
     //cover cases where the user passes in [man|woman|[m|w]|[m|f]] instead
     //using String() here, to force it to be a string, to handle null case
+    if (country) {
+        let recognized_codes = {
+        us: "United States",
+        ca: "Canada",
+        rs: "Russia",
+        nl: "Netherlands",
+        fr: "France",
+        es: "Spain",
+        ch: "Switzerland",
+        gb: "United Kingdom",
+        uk: "United Kingdom",
+        dk: "Denmark",
+        no: "Norway",
+        de: "Germany",
+        mx: "Mexico",
+        br: "Brazil",
+        au: "Australia",
+        nz: "New Zealand",
+        tr: "Turkey",
+        in: "India",
+        pk: "Pakistan",
+        ir: "Iran",
+        ie: "Ireland",
+        fi: "Finland",
+        ua: "Urguay",
+    };
+        country = country.toLowerCase();
+        country = recognized_codes[country] || country;
+    }
     if (country) {
         let filteredUsers = foreigners.filter(
             (u) => !!u.country.match(RegExp(country, "i"))
