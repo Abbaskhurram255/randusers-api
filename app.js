@@ -2525,6 +2525,7 @@ app.all("/:number", (req, res) => {
                             success: false,
                         });
                         return;
+                        //if key==="id", stop the operation. The core properties --- like id --- shouldn't accept any modifications.
                     }
                     user_with_specified_id[key] = value;
                 } else {
@@ -2563,6 +2564,7 @@ app.all("/:number", (req, res) => {
                             success: false,
                         });
                         return;
+                        //if key==="id", stop the operation. The core properties --- like id --- shouldn't accept any modifications.
                     }
                     u[key] = value;
                 });
