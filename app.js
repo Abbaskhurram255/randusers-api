@@ -1930,11 +1930,11 @@ app.all("/:number", (req, res) => {
                 "ir|98": "Iran",
                 "ie|353": "Ireland",
                 "fi|358": "Finland",
-                "ua|380": "Urguay",
+                "ua|380": "Ukraine",
             };
             recognized_codes = Object.entries(recognized_codes);
             country = country.toLowerCase();
-            for ([k, v] of recognized_codes) country = country.replace(k, v);
+            for ([k, v] of recognized_codes) country = country.replace(RegExp(k, "i"), v);
         }
         if (country) {
             let filteredUsers = foreigners.filter(
@@ -2736,11 +2736,12 @@ app.get("/", (req, res) => {
             "ir|98": "Iran",
             "ie|353": "Ireland",
             "fi|358": "Finland",
-            "ua|380": "Urguay",
+            "ua|380": "Ukraine",
         };
         recognized_codes = Object.entries(recognized_codes);
         country = country.toLowerCase();
-        for ([k, v] of recognized_codes) country = country.replace(k, v);
+        for ([k, v] of recognized_codes)
+            country = country.replace(RegExp(k, "i"), v);
     }
     if (country) {
         let filteredUsers = foreigners.filter(
