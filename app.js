@@ -1906,32 +1906,35 @@ app.all("/:number", (req, res) => {
         //using String() here, to force it to be a string, to handle null case
         if (country) {
             let recognized_codes = {
-                us: "United States",
+                "us|1": "United States",
                 ca: "Canada",
-                rs: "Russia",
-                nl: "Netherlands",
-                fr: "France",
-                es: "Spain",
-                ch: "Switzerland",
-                gb: "United Kingdom",
+                "rs|7": "Russia",
+                ru: "Russia",
+                "nl|31": "Netherlands",
+                "fr|33": "France",
+                "es|34": "Spain",
+                "ch|41": "Switzerland",
+                "gb|44": "United Kingdom",
                 uk: "United Kingdom",
-                dk: "Denmark",
-                no: "Norway",
-                de: "Germany",
-                mx: "Mexico",
-                br: "Brazil",
-                au: "Australia",
-                nz: "New Zealand",
-                tr: "Turkey",
-                in: "India",
-                pk: "Pakistan",
-                ir: "Iran",
-                ie: "Ireland",
-                fi: "Finland",
-                ua: "Urguay",
+                "dk|45": "Denmark",
+                "no|47": "Norway",
+                "de|49": "Germany",
+                ge: "Germany",
+                "mx|52": "Mexico",
+                "br|55": "Brazil",
+                "au|61": "Australia",
+                "nz|64": "New Zealand",
+                "tr|90": "Turkey",
+                "in|91": "India",
+                "pk|92": "Pakistan",
+                "ir|98": "Iran",
+                "ie|353": "Ireland",
+                "fi|358": "Finland",
+                "ua|380": "Urguay",
             };
+            recognized_codes = Object.entries(recognized_codes);
             country = country.toLowerCase();
-            country = recognized_codes[country] || country;
+            for ([k, v] of recognized_codes) country = country.replace(k, v);
         }
         if (country) {
             let filteredUsers = foreigners.filter(
@@ -2709,32 +2712,35 @@ app.get("/", (req, res) => {
     //using String() here, to force it to be a string, to handle null case
     if (country) {
         let recognized_codes = {
-        us: "United States",
-        ca: "Canada",
-        rs: "Russia",
-        nl: "Netherlands",
-        fr: "France",
-        es: "Spain",
-        ch: "Switzerland",
-        gb: "United Kingdom",
-        uk: "United Kingdom",
-        dk: "Denmark",
-        no: "Norway",
-        de: "Germany",
-        mx: "Mexico",
-        br: "Brazil",
-        au: "Australia",
-        nz: "New Zealand",
-        tr: "Turkey",
-        in: "India",
-        pk: "Pakistan",
-        ir: "Iran",
-        ie: "Ireland",
-        fi: "Finland",
-        ua: "Urguay",
-    };
+            "us|1": "United States",
+            ca: "Canada",
+            "rs|7": "Russia",
+            ru: "Russia",
+            "nl|31": "Netherlands",
+            "fr|33": "France",
+            "es|34": "Spain",
+            "ch|41": "Switzerland",
+            "gb|44": "United Kingdom",
+            uk: "United Kingdom",
+            "dk|45": "Denmark",
+            "no|47": "Norway",
+            "de|49": "Germany",
+            ge: "Germany",
+            "mx|52": "Mexico",
+            "br|55": "Brazil",
+            "au|61": "Australia",
+            "nz|64": "New Zealand",
+            "tr|90": "Turkey",
+            "in|91": "India",
+            "pk|92": "Pakistan",
+            "ir|98": "Iran",
+            "ie|353": "Ireland",
+            "fi|358": "Finland",
+            "ua|380": "Urguay",
+        };
+        recognized_codes = Object.entries(recognized_codes);
         country = country.toLowerCase();
-        country = recognized_codes[country] || country;
+        for ([k, v] of recognized_codes) country = country.replace(k, v);
     }
     if (country) {
         let filteredUsers = foreigners.filter(
