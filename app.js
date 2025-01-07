@@ -1,6 +1,27 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const path = require("path");
+const [NodeCache, helmet, compression] = [require("node-cache"), require("helmet"), require("compression")];
+
+//configuring express
+const app = express();
+dotenv.config();
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use((req, res, next) => {
+    res.set({
+        Accept: "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE",
+    });
+    res.set({
+      "X-Powered-By": "Abbaskhurram255",
+      "Server": "Khurram's Web Servers",
+    });
+    next();
+});
+app.use(helmet());
+app.use(compression());
 
 let make_cdn = (_for) => {
     if (typeof _for !== "string" || !String(_for).trim().length) return;
@@ -1844,20 +1865,6 @@ foreigners.forEach((u, i) => {
             return collected[foreigners.indexOf(u)];
         },
     });
-});
-
-//configuring express
-const app = express();
-dotenv.config();
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use((req, res, next) => {
-    res.set({
-        Accept: "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE",
-    });
-    next();
 });
 
 //save the unsorted array for later shuffling

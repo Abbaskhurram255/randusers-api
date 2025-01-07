@@ -4,8 +4,11 @@
     "description": "Api that serves a set of random users from Pakistan you can play with as a part of API testing",
     "main": "app.js",
     "dependencies": {
+        "compression": "^1.7.5",
         "dotenv": "^16.4.5",
-        "express": "^4.21.1"
+        "express": "^4.21.1",
+        "helmet": "^8.0.0",
+        "node-cache": "^5.1.2"
     },
     "devDependencies": {
         "nodemon": "^3.1.9"
