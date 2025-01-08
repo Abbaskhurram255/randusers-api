@@ -14,12 +14,10 @@ app.use((req, res, next) => {
         Accept: "application/json",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE",
-    });
-    res.set({
-      "X-Powered-By": "Abbaskhurram255",
-      "Server": "Khurram's Web Servers",
-      "App": "Randusers",
-      "Version": "1.0.0",
+        "X-Powered-By": "Abbaskhurram255",
+        "Server": "Khurram's Web Servers",
+        "App": "Randusers",
+        "Version": "1.0.0",
     });
     
     let cacheKey = req.originalUrl;
