@@ -1,15 +1,13 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const path = require("path");
-const [NodeCache, helmet, compression] = [
-    require("node-cache"),
+const [helmet, compression] = [
     require("helmet"),
     require("compression"),
 ];
 
 //configuring express
 const app = express();
-const cache = new NodeCache({ stdTTL: 3600 });
 dotenv.config();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -29,24 +27,7 @@ app.use((req, res, next) => {
     };
     res.set(meta);
 
-    let cacheKey = req.originalUrl;
-    let cachedResponse = cache.get(cacheKey);
-    if (cachedResponse) {
-        // If cached, restore both headers and body from cache
-        let { headers, body } = cachedResponse;
-        res.set(headers);
-        res.set("X-Cache", "HIT");
-        return res.send(body);
-    }
 
-    // If not cached, proceed with request and cache the response
-    let originalSend = res.send;
-    res.send = (body) => {
-        let headers = res.getHeaders(); // Capture response headers
-        // Cache both headers and body
-        cache.set(cacheKey, { headers, body });
-        originalSend.call(res, body); // Proceed with original response
-    };
     next();
 });
 app.use(
