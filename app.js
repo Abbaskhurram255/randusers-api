@@ -18,29 +18,35 @@ app.use((req, res, next) => {
     res.set({
       "X-Powered-By": "Abbaskhurram255",
       "Server": "Khurram's Web Servers",
+      "App": "Randusers",
+      "Version": "1.0.0",
     });
     
     let cacheKey = req.originalUrl;
     let cachedResponse = cache.get(cacheKey);
     if (cachedResponse) {
     	// If cached, restore both headers and body from cache
-    	const { headers, body } = cachedResponse;
+    	let { headers, body } = cachedResponse;
     	res.set(headers);
     	res.set('X-Cache', 'HIT');
     	return res.send(body);
     }
 
     // If not cached, proceed with request and cache the response
-    const originalSend = res.send;
+    let originalSend = res.send;
     res.send = body => {
-    	const headers = res.getHeaders(); // Capture response headers
+    	let headers = res.getHeaders(); // Capture response headers
     	// Cache both headers and body
     	cache.set(cacheKey, { headers, body });
     	originalSend.call(res, body); // Proceed with original response
     };
     next();
 });
-app.use(helmet());
+app.use(
+    helmet({
+        hidePoweredBy: false,
+    })
+);
 app.use(compression());
 
 let make_cdn = (_for) => {
@@ -312,14 +318,14 @@ let foreigners = [
     },
     {
         "name": {
-            "title": "Mrs",
+            "title": "Mr",
             "first": "Alisa",
             "last": "Kivi",
-            "full": "Mrs Alisa Kivi"
+            "full": "Ms Alisa Kivi"
         },
         "email": "alisa.kivi@hotmail.com",
         "login": {
-            "username": "tinyswan604",
+            "username": "tiny.alisa.in.her.tiny.world.24.7",
             "password": "EMccJsJcOfNEwF"
         },
         "dob": "July 21, 1989",
@@ -1398,6 +1404,7 @@ let foreigners = [
         "name": {
             "title": "Mrs",
             "first": "Ladomira",
+            "family": "Deema",
             "last": "Chishko",
             "full": "Mrs Ladomira Chishko"
         },
@@ -2703,7 +2710,7 @@ app.all("/:number", (req, res) => {
             });
         }
     } else if (method === "POST") {
-        res.send(req.body);
+        res.status(200).json(req.body);
     } else if (method === "PATCH") {
         non_parsed_number = non_parsed_number.toUpperCase();
         non_parsed_number = non_parsed_number.match(/\W/)
