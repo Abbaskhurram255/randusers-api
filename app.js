@@ -3205,7 +3205,47 @@ app.all("/:number", (req, res) => {
             });
         }
     } else if (method === "POST") {
-        res.status(200).json(req.body);
+        let {
+            id,
+            name,
+            sex,
+            age,
+            country,
+            city,
+            state,
+            status,
+            religion,
+            phone,
+            email,
+            password,
+            bloodGroup
+        } = req.body;
+        name = name || {};
+        if (
+            !id || foreigners.some((u) => u.id === id) ||
+            typeof name !== "object" || Object.values(name).length < 3 || !("title" in name) || !("first" in name) || !("last" in name) ||
+            !String(sex).trim().length ||
+            String(age).trim().length < 2 ||
+            String(country).trim().length < 3 ||
+            String(city).trim().length <= 5 ||
+            String(state).trim().length <= 5 ||
+            String(status).trim().length <= 5 ||
+            String(religion).trim().length <= 5 ||
+            String(phone).trim().length < 10 ||
+            !String(email).trim().length ||
+            String(password).trim().length < 8||
+            String(bloodGroup).trim().length < 2
+        ) {
+            res.status(400).json({ message: "Either bad paramaters, or user with the same id was found!", success: false });
+            return;
+        }
+        const newUser = { name: name, sex: sex, age: age, country: country, city: city, state: state, status: status, religion: religion, phone: phone, email, password: password, bloodGroup: bloodGroup, id: id };
+        foreigners.push(newUser);
+        res.status(200).json({
+            message: `User added successfully! New user: ${newUser.name} from ${newUser.country}`,
+            success: true,
+        });
+        
     } else if (method === "PATCH") {
         non_parsed_number = non_parsed_number.toUpperCase();
         non_parsed_number = non_parsed_number.match(/\W/)
