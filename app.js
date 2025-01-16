@@ -2583,7 +2583,7 @@ app.all("/:number", (req, res) => {
         (number % 1 || number < 1 || !isFinite(number)) &&
         !String(non_parsed_number).match(/\d[a-yA-Y]|[a-yA-Y]\d/i)
     ) {
-        return res.status(400).json({ message: "Invalid request!" });
+        return res.status(400).json({ code: 400, message: "Invalid request!" });
     }
     console.log(`Received a ${method} request on ${path}, acting accordingly!`);
     if (method === "GET") {
@@ -3285,6 +3285,7 @@ app.all("/:number", (req, res) => {
                         //if key==="id", stop the operation. The core properties --- like id --- shouldn't accept any modifications.
                     }
                     user_with_specified_id[key] = value;
+                    console.log(user_with_specified_id);
                 } else {
                     res.status(404).json({
                         error: {
