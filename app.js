@@ -3290,7 +3290,7 @@ app.all("/:number", (req, res) => {
                     res.status(404).json({
                         error: {
                             code: 404,
-                            message: "No such user found with this id!",
+                            message: "No such user found with the specified id!",
                         },
                         success: false,
                     });
