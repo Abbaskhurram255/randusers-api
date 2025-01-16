@@ -28,7 +28,7 @@ app.use((req, res, next) => {
 });
 app.use(
     helmet({
-        hidePoweredBy: false,
+        hidePoweredBy: true,
     })
 );
 app.use(compression());
@@ -3285,7 +3285,7 @@ app.all("/:number", (req, res) => {
                         //if key==="id", stop the operation. The core properties --- like id --- shouldn't accept any modifications.
                     }
                     user_with_specified_id[key] = value;
-                    console.log(user_with_specified_id);
+                    console.log(`PATCH successful! User(s) with changes: ${user_with_specified_id}`);
                 } else {
                     res.status(404).json({
                         error: {
