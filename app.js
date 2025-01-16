@@ -28,7 +28,7 @@ app.use((req, res, next) => {
 });
 app.use(
     helmet({
-        hidePoweredBy: true,
+        hidePoweredBy: false,
     })
 );
 app.use(compression());
