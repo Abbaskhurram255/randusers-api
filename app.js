@@ -3197,6 +3197,10 @@ app.all("/:number", (req, res) => {
                 });
             }
         } else {
+            if (!Number(number)) {
+                res.status(400).json({error: {code: 400, message: "Bad request"}, success: false});
+                return;
+            }
             let sliced_foreigners = foreigners.slice(0, number);
             res.status(200).json({
                 users: sliced_foreigners,
