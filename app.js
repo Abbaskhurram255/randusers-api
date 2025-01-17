@@ -3225,33 +3225,33 @@ app.all("/:number", (req, res) => {
             password,
             bloodGroup
         } = req.body;
-        name = name || {};
+        name = name || {title:"",first:"",last:""};
+        id = id || non_parsed_number.toUpperCase();
         if (
-            !id || String(id).trim().length < 2 || foreigners.some((u) => u.id === id) ||
-            !name || typeof name !== "object" || Object.values(name).length < 3 || !("title" in name) || !("first" in name) || !("last" in name) ||
-            !sex || !String(sex).trim().length ||
-            !age || String(age).trim().length < 2 ||
-            !country || String(country).trim().length < 3 ||
-            !city || String(city).trim().length < 3 ||
-            !state || String(state).trim().length < 2 ||
-            !status || String(status).trim().length < 5 ||
-            !religion || String(religion).trim().length < 4 ||
-            !phone || String(phone).trim().length < 10 ||
-            !email || String(email).trim().length < 5 ||
-            !username || !String(username).trim().length ||
-            !password || String(password).trim().length < 8 ||
-            !bloodGroup || String(bloodGroup).trim().length < 2
+            !id || !/^([a-z][\d]|[\d][a-z])$/i.test(String(id)) || String(id).trim().length < 2 || foreigners.some((u) => u.id === id) ||
+            !name || typeof name !== "object" || Object.values(name).length < 3 || !("title" in name) || !("first" in name) || !("last" in name) || !/[a-z]{2,}/i.test(String(name.title).trim()) || !/[a-z]{3,}/i.test(String(name.first).trim()) || !/[a-z]{3,}/i.test(String(name.last).trim()) ||
+            !sex || !/[a-z]{1,}/i.test(String(sex)) ||
+            !parseInt(age) || parseInt(age) < 18 || parseInt(age) > 40 || String(age).trim().length < 2 ||
+            !country || !/[a-z]{4,}/i.test(String(country)) ||
+            !city || !/[a-z]{4,}/i.test(String(city)) ||
+            !state || !/[a-z]{4,}/i.test(String(state)) ||
+            !status || !/(in|o(n|ff))?(active|line)/.test(String(status)) || String(status).trim().length < 5 ||
+            !religion || !String(religion).match(/[a-z]{4,}/i) ||
+            !/^((([\+\d\-.]{1,4})?[ \-.]?\d{3,5})|([\+?\d\-.]{1,4})?[ \-.]?\((\d{3}\)))?[ \-.]?\d{3}[ \-.]?\d{4}$/i.test(String(phone).trim()) ||
+            !email || !/^[\w\.\-\_\+\!]+@[\w]+\.[\w]{2,}(\.[\w]{2,})?$/i.test(String(email).trim()) ||
+            !username || !/[a-z]{2,}/i.test(String(username)) ||
+            !password || !/[a-z]{2,}/i.test(String(password)) || String(password).trim().length < 8 ||
+            !bloodGroup || !/^[OOa-bOO]+[\+\-]|((N|TB)[\/.]*A[.]*)$/i.test(String(bloodGroup)) || String(bloodGroup).trim().length < 2
         ) {
-            res.status(400).json({ message: "Either bad paramaters, or user with the same id was found!", success: false });
+            res.status(400).json({ error: {code: 400, message: "Either bad paramaters, or user with the same id was found!"}, success: false });
             return;
         }
         const newUser = { name: name, sex: sex, age: age, country: country, city: city, state: state, status: status, religion: religion, phone: phone, email: email, login: {username: username, password: password }, bloodGroup: bloodGroup, id: id };
         foreigners.push(newUser);
         res.status(200).json({
-            message: `User added successfully! New user: ${newUser.name} from ${newUser.country}`,
+            message: `User added successfully! New user: ${Object.values(newUser.name).join(" ")} from ${newUser.country}`,
             success: true,
         });
-        
     } else if (method === "PATCH") {
         non_parsed_number = non_parsed_number.toUpperCase();
         non_parsed_number = non_parsed_number.match(/\W/)
