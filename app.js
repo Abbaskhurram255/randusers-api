@@ -2607,10 +2607,10 @@ app.all("/", (req, res) => {
             res.status(400).json({ error: {code: 400, message: "Either bad paramaters, or user with the same id was found!"}, success: false });
             return;
         }
-        const newUser = { name: name, sex: sex, age: parseInt(age), country: country, city: city, state: state, status: status, religion: religion, phone: phone, email: email, login: {username: username, password: password }, bloodGroup: bloodGroup, id: id };
+        const newUser = { name: {...name, full: Object.values(name).join(" ")}, sex: sex, age: parseInt(age), country: country, city: city, state: state, status: status, religion: religion, phone: phone, email: email, login: {username: username, password: password }, bloodGroup: bloodGroup, id: id };
         foreigners.push(newUser);
         res.status(200).json({
-            message: `User added successfully! New user: ${Object.values(newUser.name).join(" ")} from ${newUser.country}`,
+            message: `User added successfully! New user: ${newUser.full} from ${newUser.country}`,
             success: true,
         });
     } else {
@@ -3294,10 +3294,10 @@ app.all("/:number", (req, res) => {
             res.status(400).json({ error: {code: 400, message: "Either bad paramaters, or user with the same id was found!"}, success: false });
             return;
         }
-        const newUser = { name: name, sex: sex, age: parseInt(age), country: country, city: city, state: state, status: status, religion: religion, phone: phone, email: email, login: {username: username, password: password }, bloodGroup: bloodGroup, id: id };
+        const newUser = { name: {...name, full: Object.values(name).join(" ")}, sex: sex, age: parseInt(age), country: country, city: city, state: state, status: status, religion: religion, phone: phone, email: email, login: {username: username, password: password }, bloodGroup: bloodGroup, id: id };
         foreigners.push(newUser);
         res.status(200).json({
-            message: `User added successfully! New user: ${Object.values(newUser.name).join(" ")} from ${newUser.country}`,
+            message: `User added successfully! New user: ${newUser.full} from ${newUser.country}`,
             success: true,
         });
     } else if (method === "PATCH") {
