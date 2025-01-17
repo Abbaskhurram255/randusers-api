@@ -3241,7 +3241,7 @@ app.all("/:number", (req, res) => {
             !email || !/^[\w\.\-\_\+\!]+@[\w]+\.[\w]{2,}(\.[\w]{2,})?$/i.test(String(email).trim()) ||
             !username || !/[a-z]{2,}/i.test(String(username)) ||
             !password || !/[a-z]{2,}/i.test(String(password)) || String(password).trim().length < 8 ||
-            !bloodGroup || !/^[OOa-bOO]+[\+\-]|((N|TB)[\/.]*A[.]*)$/i.test(String(bloodGroup)) || String(bloodGroup).trim().length < 2
+            !bloodGroup || !/^[OOa-bOO]+[\+\-]|((N|TB)[\/.]*A[\.]*)$/i.test(String(bloodGroup)) || String(bloodGroup).trim().length < 2
         ) {
             res.status(400).json({ error: {code: 400, message: "Either bad paramaters, or user with the same id was found!"}, success: false });
             return;
