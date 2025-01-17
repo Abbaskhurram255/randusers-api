@@ -1963,7 +1963,7 @@ let recognized_codes = {
 recognized_codes = Object.entries(recognized_codes);
 
 //ROOT ROUTES
-app.get("/", (req, res) => {
+app.all("/", (req, res) => {
     const { method, path, query } = req;
     let { country, city, state, age, religion, status, sex, id, sorted } =
         query;
@@ -1982,63 +1982,379 @@ app.get("/", (req, res) => {
         }, acting accordingly!`
     );
 
-    if (String(sorted).match(/true|yes/i)) foreigners = sorted_foreigners;
-    else foreigners = shuffled_foreigners;
-    // let objectKeysToLowerCase = function (input) {
-    //     if (typeof input !== "object") return input;
-    //     if (Array.isArray(input)) return input.map(objectKeysToLowerCase);
-    //     return Object.keys(input).reduce(function (newObj, key) {
-    //         let val = input[key];
-    //         let newVal =
-    //             typeof val === "object" && val !== null
-    //                 ? objectKeysToLowerCase(val)
-    //                 : val;
-    //         newObj[key.toLowerCase()] = newVal;
-    //         return newObj;
-    //     }, {});
-    // };
-    // req.query = objectKeysToLowerCase(req.query);
+    if (method === "GET") {
+        if (String(sorted).match(/true|yes/i)) foreigners = sorted_foreigners;
+        else foreigners = shuffled_foreigners;
+        // let objectKeysToLowerCase = function (input) {
+        //     if (typeof input !== "object") return input;
+        //     if (Array.isArray(input)) return input.map(objectKeysToLowerCase);
+        //     return Object.keys(input).reduce(function (newObj, key) {
+        //         let val = input[key];
+        //         let newVal =
+        //             typeof val === "object" && val !== null
+        //                 ? objectKeysToLowerCase(val)
+        //                 : val;
+        //         newObj[key.toLowerCase()] = newVal;
+        //         return newObj;
+        //     }, {});
+        // };
+        // req.query = objectKeysToLowerCase(req.query);
 
-    if (status) status = status.toLowerCase();
-    if (sex) sex = sex.toLowerCase();
-    if (status === "online") status = "active";
-    else if (status === "offline") status = "inactive";
-    //^this here, stays, to handle cases where the uses passes in "online" or "offline" instead of "active" or "inactive"
-    if (!!String(sex).match(/^m(an)?$/i)) sex = "male";
-    else if (!!String(sex).match(/^(f$|w)(oman$)?/i)) sex = "female";
-    //cover cases where the user passes in [man|woman|[m|w]|[m|f]] instead
-    //using String() here, to force it to be a string, to handle null case
-    if (country) {
-        //replace the cc with the full country name
-        country = country.toLowerCase();
-        for ([k, v] of recognized_codes)
-            country = country.replace(RegExp(`^${k}$`, "i"), v);
+        if (status) status = status.toLowerCase();
+        if (sex) sex = sex.toLowerCase();
+        if (status === "online") status = "active";
+        else if (status === "offline") status = "inactive";
+        //^this here, stays, to handle cases where the uses passes in "online" or "offline" instead of "active" or "inactive"
+        if (!!String(sex).match(/^m(an)?$/i)) sex = "male";
+        else if (!!String(sex).match(/^(f$|w)(oman$)?/i)) sex = "female";
+        //cover cases where the user passes in [man|woman|[m|w]|[m|f]] instead
+        //using String() here, to force it to be a string, to handle null case
+        if (country) {
+            //replace the cc with the full country name
+            country = country.toLowerCase();
+            for ([k, v] of recognized_codes)
+                country = country.replace(RegExp(`^${k}$`, "i"), v);
 
-        let filteredUsers = foreigners.filter(
-            (u) => !!u.country.match(RegExp(country, "i"))
-        );
-        if (state)
-            filteredUsers = filteredUsers.filter(
-                (u) => !!u.state.match(RegExp(state, "i"))
+            let filteredUsers = foreigners.filter(
+                (u) => !!u.country.match(RegExp(country, "i"))
             );
-        if (city)
-            filteredUsers = filteredUsers.filter(
+            if (state)
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!u.state.match(RegExp(state, "i"))
+                );
+            if (city)
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!u.city.match(RegExp(city, "i"))
+                );
+            if (religion)
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!u.religion.match(RegExp(religion, "i"))
+                );
+            if (age) {
+                if (String(age).match(/[>\^]/)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter((u) => u.age >= age);
+                } else if (String(age).match(/</)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter((u) => u.age <= age);
+                } else if (String(age).match(/[\~\*]/)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter(
+                        (u) =>
+                            u.age === age + 2 ||
+                            u.age === age - 2 ||
+                            u.age === age + 1 ||
+                            u.age === age - 1 ||
+                            u.age === age
+                    );
+                } else {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter((u) => u.age === age);
+                }
+            }
+            if (sex) filteredUsers = filteredUsers.filter((u) => u.sex === sex);
+            if (status)
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!u.status.match(RegExp(String.raw`^${status}$`, "i"))
+                );
+            if (id) {
+                id = RegExp(
+                    String.raw`(${id}|${id.split("").reverse().join("")})`,
+                    "i"
+                );
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!String(u.id).match(id)
+                );
+            }
+            if (filteredUsers.length)
+                res.status(200).json({
+                    users: filteredUsers,
+                    length: filteredUsers.length,
+                    success: true,
+                });
+            else
+                res.status(404).json({
+                    error: {
+                        code: 404,
+                        message: "No users found for this country!",
+                    },
+                    success: false,
+                });
+        } else if (city) {
+            let filteredUsers = foreigners.filter(
                 (u) => !!u.city.match(RegExp(city, "i"))
             );
-        if (religion)
-            filteredUsers = filteredUsers.filter(
+            if (state)
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!u.state.match(RegExp(state, "i"))
+                );
+            if (country)
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!u.country.match(RegExp(country, "i"))
+                );
+            if (religion)
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!u.religion.match(RegExp(religion, "i"))
+                );
+            if (age) {
+                if (String(age).match(/[>\^]/)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter((u) => u.age >= age);
+                } else if (String(age).match(/</)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter((u) => u.age <= age);
+                } else if (String(age).match(/[\~\*]/)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter(
+                        (u) =>
+                            u.age === age + 2 ||
+                            u.age === age - 2 ||
+                            u.age === age + 1 ||
+                            u.age === age - 1 ||
+                            u.age === age
+                    );
+                } else {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter((u) => u.age === age);
+                }
+            }
+            if (sex) filteredUsers = filteredUsers.filter((u) => u.sex === sex);
+            if (status)
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!u.status.match(RegExp(String.raw`^${status}$`, "i"))
+                );
+            if (id) {
+                id = RegExp(
+                    String.raw`(${id}|${id.split("").reverse().join("")})`,
+                    "i"
+                );
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!String(u.id).match(id)
+                );
+            }
+            if (filteredUsers.length)
+                res.status(200).json({
+                    users: filteredUsers,
+                    length: filteredUsers.length,
+                    success: true,
+                });
+            else
+                res.status(404).json({
+                    error: {
+                        code: 404,
+                        message: "No users found for this city!",
+                    },
+                    success: false,
+                });
+        } else if (state) {
+            let filteredUsers = foreigners.filter(
+                (u) => !!u.state.match(RegExp(state, "i"))
+            );
+            if (country)
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!u.country.match(RegExp(country, "i"))
+                );
+            if (city)
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!u.city.match(RegExp(city, "i"))
+                );
+            if (age) {
+                if (String(age).match(/[>\^]/)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter((u) => u.age >= age);
+                } else if (String(age).match(/</)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter((u) => u.age <= age);
+                } else if (String(age).match(/[\~\*]/)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter(
+                        (u) =>
+                            u.age === age + 2 ||
+                            u.age === age - 2 ||
+                            u.age === age + 1 ||
+                            u.age === age - 1 ||
+                            u.age === age
+                    );
+                } else {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter((u) => u.age === age);
+                }
+            }
+            if (sex) filteredUsers = filteredUsers.filter((u) => u.sex === sex);
+            if (status)
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!u.status.match(RegExp(String.raw`^${status}$`, "i"))
+                );
+            if (religion)
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!u.religion.match(RegExp(religion, "i"))
+                );
+            if (id) {
+                id = RegExp(
+                    String.raw`(${id}|${id.split("").reverse().join("")})`,
+                    "i"
+                );
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!String(u.id).match(id)
+                );
+            }
+            if (filteredUsers.length)
+                res.status(200).json({
+                    users: filteredUsers,
+                    length: filteredUsers.length,
+                    success: true,
+                });
+            else
+                res.status(404).json({
+                    error: {
+                        code: 404,
+                        message: "No users found for this state/provision!",
+                    },
+                    success: false,
+                });
+        } else if (religion) {
+            let filteredUsers = foreigners.filter(
                 (u) => !!u.religion.match(RegExp(religion, "i"))
             );
-        if (age) {
+            if (country)
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!u.country.match(RegExp(country, "i"))
+                );
+            if (city)
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!u.city.match(RegExp(city, "i"))
+                );
+            if (age) {
+                if (String(age).match(/[>\^]/)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter((u) => u.age >= age);
+                } else if (String(age).match(/</)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter((u) => u.age <= age);
+                } else if (String(age).match(/[\~\*]/)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter(
+                        (u) =>
+                            u.age === age + 2 ||
+                            u.age === age - 2 ||
+                            u.age === age + 1 ||
+                            u.age === age - 1 ||
+                            u.age === age
+                    );
+                } else {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter((u) => u.age === age);
+                }
+            }
+            if (sex) filteredUsers = filteredUsers.filter((u) => u.sex === sex);
+            if (state)
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!u.state.match(RegExp(state, "i"))
+                );
+            if (status)
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!u.status.match(RegExp(String.raw`^${status}$`, "i"))
+                );
+            if (id) {
+                id = RegExp(
+                    String.raw`(${id}|${id.split("").reverse().join("")})`,
+                    "i"
+                );
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!String(u.id).match(id)
+                );
+            }
+            if (filteredUsers.length)
+                res.status(200).json({
+                    users: filteredUsers,
+                    length: filteredUsers.length,
+                    success: true,
+                });
+            else
+                res.status(404).json({
+                    error: {
+                        code: 404,
+                        message: "No users found for this religion!",
+                    },
+                    success: false,
+                });
+        } else if (status) {
+            let filteredUsers = foreigners.filter(
+                (u) => !!u.status.match(RegExp(String.raw`^${status}$`, "i"))
+            );
+            if (country)
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!u.country.match(RegExp(country, "i"))
+                );
+            if (city)
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!u.city.match(RegExp(city, "i"))
+                );
+            if (age) {
+                if (String(age).match(/[>\^]/)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter((u) => u.age >= age);
+                } else if (String(age).match(/</)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter((u) => u.age <= age);
+                } else if (String(age).match(/[\~\*]/)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter(
+                        (u) =>
+                            u.age === age + 2 ||
+                            u.age === age - 2 ||
+                            u.age === age + 1 ||
+                            u.age === age - 1 ||
+                            u.age === age
+                    );
+                } else {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter((u) => u.age === age);
+                }
+            }
+            if (sex) filteredUsers = filteredUsers.filter((u) => u.sex === sex);
+            if (state)
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!u.state.match(RegExp(state, "i"))
+                );
+            if (religion)
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!u.religion.match(RegExp(religion, "i"))
+                );
+            if (id) {
+                id = RegExp(
+                    String.raw`(${id}|${id.split("").reverse().join("")})`,
+                    "i"
+                );
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!String(u.id).match(id)
+                );
+            }
+            if (filteredUsers.length)
+                res.status(200).json({
+                    users: filteredUsers,
+                    length: filteredUsers.length,
+                    success: true,
+                });
+            else
+                res.status(404).json({
+                    error: {
+                        code: 404,
+                        message: "No users found for this activity status!",
+                    },
+                    success: false,
+                });
+        } else if (age) {
+            let filteredUsers = [];
             if (String(age).match(/[>\^]/)) {
                 age = parseInt(String(age).replace(/\D/g, ""));
-                filteredUsers = filteredUsers.filter((u) => u.age >= age);
+                filteredUsers = foreigners.filter((u) => u.age >= age);
             } else if (String(age).match(/</)) {
                 age = parseInt(String(age).replace(/\D/g, ""));
-                filteredUsers = filteredUsers.filter((u) => u.age <= age);
+                filteredUsers = foreigners.filter((u) => u.age <= age);
             } else if (String(age).match(/[\~\*]/)) {
                 age = parseInt(String(age).replace(/\D/g, ""));
-                filteredUsers = filteredUsers.filter(
+                filteredUsers = foreigners.filter(
                     (u) =>
                         u.age === age + 2 ||
                         u.age === age - 2 ||
@@ -2048,525 +2364,257 @@ app.get("/", (req, res) => {
                 );
             } else {
                 age = parseInt(String(age).replace(/\D/g, ""));
-                filteredUsers = filteredUsers.filter((u) => u.age === age);
+                filteredUsers = foreigners.filter((u) => u.age === age);
             }
-        }
-        if (sex) filteredUsers = filteredUsers.filter((u) => u.sex === sex);
-        if (status)
-            filteredUsers = filteredUsers.filter(
-                (u) => !!u.status.match(RegExp(String.raw`^${status}$`, "i"))
-            );
-        if (id) {
-            id = RegExp(
-                String.raw`(${id}|${id.split("").reverse().join("")})`,
-                "i"
-            );
-            filteredUsers = filteredUsers.filter(
-                (u) => !!String(u.id).match(id)
-            );
-        }
-        if (filteredUsers.length)
-            res.status(200).json({
-                users: filteredUsers,
-                length: filteredUsers.length,
-                success: true,
-            });
-        else
-            res.status(404).json({
-                error: {
-                    code: 404,
-                    message: "No users found for this country!",
-                },
-                success: false,
-            });
-    } else if (city) {
-        let filteredUsers = foreigners.filter(
-            (u) => !!u.city.match(RegExp(city, "i"))
-        );
-        if (state)
-            filteredUsers = filteredUsers.filter(
-                (u) => !!u.state.match(RegExp(state, "i"))
-            );
-        if (country)
-            filteredUsers = filteredUsers.filter(
-                (u) => !!u.country.match(RegExp(country, "i"))
-            );
-        if (religion)
-            filteredUsers = filteredUsers.filter(
-                (u) => !!u.religion.match(RegExp(religion, "i"))
-            );
-        if (age) {
-            if (String(age).match(/[>\^]/)) {
-                age = parseInt(String(age).replace(/\D/g, ""));
-                filteredUsers = filteredUsers.filter((u) => u.age >= age);
-            } else if (String(age).match(/</)) {
-                age = parseInt(String(age).replace(/\D/g, ""));
-                filteredUsers = filteredUsers.filter((u) => u.age <= age);
-            } else if (String(age).match(/[\~\*]/)) {
-                age = parseInt(String(age).replace(/\D/g, ""));
+            if (country)
                 filteredUsers = filteredUsers.filter(
-                    (u) =>
-                        u.age === age + 2 ||
-                        u.age === age - 2 ||
-                        u.age === age + 1 ||
-                        u.age === age - 1 ||
-                        u.age === age
+                    (u) => !!u.country.match(RegExp(country, "i"))
                 );
-            } else {
-                age = parseInt(String(age).replace(/\D/g, ""));
-                filteredUsers = filteredUsers.filter((u) => u.age === age);
-            }
-        }
-        if (sex) filteredUsers = filteredUsers.filter((u) => u.sex === sex);
-        if (status)
-            filteredUsers = filteredUsers.filter(
-                (u) => !!u.status.match(RegExp(String.raw`^${status}$`, "i"))
-            );
-        if (id) {
-            id = RegExp(
-                String.raw`(${id}|${id.split("").reverse().join("")})`,
-                "i"
-            );
-            filteredUsers = filteredUsers.filter(
-                (u) => !!String(u.id).match(id)
-            );
-        }
-        if (filteredUsers.length)
-            res.status(200).json({
-                users: filteredUsers,
-                length: filteredUsers.length,
-                success: true,
-            });
-        else
-            res.status(404).json({
-                error: {
-                    code: 404,
-                    message: "No users found for this city!",
-                },
-                success: false,
-            });
-    } else if (state) {
-        let filteredUsers = foreigners.filter(
-            (u) => !!u.state.match(RegExp(state, "i"))
-        );
-        if (country)
-            filteredUsers = filteredUsers.filter(
-                (u) => !!u.country.match(RegExp(country, "i"))
-            );
-        if (city)
-            filteredUsers = filteredUsers.filter(
-                (u) => !!u.city.match(RegExp(city, "i"))
-            );
-        if (age) {
-            if (String(age).match(/[>\^]/)) {
-                age = parseInt(String(age).replace(/\D/g, ""));
-                filteredUsers = filteredUsers.filter((u) => u.age >= age);
-            } else if (String(age).match(/</)) {
-                age = parseInt(String(age).replace(/\D/g, ""));
-                filteredUsers = filteredUsers.filter((u) => u.age <= age);
-            } else if (String(age).match(/[\~\*]/)) {
-                age = parseInt(String(age).replace(/\D/g, ""));
+            if (city)
                 filteredUsers = filteredUsers.filter(
-                    (u) =>
-                        u.age === age + 2 ||
-                        u.age === age - 2 ||
-                        u.age === age + 1 ||
-                        u.age === age - 1 ||
-                        u.age === age
+                    (u) => !!u.city.match(RegExp(city, "i"))
                 );
-            } else {
-                age = parseInt(String(age).replace(/\D/g, ""));
-                filteredUsers = filteredUsers.filter((u) => u.age === age);
-            }
-        }
-        if (sex) filteredUsers = filteredUsers.filter((u) => u.sex === sex);
-        if (status)
-            filteredUsers = filteredUsers.filter(
-                (u) => !!u.status.match(RegExp(String.raw`^${status}$`, "i"))
-            );
-        if (religion)
-            filteredUsers = filteredUsers.filter(
-                (u) => !!u.religion.match(RegExp(religion, "i"))
-            );
-        if (id) {
-            id = RegExp(
-                String.raw`(${id}|${id.split("").reverse().join("")})`,
-                "i"
-            );
-            filteredUsers = filteredUsers.filter(
-                (u) => !!String(u.id).match(id)
-            );
-        }
-        if (filteredUsers.length)
-            res.status(200).json({
-                users: filteredUsers,
-                length: filteredUsers.length,
-                success: true,
-            });
-        else
-            res.status(404).json({
-                error: {
-                    code: 404,
-                    message: "No users found for this state/provision!",
-                },
-                success: false,
-            });
-    } else if (religion) {
-        let filteredUsers = foreigners.filter(
-            (u) => !!u.religion.match(RegExp(religion, "i"))
-        );
-        if (country)
-            filteredUsers = filteredUsers.filter(
-                (u) => !!u.country.match(RegExp(country, "i"))
-            );
-        if (city)
-            filteredUsers = filteredUsers.filter(
-                (u) => !!u.city.match(RegExp(city, "i"))
-            );
-        if (age) {
-            if (String(age).match(/[>\^]/)) {
-                age = parseInt(String(age).replace(/\D/g, ""));
-                filteredUsers = filteredUsers.filter((u) => u.age >= age);
-            } else if (String(age).match(/</)) {
-                age = parseInt(String(age).replace(/\D/g, ""));
-                filteredUsers = filteredUsers.filter((u) => u.age <= age);
-            } else if (String(age).match(/[\~\*]/)) {
-                age = parseInt(String(age).replace(/\D/g, ""));
+            if (sex) filteredUsers = filteredUsers.filter((u) => u.sex === sex);
+            if (state)
                 filteredUsers = filteredUsers.filter(
-                    (u) =>
-                        u.age === age + 2 ||
-                        u.age === age - 2 ||
-                        u.age === age + 1 ||
-                        u.age === age - 1 ||
-                        u.age === age
+                    (u) => !!u.state.match(RegExp(state, "i"))
                 );
-            } else {
-                age = parseInt(String(age).replace(/\D/g, ""));
-                filteredUsers = filteredUsers.filter((u) => u.age === age);
-            }
-        }
-        if (sex) filteredUsers = filteredUsers.filter((u) => u.sex === sex);
-        if (state)
-            filteredUsers = filteredUsers.filter(
-                (u) => !!u.state.match(RegExp(state, "i"))
-            );
-        if (status)
-            filteredUsers = filteredUsers.filter(
-                (u) => !!u.status.match(RegExp(String.raw`^${status}$`, "i"))
-            );
-        if (id) {
-            id = RegExp(
-                String.raw`(${id}|${id.split("").reverse().join("")})`,
-                "i"
-            );
-            filteredUsers = filteredUsers.filter(
-                (u) => !!String(u.id).match(id)
-            );
-        }
-        if (filteredUsers.length)
-            res.status(200).json({
-                users: filteredUsers,
-                length: filteredUsers.length,
-                success: true,
-            });
-        else
-            res.status(404).json({
-                error: {
-                    code: 404,
-                    message: "No users found for this religion!",
-                },
-                success: false,
-            });
-    } else if (status) {
-        let filteredUsers = foreigners.filter(
-            (u) => !!u.status.match(RegExp(String.raw`^${status}$`, "i"))
-        );
-        if (country)
-            filteredUsers = filteredUsers.filter(
-                (u) => !!u.country.match(RegExp(country, "i"))
-            );
-        if (city)
-            filteredUsers = filteredUsers.filter(
-                (u) => !!u.city.match(RegExp(city, "i"))
-            );
-        if (age) {
-            if (String(age).match(/[>\^]/)) {
-                age = parseInt(String(age).replace(/\D/g, ""));
-                filteredUsers = filteredUsers.filter((u) => u.age >= age);
-            } else if (String(age).match(/</)) {
-                age = parseInt(String(age).replace(/\D/g, ""));
-                filteredUsers = filteredUsers.filter((u) => u.age <= age);
-            } else if (String(age).match(/[\~\*]/)) {
-                age = parseInt(String(age).replace(/\D/g, ""));
+            if (status)
                 filteredUsers = filteredUsers.filter(
-                    (u) =>
-                        u.age === age + 2 ||
-                        u.age === age - 2 ||
-                        u.age === age + 1 ||
-                        u.age === age - 1 ||
-                        u.age === age
+                    (u) => !!u.status.match(RegExp(String.raw`^${status}$`, "i"))
                 );
-            } else {
-                age = parseInt(String(age).replace(/\D/g, ""));
-                filteredUsers = filteredUsers.filter((u) => u.age === age);
-            }
-        }
-        if (sex) filteredUsers = filteredUsers.filter((u) => u.sex === sex);
-        if (state)
-            filteredUsers = filteredUsers.filter(
-                (u) => !!u.state.match(RegExp(state, "i"))
-            );
-        if (religion)
-            filteredUsers = filteredUsers.filter(
-                (u) => !!u.religion.match(RegExp(religion, "i"))
-            );
-        if (id) {
-            id = RegExp(
-                String.raw`(${id}|${id.split("").reverse().join("")})`,
-                "i"
-            );
-            filteredUsers = filteredUsers.filter(
-                (u) => !!String(u.id).match(id)
-            );
-        }
-        if (filteredUsers.length)
-            res.status(200).json({
-                users: filteredUsers,
-                length: filteredUsers.length,
-                success: true,
-            });
-        else
-            res.status(404).json({
-                error: {
-                    code: 404,
-                    message: "No users found for this activity status!",
-                },
-                success: false,
-            });
-    } else if (age) {
-        let filteredUsers = [];
-        if (String(age).match(/[>\^]/)) {
-            age = parseInt(String(age).replace(/\D/g, ""));
-            filteredUsers = foreigners.filter((u) => u.age >= age);
-        } else if (String(age).match(/</)) {
-            age = parseInt(String(age).replace(/\D/g, ""));
-            filteredUsers = foreigners.filter((u) => u.age <= age);
-        } else if (String(age).match(/[\~\*]/)) {
-            age = parseInt(String(age).replace(/\D/g, ""));
-            filteredUsers = foreigners.filter(
-                (u) =>
-                    u.age === age + 2 ||
-                    u.age === age - 2 ||
-                    u.age === age + 1 ||
-                    u.age === age - 1 ||
-                    u.age === age
-            );
-        } else {
-            age = parseInt(String(age).replace(/\D/g, ""));
-            filteredUsers = foreigners.filter((u) => u.age === age);
-        }
-        if (country)
-            filteredUsers = filteredUsers.filter(
-                (u) => !!u.country.match(RegExp(country, "i"))
-            );
-        if (city)
-            filteredUsers = filteredUsers.filter(
-                (u) => !!u.city.match(RegExp(city, "i"))
-            );
-        if (sex) filteredUsers = filteredUsers.filter((u) => u.sex === sex);
-        if (state)
-            filteredUsers = filteredUsers.filter(
-                (u) => !!u.state.match(RegExp(state, "i"))
-            );
-        if (status)
-            filteredUsers = filteredUsers.filter(
-                (u) => !!u.status.match(RegExp(String.raw`^${status}$`, "i"))
-            );
-        //String.raw here, fixes a bug
-        if (religion)
-            filteredUsers = filteredUsers.filter(
-                (u) => !!u.religion.match(RegExp(religion, "i"))
-            );
-        if (id) {
-            id = RegExp(
-                String.raw`(${id}|${id.split("").reverse().join("")})`,
-                "i"
-            );
-            filteredUsers = filteredUsers.filter(
-                (u) => !!String(u.id).match(id)
-            );
-        }
-        if (filteredUsers.length)
-            res.status(200).json({
-                users: filteredUsers,
-                length: filteredUsers.length,
-                success: true,
-            });
-        else
-            res.status(404).json({
-                error: {
-                    code: 404,
-                    message: "No users found for this age!",
-                },
-                success: false,
-            });
-    } else if (sex) {
-        let filteredUsers = foreigners.filter((u) => u.sex === sex);
-        if (country)
-            filteredUsers = filteredUsers.filter(
-                (u) => !!u.country.match(RegExp(country, "i"))
-            );
-        if (city)
-            filteredUsers = filteredUsers.filter(
-                (u) => !!u.city.match(RegExp(city, "i"))
-            );
-        if (age) {
-            if (String(age).match(/[>\^]/)) {
-                age = parseInt(String(age).replace(/\D/g, ""));
-                filteredUsers = filteredUsers.filter((u) => u.age >= age);
-            } else if (String(age).match(/</)) {
-                age = parseInt(String(age).replace(/\D/g, ""));
-                filteredUsers = filteredUsers.filter((u) => u.age <= age);
-            } else if (String(age).match(/[\~\*]/)) {
-                age = parseInt(String(age).replace(/\D/g, ""));
+            //String.raw here, fixes a bug
+            if (religion)
                 filteredUsers = filteredUsers.filter(
-                    (u) =>
-                        u.age === age + 2 ||
-                        u.age === age - 2 ||
-                        u.age === age + 1 ||
-                        u.age === age - 1 ||
-                        u.age === age
+                    (u) => !!u.religion.match(RegExp(religion, "i"))
                 );
-            } else {
-                age = parseInt(String(age).replace(/\D/g, ""));
-                filteredUsers = filteredUsers.filter((u) => u.age === age);
+            if (id) {
+                id = RegExp(
+                    String.raw`(${id}|${id.split("").reverse().join("")})`,
+                    "i"
+                );
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!String(u.id).match(id)
+                );
             }
-        }
-        if (state)
-            filteredUsers = filteredUsers.filter(
-                (u) => !!u.state.match(RegExp(state, "i"))
-            );
-        if (status)
-            filteredUsers = filteredUsers.filter(
-                (u) => !!u.status.match(RegExp(String.raw`^${status}$`, "i"))
-            );
-        //String.raw here fixes a bug
-        if (religion)
-            filteredUsers = filteredUsers.filter(
-                (u) => !!u.religion.match(RegExp(religion, "i"))
-            );
-        if (id) {
-            id = RegExp(
-                String.raw`(${id}|${id.split("").reverse().join("")})`,
-                "i"
-            );
-            filteredUsers = filteredUsers.filter(
-                (u) => !!String(u.id).match(id)
-            );
-        }
-        if (filteredUsers.length)
-            res.status(200).json({
-                users: filteredUsers,
-                length: filteredUsers.length,
-                success: true,
-            });
-        else
-            res.status(404).json({
-                error: {
-                    code: 404,
-                    message: "No users found for this sex!",
-                },
-                success: false,
-            });
-    } else if (id) {
-        id = id.toUpperCase();
-        id = id.match(/[,;]/) ? id.split(/[,;]+/g) : id;
-        let filteredUsers;
-        if (!Array.isArray(id)) {
-            id = RegExp(
-                String.raw`(${id}|${id.split("").reverse().join("")})`,
-                "i"
-            );
-            filteredUsers = foreigners.filter((u) => !!String(u.id).match(id));
-        } else {
-            filteredUsers = foreigners.filter((u) =>
-                id.some((n) =>
-                    n.match(
-                        RegExp(
-                            String.raw`(${u.id}|${u.id
-                                .split("")
-                                .reverse()
-                                .join("")})`,
-                            "i"
+            if (filteredUsers.length)
+                res.status(200).json({
+                    users: filteredUsers,
+                    length: filteredUsers.length,
+                    success: true,
+                });
+            else
+                res.status(404).json({
+                    error: {
+                        code: 404,
+                        message: "No users found for this age!",
+                    },
+                    success: false,
+                });
+        } else if (sex) {
+            let filteredUsers = foreigners.filter((u) => u.sex === sex);
+            if (country)
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!u.country.match(RegExp(country, "i"))
+                );
+            if (city)
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!u.city.match(RegExp(city, "i"))
+                );
+            if (age) {
+                if (String(age).match(/[>\^]/)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter((u) => u.age >= age);
+                } else if (String(age).match(/</)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter((u) => u.age <= age);
+                } else if (String(age).match(/[\~\*]/)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter(
+                        (u) =>
+                            u.age === age + 2 ||
+                            u.age === age - 2 ||
+                            u.age === age + 1 ||
+                            u.age === age - 1 ||
+                            u.age === age
+                    );
+                } else {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter((u) => u.age === age);
+                }
+            }
+            if (state)
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!u.state.match(RegExp(state, "i"))
+                );
+            if (status)
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!u.status.match(RegExp(String.raw`^${status}$`, "i"))
+                );
+            //String.raw here fixes a bug
+            if (religion)
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!u.religion.match(RegExp(religion, "i"))
+                );
+            if (id) {
+                id = RegExp(
+                    String.raw`(${id}|${id.split("").reverse().join("")})`,
+                    "i"
+                );
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!String(u.id).match(id)
+                );
+            }
+            if (filteredUsers.length)
+                res.status(200).json({
+                    users: filteredUsers,
+                    length: filteredUsers.length,
+                    success: true,
+                });
+            else
+                res.status(404).json({
+                    error: {
+                        code: 404,
+                        message: "No users found for this sex!",
+                    },
+                    success: false,
+                });
+        } else if (id) {
+            id = id.toUpperCase();
+            id = id.match(/[,;]/) ? id.split(/[,;]+/g) : id;
+            let filteredUsers;
+            if (!Array.isArray(id)) {
+                id = RegExp(
+                    String.raw`(${id}|${id.split("").reverse().join("")})`,
+                    "i"
+                );
+                filteredUsers = foreigners.filter((u) => !!String(u.id).match(id));
+            } else {
+                filteredUsers = foreigners.filter((u) =>
+                    id.some((n) =>
+                        n.match(
+                            RegExp(
+                                String.raw`(${u.id}|${u.id
+                                    .split("")
+                                    .reverse()
+                                    .join("")})`,
+                                "i"
+                            )
                         )
                     )
-                )
-            );
-        }
-        if (country)
-            filteredUsers = filteredUsers.filter(
-                (u) => !!u.country.match(RegExp(country, "i"))
-            );
-        if (city)
-            filteredUsers = filteredUsers.filter(
-                (u) => !!u.city.match(RegExp(city, "i"))
-            );
-        if (age) {
-            if (String(age).match(/[>\^]/)) {
-                age = parseInt(String(age).replace(/\D/g, ""));
-                filteredUsers = filteredUsers.filter((u) => u.age >= age);
-            } else if (String(age).match(/</)) {
-                age = parseInt(String(age).replace(/\D/g, ""));
-                filteredUsers = filteredUsers.filter((u) => u.age <= age);
-            } else if (String(age).match(/[\~\*]/)) {
-                age = parseInt(String(age).replace(/\D/g, ""));
-                filteredUsers = filteredUsers.filter(
-                    (u) =>
-                        u.age === age + 2 ||
-                        u.age === age - 2 ||
-                        u.age === age + 1 ||
-                        u.age === age - 1 ||
-                        u.age === age
                 );
-            } else {
-                age = parseInt(String(age).replace(/\D/g, ""));
-                filteredUsers = filteredUsers.filter((u) => u.age === age);
             }
-        }
-        if (state)
-            filteredUsers = filteredUsers.filter(
-                (u) => !!u.state.match(RegExp(state, "i"))
-            );
-        if (status)
-            filteredUsers = filteredUsers.filter(
-                (u) => !!u.status.match(RegExp(String.raw`^${status}$`, "i"))
-            );
-        //String.raw here fixes a bug
-        if (religion)
-            filteredUsers = filteredUsers.filter(
-                (u) => !!u.religion.match(RegExp(religion, "i"))
-            );
-        if (sex) filteredUsers = filteredUsers.filter((u) => u.sex === sex);
-        if (filteredUsers.length)
+            if (country)
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!u.country.match(RegExp(country, "i"))
+                );
+            if (city)
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!u.city.match(RegExp(city, "i"))
+                );
+            if (age) {
+                if (String(age).match(/[>\^]/)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter((u) => u.age >= age);
+                } else if (String(age).match(/</)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter((u) => u.age <= age);
+                } else if (String(age).match(/[\~\*]/)) {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter(
+                        (u) =>
+                            u.age === age + 2 ||
+                            u.age === age - 2 ||
+                            u.age === age + 1 ||
+                            u.age === age - 1 ||
+                            u.age === age
+                    );
+                } else {
+                    age = parseInt(String(age).replace(/\D/g, ""));
+                    filteredUsers = filteredUsers.filter((u) => u.age === age);
+                }
+            }
+            if (state)
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!u.state.match(RegExp(state, "i"))
+                );
+            if (status)
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!u.status.match(RegExp(String.raw`^${status}$`, "i"))
+                );
+            //String.raw here fixes a bug
+            if (religion)
+                filteredUsers = filteredUsers.filter(
+                    (u) => !!u.religion.match(RegExp(religion, "i"))
+                );
+            if (sex) filteredUsers = filteredUsers.filter((u) => u.sex === sex);
+            if (filteredUsers.length)
+                res.status(200).json({
+                    users: filteredUsers,
+                    length: filteredUsers.length,
+                    success: true,
+                });
+            else
+                res.status(404).json({
+                    error: {
+                        code: 404,
+                        message: "No users found for this id!",
+                    },
+                    success: false,
+                });
+        } else {
             res.status(200).json({
-                users: filteredUsers,
-                length: filteredUsers.length,
+                users: foreigners,
+                length: foreigners.length,
                 success: true,
             });
-        else
-            res.status(404).json({
-                error: {
-                    code: 404,
-                    message: "No users found for this id!",
-                },
-                success: false,
-            });
-    } else {
+        }
+    } else if (method === "POST") {
+        let {
+            id,
+            name,
+            sex,
+            age,
+            country,
+            city,
+            state,
+            status,
+            religion,
+            phone,
+            email,
+            username,
+            password,
+            bloodGroup
+        } = req.body;
+        name = name || {title:"",first:"",last:""};
+        id = id;
+        if (
+            !id || !/^([a-z][\d]|[\d][a-z])$/i.test(String(id)) || String(id).trim().length < 2 || foreigners.some((u) => u.id === id) ||
+            !name || typeof name !== "object" || Object.values(name).length < 3 || !("title" in name) || !("first" in name) || !("last" in name) || !/[a-z]{2,}/i.test(String(name.title).trim()) || !/[a-z]{3,}/i.test(String(name.first).trim()) || !/[a-z]{3,}/i.test(String(name.last).trim()) ||
+            !sex || !/[a-z]{1,}/i.test(String(sex)) ||
+            !parseInt(age) || parseInt(age) < 18 || parseInt(age) > 40 || String(age).trim().length < 2 ||
+            !country || !/[a-z]{4,}/i.test(String(country)) ||
+            !city || !/[a-z]{4,}/i.test(String(city)) ||
+            !state || !/[a-z]{4,}/i.test(String(state)) ||
+            !status || !/(in|o(n|ff))?(active|line)/.test(String(status)) || String(status).trim().length < 5 ||
+            !religion || !String(religion).match(/[a-z]{4,}/i) ||
+            !/^((([\+\d\-.]{1,4})?[ \-.]?\d{3,5})|([\+?\d\-.]{1,4})?[ \-.]?\((\d{3}\)))?[ \-.]?\d{3}[ \-.]?\d{4}$/i.test(String(phone).trim()) ||
+            !email || !/^[\w\.\-\_\+\!]+@[\w]+\.[\w]{2,}(\.[\w]{2,})?$/i.test(String(email).trim()) ||
+            !username || !/[a-z]{2,}/i.test(String(username)) ||
+            !password || !/[a-z]{2,}/i.test(String(password)) || String(password).trim().length < 8 ||
+            !bloodGroup || !/^[OOa-bOO]+[\+\-]|((N|TB)[\/.]*A[\.]*)$/i.test(String(bloodGroup)) || String(bloodGroup).trim().length < 2
+        ) {
+            res.status(400).json({ error: {code: 400, message: "Either bad paramaters, or user with the same id was found!"}, success: false });
+            return;
+        }
+        const newUser = { name: name, sex: sex, age: parseInt(age), country: country, city: city, state: state, status: status, religion: religion, phone: phone, email: email, login: {username: username, password: password }, bloodGroup: bloodGroup, id: id };
+        foreigners.push(newUser);
         res.status(200).json({
-            users: foreigners,
-            length: foreigners.length,
+            message: `User added successfully! New user: ${Object.values(newUser.name).join(" ")} from ${newUser.country}`,
             success: true,
         });
+    } else {
+        res.status(400).json({error: {code: 400, message: "Unsupported method for this route!"}, success: false});
     }
 });
 
