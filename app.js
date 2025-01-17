@@ -3227,20 +3227,20 @@ app.all("/:number", (req, res) => {
         } = req.body;
         name = name || {};
         if (
-            String(id).trim().length < 2 || foreigners.some((u) => u.id === id) ||
-            typeof name !== "object" || Object.values(name).length < 3 || !("title" in name) || !("first" in name) || !("last" in name) ||
-            !String(sex).trim().length ||
-            String(age).trim().length < 2 ||
-            String(country).trim().length < 3 ||
-            String(city).trim().length < 3 ||
-            String(state).trim().length < 2 ||
-            String(status).trim().length < 5 ||
-            String(religion).trim().length < 4 ||
-            String(phone).trim().length < 10 ||
-            String(email).trim().length < 5 ||
-            !String(username).trim().length ||
-            String(password).trim().length < 8 ||
-            String(bloodGroup).trim().length < 2
+            !id || String(id).trim().length < 2 || foreigners.some((u) => u.id === id) ||
+            !name || typeof name !== "object" || Object.values(name).length < 3 || !("title" in name) || !("first" in name) || !("last" in name) ||
+            !sex || !String(sex).trim().length ||
+            !age || String(age).trim().length < 2 ||
+            !country || String(country).trim().length < 3 ||
+            !city || String(city).trim().length < 3 ||
+            !state || String(state).trim().length < 2 ||
+            !status || String(status).trim().length < 5 ||
+            !religion || String(religion).trim().length < 4 ||
+            !phone || String(phone).trim().length < 10 ||
+            !email || String(email).trim().length < 5 ||
+            !username || !String(username).trim().length ||
+            !password || String(password).trim().length < 8 ||
+            !bloodGroup || String(bloodGroup).trim().length < 2
         ) {
             res.status(400).json({ message: "Either bad paramaters, or user with the same id was found!", success: false });
             return;
