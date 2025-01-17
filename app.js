@@ -3301,6 +3301,55 @@ app.all("/:number", (req, res) => {
             message: `User added successfully! New user: ${newUser.name.full} from ${newUser.country}`,
             success: true,
         });
+    } else if (method === "PUT") {
+        let {
+            id,
+            name,
+            sex,
+            age,
+            country,
+            city,
+            state,
+            status,
+            religion,
+            phone,
+            email,
+            username,
+            password,
+            bloodGroup
+        } = req.body;
+        name = name || {title:"",first:"",last:""};
+        id = id || non_parsed_number.toUpperCase();
+        let userToPutTo = foreigners.find(u => u.id === id);
+        id = userToPutTo ? userToPutTo.id : null;
+        bloodGroup = bloodGroup || "N/A";
+        if (
+            !id || !/^([a-z][\d]|[\d][a-z])$/i.test(String(id)) || String(id).trim().length < 2 ||
+            !name || typeof name !== "object" || Object.values(name).length < 3 || !("title" in name) || !("first" in name) || !("last" in name) || !/[a-z]{2,}/i.test(String(name.title).trim()) || !/[a-z]{3,}/i.test(String(name.first).trim()) || !/[a-z]{3,}/i.test(String(name.last).trim()) ||
+            !sex || !/[a-z]{1,}/i.test(String(sex)) ||
+            !parseInt(age) || parseInt(age) < 18 || parseInt(age) > 40 || String(age).trim().length < 2 ||
+            !country || !/[a-z]{4,}/i.test(String(country)) ||
+            !city || !/[a-z]{4,}/i.test(String(city)) ||
+            !state || !/[a-z]{4,}/i.test(String(state)) ||
+            !status || !/(in|o(n|ff))?(active|line)/.test(String(status)) || String(status).trim().length < 5 ||
+            !religion || !String(religion).match(/[a-z]{4,}/i) ||
+            !/^((([\+\d\-.]{1,4})?[ \-.]?\d{3,5})|([\+?\d\-.]{1,4})?[ \-.]?\((\d{3}\)))?[ \-.]?\d{3}[ \-.]?\d{4}$/i.test(String(phone).trim()) ||
+            !email || !/^[\w\.\-\_\+\!]+@[\w]+\.[\w]{2,}(\.[\w]{2,})?$/i.test(String(email).trim()) ||
+            !username || !/[a-z]{2,}/i.test(String(username)) ||
+            !password || !/[a-z]{2,}/i.test(String(password)) || String(password).trim().length < 8 ||
+            !bloodGroup || !/^[OOa-bOO]+[\+\-]|((N|T\.?B)[\/.]*A[\.]*)$/i.test(String(bloodGroup)) || String(bloodGroup).trim().length < 2
+        ) {
+            res.status(400).json({ error: {code: 400, message: "Either bad paramaters, or NO USER with the same id was found!"}, success: false });
+            return;
+        }
+        const newUserData = { name: {...name, full: Object.values(name).join(" ")}, sex: sex, age: parseInt(age), country: country, city: city, state: state, status: status, religion: religion, phone: phone, email: email, login: {username: username, password: password }, bloodGroup: bloodGroup, id: id };
+        foreigners = foreigners.filter(u => u.id != id);
+        foreigners.push(newUserData);
+        res.status(200).json({
+            message: `Userdata PUT successful! New userdata was added to: (now) ${newUserData.name.full} from ${newUserData.country}`,
+            userWithChanges: newUserData,
+            success: true,
+        });
     } else if (method === "PATCH") {
         non_parsed_number = non_parsed_number.toUpperCase();
         non_parsed_number = non_parsed_number.match(/\W/)
@@ -3378,14 +3427,14 @@ app.all("/:number", (req, res) => {
             });
         }
         res.status(200).json({
-            message: `Updated user(s) with specified ids, and their values, as per the request. Here comes the modified user:`,
+            message: `User(s) with specified ids, and their values, as per the request, were updated. User with patched data:`,
             modifiedUser: users_with_specified_ids.length
                 ? users_with_specified_ids
                 : user_with_specified_id,
             success: true,
         });
     } else if (method === "PUT") {
-        res.status(403).json({ error: {code: 403, message: "PUT method not allowed!"}, success: false });
+        res.status(403).json({ error: {code: 403, message: "PUT method not allowed for this route, try the other route!"}, success: false });
     } else if (method === "DELETE") {
         non_parsed_number = non_parsed_number.toUpperCase();
         non_parsed_number = non_parsed_number.match(/\W/)
