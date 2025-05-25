@@ -2,7 +2,7 @@
     "name": "randusers",
     "version": "0.1.0",
     "description": "Api that serves a set of random users from Pakistan you can play with as a part of API testing",
-    "main": "app.js",
+    "main": "index.js",
     "dependencies": {
         "compression": "^1.7.5",
         "express": "^4.21.1",
@@ -13,8 +13,8 @@
         "dotenv": "^16.4.5"
     },
     "scripts": {
-        "start": "node app.js",
-        "dev": "nodemon app.js",
+        "start": "node index.js",
+        "dev": "nodemon index.js",
         "deploy": "deploy",
         "push": "push"
     },

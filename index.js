@@ -1,11 +1,10 @@
 const express = require("express");
-const dotenv = require("dotenv");
+const dotenv = require("dotenv").config();
 const path = require("path");
 const [helmet, compression] = [require("helmet"), require("compression")];
 
 //configuring express
 const app = express();
-dotenv.config();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use((req, res, next) => {
@@ -37,7 +36,7 @@ let make_cdn = (_for) => {
     if (typeof _for !== "string" || !String(_for).trim().length) return;
     let _this = {
         protocol: "https://",
-        host: "randusers-api.up.railway.app",
+        host: "randusers-api.vercel.app",
         path: "/img",
     };
     return `${Object.values(_this).join("")}${
@@ -1983,7 +1982,7 @@ app.all("/", (req, res) => {
     );
 
     if (method === "GET") {
-        if (String(sorted).match(/true|yes/i)) foreigners = sorted_foreigners;
+        if (String(sorted).match(/true|yes|1/i)) foreigners = sorted_foreigners;
         else foreigners = shuffled_foreigners;
         // let objectKeysToLowerCase = function (input) {
         //     if (typeof input !== "object") return input;
@@ -2055,7 +2054,8 @@ app.all("/", (req, res) => {
             if (sex) filteredUsers = filteredUsers.filter((u) => u.sex === sex);
             if (status)
                 filteredUsers = filteredUsers.filter(
-                    (u) => !!u.status.match(RegExp(String.raw`^${status}$`, "i"))
+                    (u) =>
+                        !!u.status.match(RegExp(String.raw`^${status}$`, "i"))
                 );
             if (id) {
                 id = RegExp(
@@ -2070,6 +2070,10 @@ app.all("/", (req, res) => {
                 res.status(200).json({
                     users: filteredUsers,
                     length: filteredUsers.length,
+                    report_a_bug: {
+                        email: "abbaskhurram255@gmail.com",
+                        phone: "+92 301 296 5459",
+                    },
                     success: true,
                 });
             else
@@ -2077,6 +2081,10 @@ app.all("/", (req, res) => {
                     error: {
                         code: 404,
                         message: "No users found for this country!",
+                    },
+                    report_a_bug: {
+                        email: "abbaskhurram255@gmail.com",
+                        phone: "+92 301 296 5459",
                     },
                     success: false,
                 });
@@ -2121,7 +2129,8 @@ app.all("/", (req, res) => {
             if (sex) filteredUsers = filteredUsers.filter((u) => u.sex === sex);
             if (status)
                 filteredUsers = filteredUsers.filter(
-                    (u) => !!u.status.match(RegExp(String.raw`^${status}$`, "i"))
+                    (u) =>
+                        !!u.status.match(RegExp(String.raw`^${status}$`, "i"))
                 );
             if (id) {
                 id = RegExp(
@@ -2136,6 +2145,10 @@ app.all("/", (req, res) => {
                 res.status(200).json({
                     users: filteredUsers,
                     length: filteredUsers.length,
+                    report_a_bug: {
+                        email: "abbaskhurram255@gmail.com",
+                        phone: "+92 301 296 5459",
+                    },
                     success: true,
                 });
             else
@@ -2143,6 +2156,10 @@ app.all("/", (req, res) => {
                     error: {
                         code: 404,
                         message: "No users found for this city!",
+                    },
+                    report_a_bug: {
+                        email: "abbaskhurram255@gmail.com",
+                        phone: "+92 301 296 5459",
                     },
                     success: false,
                 });
@@ -2183,7 +2200,8 @@ app.all("/", (req, res) => {
             if (sex) filteredUsers = filteredUsers.filter((u) => u.sex === sex);
             if (status)
                 filteredUsers = filteredUsers.filter(
-                    (u) => !!u.status.match(RegExp(String.raw`^${status}$`, "i"))
+                    (u) =>
+                        !!u.status.match(RegExp(String.raw`^${status}$`, "i"))
                 );
             if (religion)
                 filteredUsers = filteredUsers.filter(
@@ -2202,6 +2220,10 @@ app.all("/", (req, res) => {
                 res.status(200).json({
                     users: filteredUsers,
                     length: filteredUsers.length,
+                    report_a_bug: {
+                        email: "abbaskhurram255@gmail.com",
+                        phone: "+92 301 296 5459",
+                    },
                     success: true,
                 });
             else
@@ -2209,6 +2231,10 @@ app.all("/", (req, res) => {
                     error: {
                         code: 404,
                         message: "No users found for this state/provision!",
+                    },
+                    report_a_bug: {
+                        email: "abbaskhurram255@gmail.com",
+                        phone: "+92 301 296 5459",
                     },
                     success: false,
                 });
@@ -2253,7 +2279,8 @@ app.all("/", (req, res) => {
                 );
             if (status)
                 filteredUsers = filteredUsers.filter(
-                    (u) => !!u.status.match(RegExp(String.raw`^${status}$`, "i"))
+                    (u) =>
+                        !!u.status.match(RegExp(String.raw`^${status}$`, "i"))
                 );
             if (id) {
                 id = RegExp(
@@ -2268,6 +2295,10 @@ app.all("/", (req, res) => {
                 res.status(200).json({
                     users: filteredUsers,
                     length: filteredUsers.length,
+                    report_a_bug: {
+                        email: "abbaskhurram255@gmail.com",
+                        phone: "+92 301 296 5459",
+                    },
                     success: true,
                 });
             else
@@ -2275,6 +2306,10 @@ app.all("/", (req, res) => {
                     error: {
                         code: 404,
                         message: "No users found for this religion!",
+                    },
+                    report_a_bug: {
+                        email: "abbaskhurram255@gmail.com",
+                        phone: "+92 301 296 5459",
                     },
                     success: false,
                 });
@@ -2334,6 +2369,10 @@ app.all("/", (req, res) => {
                 res.status(200).json({
                     users: filteredUsers,
                     length: filteredUsers.length,
+                    report_a_bug: {
+                        email: "abbaskhurram255@gmail.com",
+                        phone: "+92 301 296 5459",
+                    },
                     success: true,
                 });
             else
@@ -2341,6 +2380,10 @@ app.all("/", (req, res) => {
                     error: {
                         code: 404,
                         message: "No users found for this activity status!",
+                    },
+                    report_a_bug: {
+                        email: "abbaskhurram255@gmail.com",
+                        phone: "+92 301 296 5459",
                     },
                     success: false,
                 });
@@ -2381,7 +2424,8 @@ app.all("/", (req, res) => {
                 );
             if (status)
                 filteredUsers = filteredUsers.filter(
-                    (u) => !!u.status.match(RegExp(String.raw`^${status}$`, "i"))
+                    (u) =>
+                        !!u.status.match(RegExp(String.raw`^${status}$`, "i"))
                 );
             //String.raw here, fixes a bug
             if (religion)
@@ -2401,6 +2445,10 @@ app.all("/", (req, res) => {
                 res.status(200).json({
                     users: filteredUsers,
                     length: filteredUsers.length,
+                    report_a_bug: {
+                        email: "abbaskhurram255@gmail.com",
+                        phone: "+92 301 296 5459",
+                    },
                     success: true,
                 });
             else
@@ -2408,6 +2456,10 @@ app.all("/", (req, res) => {
                     error: {
                         code: 404,
                         message: "No users found for this age!",
+                    },
+                    report_a_bug: {
+                        email: "abbaskhurram255@gmail.com",
+                        phone: "+92 301 296 5459",
                     },
                     success: false,
                 });
@@ -2449,7 +2501,8 @@ app.all("/", (req, res) => {
                 );
             if (status)
                 filteredUsers = filteredUsers.filter(
-                    (u) => !!u.status.match(RegExp(String.raw`^${status}$`, "i"))
+                    (u) =>
+                        !!u.status.match(RegExp(String.raw`^${status}$`, "i"))
                 );
             //String.raw here fixes a bug
             if (religion)
@@ -2469,6 +2522,10 @@ app.all("/", (req, res) => {
                 res.status(200).json({
                     users: filteredUsers,
                     length: filteredUsers.length,
+                    report_a_bug: {
+                        email: "abbaskhurram255@gmail.com",
+                        phone: "+92 301 296 5459",
+                    },
                     success: true,
                 });
             else
@@ -2476,6 +2533,10 @@ app.all("/", (req, res) => {
                     error: {
                         code: 404,
                         message: "No users found for this sex!",
+                    },
+                    report_a_bug: {
+                        email: "abbaskhurram255@gmail.com",
+                        phone: "+92 301 296 5459",
                     },
                     success: false,
                 });
@@ -2488,7 +2549,9 @@ app.all("/", (req, res) => {
                     String.raw`(${id}|${id.split("").reverse().join("")})`,
                     "i"
                 );
-                filteredUsers = foreigners.filter((u) => !!String(u.id).match(id));
+                filteredUsers = foreigners.filter(
+                    (u) => !!String(u.id).match(id)
+                );
             } else {
                 filteredUsers = foreigners.filter((u) =>
                     id.some((n) =>
@@ -2540,7 +2603,8 @@ app.all("/", (req, res) => {
                 );
             if (status)
                 filteredUsers = filteredUsers.filter(
-                    (u) => !!u.status.match(RegExp(String.raw`^${status}$`, "i"))
+                    (u) =>
+                        !!u.status.match(RegExp(String.raw`^${status}$`, "i"))
                 );
             //String.raw here fixes a bug
             if (religion)
@@ -2552,6 +2616,10 @@ app.all("/", (req, res) => {
                 res.status(200).json({
                     users: filteredUsers,
                     length: filteredUsers.length,
+                    report_a_bug: {
+                        email: "abbaskhurram255@gmail.com",
+                        phone: "+92 301 296 5459",
+                    },
                     success: true,
                 });
             else
@@ -2560,12 +2628,20 @@ app.all("/", (req, res) => {
                         code: 404,
                         message: "No users found for this id!",
                     },
+                    report_a_bug: {
+                        email: "abbaskhurram255@gmail.com",
+                        phone: "+92 301 296 5459",
+                    },
                     success: false,
                 });
         } else {
             res.status(200).json({
                 users: foreigners,
                 length: foreigners.length,
+                report_a_bug: {
+                    email: "abbaskhurram255@gmail.com",
+                    phone: "+92 301 296 5459",
+                },
                 success: true,
             });
         }
@@ -2584,37 +2660,106 @@ app.all("/", (req, res) => {
             email,
             username,
             password,
-            bloodGroup
+            bloodGroup,
         } = req.body;
-        name = name || {title:"",first:"",last:""};
+        name = name || { title: "", first: "", last: "" };
         bloodGroup = bloodGroup || "N/A";
         if (
-            !id || !/^([a-z][\d]|[\d][a-z])$/i.test(String(id)) || String(id).trim().length < 2 || foreigners.some((u) => u.id === id) ||
-            !name || typeof name !== "object" || Object.values(name).length < 3 || !("title" in name) || !("first" in name) || !("last" in name) || !/[a-z]{2,}/i.test(String(name.title).trim()) || !/[a-z]{3,}/i.test(String(name.first).trim()) || !/[a-z]{3,}/i.test(String(name.last).trim()) ||
-            !sex || !/[a-z]{1,}/i.test(String(sex)) ||
-            !parseInt(age) || parseInt(age) < 18 || parseInt(age) > 40 || String(age).trim().length < 2 ||
-            !country || !/[a-z]{4,}/i.test(String(country)) ||
-            !city || !/[a-z]{4,}/i.test(String(city)) ||
-            !state || !/[a-z]{4,}/i.test(String(state)) ||
-            !status || !/(in|o(n|ff))?(active|line)/.test(String(status)) || String(status).trim().length < 5 ||
-            !religion || !String(religion).match(/[a-z]{4,}/i) ||
-            !/^((([\+\d\-.]{1,4})?[ \-.]?\d{3,5})|([\+?\d\-.]{1,4})?[ \-.]?\((\d{3}\)))?[ \-.]?\d{3}[ \-.]?\d{4}$/i.test(String(phone).trim()) ||
-            !email || !/^[\w\.\-\_\+\!]+@[\w]+\.[\w]{2,}(\.[\w]{2,})?$/i.test(String(email).trim()) ||
-            !username || !/[a-z]{2,}/i.test(String(username)) ||
-            !password || !/[a-z]{2,}/i.test(String(password)) || String(password).trim().length < 8 ||
-            !bloodGroup || !/^[OOa-bOO]+[\+\-]|((N|T\.?B)[\/.]*A[\.]*)$/i.test(String(bloodGroup)) || String(bloodGroup).trim().length < 2
+            !id ||
+            !/^([a-z][\d]|[\d][a-z])$/i.test(String(id)) ||
+            String(id).trim().length < 2 ||
+            foreigners.some((u) => u.id === id) ||
+            !name ||
+            typeof name !== "object" ||
+            Object.values(name).length < 3 ||
+            !("title" in name) ||
+            !("first" in name) ||
+            !("last" in name) ||
+            !/[a-z]{2,}/i.test(String(name.title).trim()) ||
+            !/[a-z]{3,}/i.test(String(name.first).trim()) ||
+            !/[a-z]{3,}/i.test(String(name.last).trim()) ||
+            !sex ||
+            !/[a-z]{1,}/i.test(String(sex)) ||
+            !parseInt(age) ||
+            parseInt(age) < 18 ||
+            parseInt(age) > 40 ||
+            String(age).trim().length < 2 ||
+            !country ||
+            !/[a-z]{4,}/i.test(String(country)) ||
+            !city ||
+            !/[a-z]{4,}/i.test(String(city)) ||
+            !state ||
+            !/[a-z]{4,}/i.test(String(state)) ||
+            !status ||
+            !/(in|o(n|ff))?(active|line)/.test(String(status)) ||
+            String(status).trim().length < 5 ||
+            !religion ||
+            !String(religion).match(/[a-z]{4,}/i) ||
+            !/^((([\+\d\-.]{1,4})?[ \-.]?\d{3,5})|([\+?\d\-.]{1,4})?[ \-.]?\((\d{3}\)))?[ \-.]?\d{3}[ \-.]?\d{4}$/i.test(
+                String(phone).trim()
+            ) ||
+            !email ||
+            !/^[\w\.\-\_\+\!]+@[\w]+\.[\w]{2,}(\.[\w]{2,})?$/i.test(
+                String(email).trim()
+            ) ||
+            !username ||
+            !/[a-z]{2,}/i.test(String(username)) ||
+            !password ||
+            !/[a-z]{2,}/i.test(String(password)) ||
+            String(password).trim().length < 8 ||
+            !bloodGroup ||
+            !/^[OOa-bOO]+[\+\-]|((N|T\.?B)[\/.]*A[\.]*)$/i.test(
+                String(bloodGroup)
+            ) ||
+            String(bloodGroup).trim().length < 2
         ) {
-            res.status(400).json({ error: {code: 400, message: "Either bad paramaters, or user with the same id was found!"}, success: false });
+            res.status(400).json({
+                error: {
+                    code: 400,
+                    message:
+                        "Either bad paramaters, or user with the same id was found!",
+                },
+                report_a_bug: {
+                    email: "abbaskhurram255@gmail.com",
+                    phone: "+92 301 296 5459",
+                },
+                success: false,
+            });
             return;
         }
-        const newUser = { name: {...name, full: Object.values(name).join(" ")}, sex: sex, age: parseInt(age), country: country, city: city, state: state, status: status, religion: religion, phone: phone, email: email, login: {username: username, password: password }, bloodGroup: bloodGroup, id: id };
+        const newUser = {
+            name: { ...name, full: Object.values(name).join(" ") },
+            sex: sex,
+            age: parseInt(age),
+            country: country,
+            city: city,
+            state: state,
+            status: status,
+            religion: religion,
+            phone: phone,
+            email: email,
+            login: { username: username, password: password },
+            bloodGroup: bloodGroup,
+            id: id,
+        };
         foreigners.push(newUser);
         res.status(200).json({
             message: `User added successfully! New user: ${newUser.name.full} from ${newUser.country}`,
+            report_a_bug: {
+                email: "abbaskhurram255@gmail.com",
+                phone: "+92 301 296 5459",
+            },
             success: true,
         });
     } else {
-        res.status(400).json({error: {code: 400, message: "Unsupported method for this route!"}, success: false});
+        res.status(400).json({
+            error: { code: 400, message: "Unsupported method for this route!" },
+            report_a_bug: {
+                email: "abbaskhurram255@gmail.com",
+                phone: "+92 301 296 5459",
+            },
+            success: false,
+        });
     }
 });
 
@@ -2647,7 +2792,7 @@ app.all("/:number", (req, res) => {
             shuffled_foreigners[i] = shuffled_foreigners[j];
             shuffled_foreigners[j] = temp;
         }
-        if (String(sorted).match(/true|yes/i)) foreigners = sorted_foreigners;
+        if (String(sorted).match(/true|yes|1/i)) foreigners = sorted_foreigners;
         else foreigners = shuffled_foreigners;
         if (status) status = status.toLowerCase();
         if (sex) sex = sex.toLowerCase();
@@ -2722,6 +2867,10 @@ app.all("/:number", (req, res) => {
                 res.status(200).json({
                     users: filteredUsers,
                     length: filteredUsers.length,
+                    report_a_bug: {
+                        email: "abbaskhurram255@gmail.com",
+                        phone: "+92 301 296 5459",
+                    },
                     success: true,
                 });
             } else {
@@ -2729,6 +2878,10 @@ app.all("/:number", (req, res) => {
                     error: {
                         code: 404,
                         message: "No users found for this country!",
+                    },
+                    report_a_bug: {
+                        email: "abbaskhurram255@gmail.com",
+                        phone: "+92 301 296 5459",
                     },
                     success: false,
                 });
@@ -2792,6 +2945,10 @@ app.all("/:number", (req, res) => {
                 res.status(200).json({
                     users: filteredUsers,
                     length: filteredUsers.length,
+                    report_a_bug: {
+                        email: "abbaskhurram255@gmail.com",
+                        phone: "+92 301 296 5459",
+                    },
                     success: true,
                 });
             } else {
@@ -2799,6 +2956,10 @@ app.all("/:number", (req, res) => {
                     error: {
                         code: 404,
                         message: "No users found for this city!",
+                    },
+                    report_a_bug: {
+                        email: "abbaskhurram255@gmail.com",
+                        phone: "+92 301 296 5459",
                     },
                     success: false,
                 });
@@ -2862,6 +3023,10 @@ app.all("/:number", (req, res) => {
                 res.status(200).json({
                     users: filteredUsers,
                     length: filteredUsers.length,
+                    report_a_bug: {
+                        email: "abbaskhurram255@gmail.com",
+                        phone: "+92 301 296 5459",
+                    },
                     success: true,
                 });
             } else {
@@ -2870,6 +3035,10 @@ app.all("/:number", (req, res) => {
                         code: 404,
                         message:
                             "No users found for this state/provice/region!",
+                    },
+                    report_a_bug: {
+                        email: "abbaskhurram255@gmail.com",
+                        phone: "+92 301 296 5459",
                     },
                     success: false,
                 });
@@ -2933,6 +3102,10 @@ app.all("/:number", (req, res) => {
                 res.status(200).json({
                     users: filteredUsers,
                     length: filteredUsers.length,
+                    report_a_bug: {
+                        email: "abbaskhurram255@gmail.com",
+                        phone: "+92 301 296 5459",
+                    },
                     success: true,
                 });
             } else {
@@ -2940,6 +3113,10 @@ app.all("/:number", (req, res) => {
                     error: {
                         code: 404,
                         message: "No users found for this religion!",
+                    },
+                    report_a_bug: {
+                        email: "abbaskhurram255@gmail.com",
+                        phone: "+92 301 296 5459",
                     },
                     success: false,
                 });
@@ -3002,6 +3179,10 @@ app.all("/:number", (req, res) => {
                 res.status(200).json({
                     users: filteredUsers,
                     length: filteredUsers.length,
+                    report_a_bug: {
+                        email: "abbaskhurram255@gmail.com",
+                        phone: "+92 301 296 5459",
+                    },
                     success: true,
                 });
             } else {
@@ -3009,6 +3190,10 @@ app.all("/:number", (req, res) => {
                     error: {
                         code: 404,
                         message: "No users found for this activity status!",
+                    },
+                    report_a_bug: {
+                        email: "abbaskhurram255@gmail.com",
+                        phone: "+92 301 296 5459",
                     },
                     success: false,
                 });
@@ -3072,6 +3257,10 @@ app.all("/:number", (req, res) => {
                 res.status(200).json({
                     users: filteredUsers,
                     length: filteredUsers.length,
+                    report_a_bug: {
+                        email: "abbaskhurram255@gmail.com",
+                        phone: "+92 301 296 5459",
+                    },
                     success: true,
                 });
             } else {
@@ -3079,6 +3268,10 @@ app.all("/:number", (req, res) => {
                     error: {
                         code: 404,
                         message: "No users found for this age!",
+                    },
+                    report_a_bug: {
+                        email: "abbaskhurram255@gmail.com",
+                        phone: "+92 301 296 5459",
                     },
                     success: false,
                 });
@@ -3144,6 +3337,10 @@ app.all("/:number", (req, res) => {
                 res.status(200).json({
                     users: filteredUsers,
                     length: filteredUsers.length,
+                    report_a_bug: {
+                        email: "abbaskhurram255@gmail.com",
+                        phone: "+92 301 296 5459",
+                    },
                     success: true,
                 });
             } else {
@@ -3151,6 +3348,10 @@ app.all("/:number", (req, res) => {
                     error: {
                         code: 404,
                         message: "No users found for this sex!",
+                    },
+                    report_a_bug: {
+                        email: "abbaskhurram255@gmail.com",
+                        phone: "+92 301 296 5459",
                     },
                     success: false,
                 });
@@ -3233,6 +3434,10 @@ app.all("/:number", (req, res) => {
                 res.status(200).json({
                     users: filteredUsers,
                     length: filteredUsers.length,
+                    report_a_bug: {
+                        email: "abbaskhurram255@gmail.com",
+                        phone: "+92 301 296 5459",
+                    },
                     success: true,
                 });
             } else {
@@ -3241,18 +3446,33 @@ app.all("/:number", (req, res) => {
                         code: 404,
                         message: "No users found for this id!",
                     },
+                    report_a_bug: {
+                        email: "abbaskhurram255@gmail.com",
+                        phone: "+92 301 296 5459",
+                    },
                     success: false,
                 });
             }
         } else {
             if (!Number(number)) {
-                res.status(400).json({error: {code: 400, message: "Bad request"}, success: false});
+                res.status(400).json({
+                    error: { code: 400, message: "Bad request" },
+                    report_a_bug: {
+                        email: "abbaskhurram255@gmail.com",
+                        phone: "+92 301 296 5459",
+                    },
+                    success: false,
+                });
                 return;
             }
             let sliced_foreigners = foreigners.slice(0, number);
             res.status(200).json({
                 users: sliced_foreigners,
                 length: sliced_foreigners.length,
+                report_a_bug: {
+                    email: "abbaskhurram255@gmail.com",
+                    phone: "+92 301 296 5459",
+                },
                 success: true,
             });
         }
@@ -3271,34 +3491,96 @@ app.all("/:number", (req, res) => {
             email,
             username,
             password,
-            bloodGroup
+            bloodGroup,
         } = req.body;
-        name = name || {title:"",first:"",last:""};
+        name = name || { title: "", first: "", last: "" };
         id = id || non_parsed_number.toUpperCase();
         bloodGroup = bloodGroup || "N/A";
         if (
-            !id || !/^([a-z][\d]|[\d][a-z])$/i.test(String(id)) || String(id).trim().length < 2 || foreigners.some((u) => u.id === id) ||
-            !name || typeof name !== "object" || Object.values(name).length < 3 || !("title" in name) || !("first" in name) || !("last" in name) || !/[a-z]{2,}/i.test(String(name.title).trim()) || !/[a-z]{3,}/i.test(String(name.first).trim()) || !/[a-z]{3,}/i.test(String(name.last).trim()) ||
-            !sex || !/[a-z]{1,}/i.test(String(sex)) ||
-            !parseInt(age) || parseInt(age) < 18 || parseInt(age) > 40 || String(age).trim().length < 2 ||
-            !country || !/[a-z]{4,}/i.test(String(country)) ||
-            !city || !/[a-z]{4,}/i.test(String(city)) ||
-            !state || !/[a-z]{4,}/i.test(String(state)) ||
-            !status || !/(in|o(n|ff))?(active|line)/.test(String(status)) || String(status).trim().length < 5 ||
-            !religion || !String(religion).match(/[a-z]{4,}/i) ||
-            !/^((([\+\d\-.]{1,4})?[ \-.]?\d{3,5})|([\+?\d\-.]{1,4})?[ \-.]?\((\d{3}\)))?[ \-.]?\d{3}[ \-.]?\d{4}$/i.test(String(phone).trim()) ||
-            !email || !/^[\w\.\-\_\+\!]+@[\w]+\.[\w]{2,}(\.[\w]{2,})?$/i.test(String(email).trim()) ||
-            !username || !/[a-z]{2,}/i.test(String(username)) ||
-            !password || !/[a-z]{2,}/i.test(String(password)) || String(password).trim().length < 8 ||
-            !bloodGroup || !/^[OOa-bOO]+[\+\-]|((N|T\.?B)[\/.]*A[\.]*)$/i.test(String(bloodGroup)) || String(bloodGroup).trim().length < 2
+            !id ||
+            !/^([a-z][\d]|[\d][a-z])$/i.test(String(id)) ||
+            String(id).trim().length < 2 ||
+            foreigners.some((u) => u.id === id) ||
+            !name ||
+            typeof name !== "object" ||
+            Object.values(name).length < 3 ||
+            !("title" in name) ||
+            !("first" in name) ||
+            !("last" in name) ||
+            !/[a-z]{2,}/i.test(String(name.title).trim()) ||
+            !/[a-z]{3,}/i.test(String(name.first).trim()) ||
+            !/[a-z]{3,}/i.test(String(name.last).trim()) ||
+            !sex ||
+            !/[a-z]{1,}/i.test(String(sex)) ||
+            !parseInt(age) ||
+            parseInt(age) < 18 ||
+            parseInt(age) > 40 ||
+            String(age).trim().length < 2 ||
+            !country ||
+            !/[a-z]{4,}/i.test(String(country)) ||
+            !city ||
+            !/[a-z]{4,}/i.test(String(city)) ||
+            !state ||
+            !/[a-z]{4,}/i.test(String(state)) ||
+            !status ||
+            !/(in|o(n|ff))?(active|line)/.test(String(status)) ||
+            String(status).trim().length < 5 ||
+            !religion ||
+            !String(religion).match(/[a-z]{4,}/i) ||
+            !/^((([\+\d\-.]{1,4})?[ \-.]?\d{3,5})|([\+?\d\-.]{1,4})?[ \-.]?\((\d{3}\)))?[ \-.]?\d{3}[ \-.]?\d{4}$/i.test(
+                String(phone).trim()
+            ) ||
+            !email ||
+            !/^[\w\.\-\_\+\!]+@[\w]+\.[\w]{2,}(\.[\w]{2,})?$/i.test(
+                String(email).trim()
+            ) ||
+            !username ||
+            !/[a-z]{2,}/i.test(String(username)) ||
+            !password ||
+            !/[a-z]{2,}/i.test(String(password)) ||
+            String(password).trim().length < 8 ||
+            !bloodGroup ||
+            !/^[OOa-bOO]+[\+\-]|((N|T\.?B)[\/.]*A[\.]*)$/i.test(
+                String(bloodGroup)
+            ) ||
+            String(bloodGroup).trim().length < 2
         ) {
-            res.status(400).json({ error: {code: 400, message: "Either bad paramaters, or user with the same id was found!"}, success: false });
+            res.status(400).json({
+                error: {
+                    code: 400,
+                    message:
+                        "Either bad paramaters, or user with the same id was found!",
+                },
+                report_a_bug: {
+                    email: "abbaskhurram255@gmail.com",
+                    phone: "+92 301 296 5459",
+                },
+                success: false,
+            });
             return;
         }
-        const newUser = { name: {...name, full: Object.values(name).join(" ")}, sex: sex, age: parseInt(age), country: country, city: city, state: state, status: status, religion: religion, phone: phone, email: email, login: {username: username, password: password }, bloodGroup: bloodGroup, id: id };
+        const newUser = {
+            name: { ...name, full: Object.values(name).join(" ") },
+            sex: sex,
+            age: parseInt(age),
+            country: country,
+            city: city,
+            state: state,
+            status: status,
+            religion: religion,
+            phone: phone,
+            email: email,
+            login: { username: username, password: password },
+            bloodGroup: bloodGroup,
+            id: id,
+        };
         foreigners.push(newUser);
         res.status(200).json({
             message: `User added successfully! New user: ${newUser.name.full} from ${newUser.country}`,
+            report_a_bug: {
+                email: "abbaskhurram255@gmail.com",
+                phone: "+92 301 296 5459",
+            },
             success: true,
         });
     } else if (method === "PUT") {
@@ -3316,38 +3598,99 @@ app.all("/:number", (req, res) => {
             email,
             username,
             password,
-            bloodGroup
+            bloodGroup,
         } = req.body;
-        name = name || {title:"",first:"",last:""};
+        name = name || { title: "", first: "", last: "" };
         id = id || non_parsed_number.toUpperCase();
-        let userToPutTo = foreigners.find(u => u.id === id);
+        let userToPutTo = foreigners.find((u) => u.id === id);
         id = userToPutTo ? userToPutTo.id : null;
         bloodGroup = bloodGroup || "N/A";
         if (
-            !id || !/^([a-z][\d]|[\d][a-z])$/i.test(String(id)) || String(id).trim().length < 2 ||
-            !name || typeof name !== "object" || Object.values(name).length < 3 || !("title" in name) || !("first" in name) || !("last" in name) || !/[a-z]{2,}/i.test(String(name.title).trim()) || !/[a-z]{3,}/i.test(String(name.first).trim()) || !/[a-z]{3,}/i.test(String(name.last).trim()) ||
-            !sex || !/[a-z]{1,}/i.test(String(sex)) ||
-            !parseInt(age) || parseInt(age) < 18 || parseInt(age) > 40 || String(age).trim().length < 2 ||
-            !country || !/[a-z]{4,}/i.test(String(country)) ||
-            !city || !/[a-z]{4,}/i.test(String(city)) ||
-            !state || !/[a-z]{4,}/i.test(String(state)) ||
-            !status || !/(in|o(n|ff))?(active|line)/.test(String(status)) || String(status).trim().length < 5 ||
-            !religion || !String(religion).match(/[a-z]{4,}/i) ||
-            !/^((([\+\d\-.]{1,4})?[ \-.]?\d{3,5})|([\+?\d\-.]{1,4})?[ \-.]?\((\d{3}\)))?[ \-.]?\d{3}[ \-.]?\d{4}$/i.test(String(phone).trim()) ||
-            !email || !/^[\w\.\-\_\+\!]+@[\w]+\.[\w]{2,}(\.[\w]{2,})?$/i.test(String(email).trim()) ||
-            !username || !/[a-z]{2,}/i.test(String(username)) ||
-            !password || !/[a-z]{2,}/i.test(String(password)) || String(password).trim().length < 8 ||
-            !bloodGroup || !/^[OOa-bOO]+[\+\-]|((N|T\.?B)[\/.]*A[\.]*)$/i.test(String(bloodGroup)) || String(bloodGroup).trim().length < 2
+            !id ||
+            !/^([a-z][\d]|[\d][a-z])$/i.test(String(id)) ||
+            String(id).trim().length < 2 ||
+            !name ||
+            typeof name !== "object" ||
+            Object.values(name).length < 3 ||
+            !("title" in name) ||
+            !("first" in name) ||
+            !("last" in name) ||
+            !/[a-z]{2,}/i.test(String(name.title).trim()) ||
+            !/[a-z]{3,}/i.test(String(name.first).trim()) ||
+            !/[a-z]{3,}/i.test(String(name.last).trim()) ||
+            !sex ||
+            !/[a-z]{1,}/i.test(String(sex)) ||
+            !parseInt(age) ||
+            parseInt(age) < 18 ||
+            parseInt(age) > 40 ||
+            String(age).trim().length < 2 ||
+            !country ||
+            !/[a-z]{4,}/i.test(String(country)) ||
+            !city ||
+            !/[a-z]{4,}/i.test(String(city)) ||
+            !state ||
+            !/[a-z]{4,}/i.test(String(state)) ||
+            !status ||
+            !/(in|o(n|ff))?(active|line)/.test(String(status)) ||
+            String(status).trim().length < 5 ||
+            !religion ||
+            !String(religion).match(/[a-z]{4,}/i) ||
+            !/^((([\+\d\-.]{1,4})?[ \-.]?\d{3,5})|([\+?\d\-.]{1,4})?[ \-.]?\((\d{3}\)))?[ \-.]?\d{3}[ \-.]?\d{4}$/i.test(
+                String(phone).trim()
+            ) ||
+            !email ||
+            !/^[\w\.\-\_\+\!]+@[\w]+\.[\w]{2,}(\.[\w]{2,})?$/i.test(
+                String(email).trim()
+            ) ||
+            !username ||
+            !/[a-z]{2,}/i.test(String(username)) ||
+            !password ||
+            !/[a-z]{2,}/i.test(String(password)) ||
+            String(password).trim().length < 8 ||
+            !bloodGroup ||
+            !/^[OOa-bOO]+[\+\-]|((N|T\.?B)[\/.]*A[\.]*)$/i.test(
+                String(bloodGroup)
+            ) ||
+            String(bloodGroup).trim().length < 2
         ) {
-            res.status(400).json({ error: {code: 400, message: "Either bad paramaters, or NO USER with the same id was found!"}, success: false });
+            res.status(400).json({
+                error: {
+                    code: 400,
+                    message:
+                        "Either bad paramaters, or NO USER with the same id was found!",
+                },
+                report_a_bug: {
+                    email: "abbaskhurram255@gmail.com",
+                    phone: "+92 301 296 5459",
+                },
+                success: false,
+            });
             return;
         }
-        const newUserData = { name: {...name, full: Object.values(name).join(" ")}, sex: sex, age: parseInt(age), country: country, city: city, state: state, status: status, religion: religion, phone: phone, email: email, login: {username: username, password: password }, bloodGroup: bloodGroup, id: id };
-        foreigners = foreigners.filter(u => u.id != id);
+        const newUserData = {
+            name: { ...name, full: Object.values(name).join(" ") },
+            sex: sex,
+            age: parseInt(age),
+            country: country,
+            city: city,
+            state: state,
+            status: status,
+            religion: religion,
+            phone: phone,
+            email: email,
+            login: { username: username, password: password },
+            bloodGroup: bloodGroup,
+            id: id,
+        };
+        foreigners = foreigners.filter((u) => u.id != id);
         foreigners.push(newUserData);
         res.status(200).json({
             message: `Userdata PUT successful! New userdata was added to: (now) ${newUserData.name.full} from ${newUserData.country}`,
             userWithChanges: newUserData,
+            report_a_bug: {
+                email: "abbaskhurram255@gmail.com",
+                phone: "+92 301 296 5459",
+            },
             success: true,
         });
     } else if (method === "PATCH") {
@@ -3377,18 +3720,29 @@ app.all("/:number", (req, res) => {
                                 message:
                                     "Forbidden. You are unauthorized to modify the default id of a user. Remove the 'id' property/key to continue!",
                             },
+                            report_a_bug: {
+                                email: "abbaskhurram255@gmail.com",
+                                phone: "+92 301 296 5459",
+                            },
                             success: false,
                         });
                         return;
                         //if key==="id", stop the operation. The core properties --- like id --- shouldn't accept any modifications.
                     }
                     user_with_specified_id[key] = value;
-                    console.log(`PATCH successful! User(s) with changes: ${user_with_specified_id}`);
+                    console.log(
+                        `PATCH successful! User(s) with changes: ${user_with_specified_id}`
+                    );
                 } else {
                     res.status(404).json({
                         error: {
                             code: 404,
-                            message: "No such user found with the specified id!",
+                            message:
+                                "No such user found with the specified id!",
+                        },
+                        report_a_bug: {
+                            email: "abbaskhurram255@gmail.com",
+                            phone: "+92 301 296 5459",
                         },
                         success: false,
                     });
@@ -3417,6 +3771,10 @@ app.all("/:number", (req, res) => {
                                 message:
                                     "Forbidden. You are unauthorized to modify the default id of a user. Remove the 'id' property/key to continue!",
                             },
+                            report_a_bug: {
+                                email: "abbaskhurram255@gmail.com",
+                                phone: "+92 301 296 5459",
+                            },
                             success: false,
                         });
                         return;
@@ -3431,10 +3789,25 @@ app.all("/:number", (req, res) => {
             modifiedUser: users_with_specified_ids.length
                 ? users_with_specified_ids
                 : user_with_specified_id,
+            report_a_bug: {
+                email: "abbaskhurram255@gmail.com",
+                phone: "+92 301 296 5459",
+            },
             success: true,
         });
     } else if (method === "PUT") {
-        res.status(403).json({ error: {code: 403, message: "PUT method not allowed for this route, try the other route!"}, success: false });
+        res.status(403).json({
+            error: {
+                code: 403,
+                message:
+                    "PUT method not allowed for this route, try the other route!",
+            },
+            report_a_bug: {
+                email: "abbaskhurram255@gmail.com",
+                phone: "+92 301 296 5459",
+            },
+            success: false,
+        });
     } else if (method === "DELETE") {
         non_parsed_number = non_parsed_number.toUpperCase();
         non_parsed_number = non_parsed_number.match(/\W/)
@@ -3474,6 +3847,10 @@ app.all("/:number", (req, res) => {
             res.status(200).json({
                 message: `Deleted user(s) with id ${non_parsed_number}, as per the request. Here is the rest of the array:`,
                 filteredArray: filteredUsers,
+                report_a_bug: {
+                    email: "abbaskhurram255@gmail.com",
+                    phone: "+92 301 296 5459",
+                },
                 success: true,
             });
         else
@@ -3481,6 +3858,10 @@ app.all("/:number", (req, res) => {
                 error: {
                     code: 404,
                     message: "Such an id does not exist on the server!",
+                },
+                report_a_bug: {
+                    email: "abbaskhurram255@gmail.com",
+                    phone: "+92 301 296 5459",
                 },
                 success: false,
             });
@@ -3490,12 +3871,29 @@ app.all("/:number", (req, res) => {
 app.use("/img", express.static(path.join(__dirname, "img")));
 
 app.get("/*", (req, res) => {
-    res.status(206).json({error: {code: 206, message: "Empty request. Please type something awesome!"}, success: false});
+    res.status(206).json({
+        error: {
+            code: 206,
+            message: "Empty request. Please type something awesome!",
+        },
+        report_a_bug: {
+            email: "abbaskhurram255@gmail.com",
+            phone: "+92 301 296 5459",
+        },
+        success: false,
+    });
 });
 
 app.use((err, res) => {
     console.error(err.stack);
-    res.status(500).json({error: {code: 500, message: "Internal Server Error!"}, success: false});
+    res.status(500).json({
+        error: { code: 500, message: "Internal Server Error!" },
+        report_a_bug: {
+            email: "abbaskhurram255@gmail.com",
+            phone: "+92 301 296 5459",
+        },
+        success: false,
+    });
 });
 
 let PORT = parseInt(process.env.PORT) || 3002;
