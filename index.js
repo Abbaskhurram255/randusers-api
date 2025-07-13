@@ -1,9 +1,10 @@
 const express = require("express");
 const dotenv = require("dotenv").config();
 const path = require("path");
+const rateLimit = require("express-rate-limit");
 const [helmet, compression] = [require("helmet"), require("compression")];
 
-//configuring express
+//configuring express, getting the app up from the ground
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -22,7 +23,6 @@ app.use((req, res, next) => {
         "App-Version": "1.0.0",
     };
     res.set(meta);
-
     next();
 });
 app.use(
@@ -31,6 +31,27 @@ app.use(
     })
 );
 app.use(compression());
+app.use(
+    rateLimit({
+        windowMs: 15 * 6e4,
+        max: 100, //100 requests max, every 15 minutes. If you know how to do something, don't do it for free, killing your passion.
+        message: {
+            error: {
+                code: 429,
+                message:
+                    "Too many requests! Please try again in 15 minutes. For unlimited traffic, consider our premium plan.",
+            },
+            report_a_bug: {
+                email: "abbaskhurram255@gmail.com",
+                phone: "+92 301 296 5459",
+            },
+            users: [],
+            length: 0,
+            success: false,
+        },
+    })
+);
+//tested, working as expected
 
 let make_cdn = (_for) => {
     if (typeof _for !== "string" || !String(_for).trim().length) return;
@@ -2082,6 +2103,8 @@ app.all("/", (req, res) => {
                         code: 404,
                         message: "No users found for this country!",
                     },
+                    users: [],
+                    length: 0,
                     report_a_bug: {
                         email: "abbaskhurram255@gmail.com",
                         phone: "+92 301 296 5459",
@@ -2157,6 +2180,8 @@ app.all("/", (req, res) => {
                         code: 404,
                         message: "No users found for this city!",
                     },
+                    users: [],
+                    length: 0,
                     report_a_bug: {
                         email: "abbaskhurram255@gmail.com",
                         phone: "+92 301 296 5459",
@@ -2232,6 +2257,8 @@ app.all("/", (req, res) => {
                         code: 404,
                         message: "No users found for this state/provision!",
                     },
+                    users: [],
+                    length: 0,
                     report_a_bug: {
                         email: "abbaskhurram255@gmail.com",
                         phone: "+92 301 296 5459",
@@ -2307,6 +2334,8 @@ app.all("/", (req, res) => {
                         code: 404,
                         message: "No users found for this religion!",
                     },
+                    users: [],
+                    length: 0,
                     report_a_bug: {
                         email: "abbaskhurram255@gmail.com",
                         phone: "+92 301 296 5459",
@@ -2381,6 +2410,8 @@ app.all("/", (req, res) => {
                         code: 404,
                         message: "No users found for this activity status!",
                     },
+                    users: [],
+                    length: 0,
                     report_a_bug: {
                         email: "abbaskhurram255@gmail.com",
                         phone: "+92 301 296 5459",
@@ -2457,6 +2488,8 @@ app.all("/", (req, res) => {
                         code: 404,
                         message: "No users found for this age!",
                     },
+                    users: [],
+                    length: 0,
                     report_a_bug: {
                         email: "abbaskhurram255@gmail.com",
                         phone: "+92 301 296 5459",
@@ -2534,6 +2567,8 @@ app.all("/", (req, res) => {
                         code: 404,
                         message: "No users found for this sex!",
                     },
+                    users: [],
+                    length: 0,
                     report_a_bug: {
                         email: "abbaskhurram255@gmail.com",
                         phone: "+92 301 296 5459",
@@ -2628,6 +2663,8 @@ app.all("/", (req, res) => {
                         code: 404,
                         message: "No users found for this id!",
                     },
+                    users: [],
+                    length: 0,
                     report_a_bug: {
                         email: "abbaskhurram255@gmail.com",
                         phone: "+92 301 296 5459",
@@ -2719,6 +2756,8 @@ app.all("/", (req, res) => {
                     message:
                         "Either bad paramaters, or user with the same id was found!",
                 },
+                users: [],
+                length: 0,
                 report_a_bug: {
                     email: "abbaskhurram255@gmail.com",
                     phone: "+92 301 296 5459",
@@ -2776,7 +2815,19 @@ app.all("/:number", (req, res) => {
         (number % 1 || number < 1 || !isFinite(number)) &&
         !String(non_parsed_number).match(/\d[a-yA-Y]|[a-yA-Y]\d/i)
     ) {
-        return res.status(400).json({ code: 400, message: "Invalid request!" });
+        return res.status(400).json({
+            error: {
+                code: 400,
+                message: "Invalid request!",
+            },
+            report_a_bug: {
+                email: "abbaskhurram255@gmail.com",
+                phone: "+92 301 296 5459",
+            },
+            users: [],
+            length: 0,
+            success: false,
+        });
     }
     console.log(`Received a ${method} request on ${path}, acting accordingly!`);
     if (method === "GET") {
@@ -2879,6 +2930,8 @@ app.all("/:number", (req, res) => {
                         code: 404,
                         message: "No users found for this country!",
                     },
+                    users: [],
+                    length: 0,
                     report_a_bug: {
                         email: "abbaskhurram255@gmail.com",
                         phone: "+92 301 296 5459",
@@ -2957,6 +3010,8 @@ app.all("/:number", (req, res) => {
                         code: 404,
                         message: "No users found for this city!",
                     },
+                    users: [],
+                    length: 0,
                     report_a_bug: {
                         email: "abbaskhurram255@gmail.com",
                         phone: "+92 301 296 5459",
@@ -3036,6 +3091,8 @@ app.all("/:number", (req, res) => {
                         message:
                             "No users found for this state/provice/region!",
                     },
+                    users: [],
+                    length: 0,
                     report_a_bug: {
                         email: "abbaskhurram255@gmail.com",
                         phone: "+92 301 296 5459",
@@ -3114,6 +3171,8 @@ app.all("/:number", (req, res) => {
                         code: 404,
                         message: "No users found for this religion!",
                     },
+                    users: [],
+                    length: 0,
                     report_a_bug: {
                         email: "abbaskhurram255@gmail.com",
                         phone: "+92 301 296 5459",
@@ -3191,6 +3250,8 @@ app.all("/:number", (req, res) => {
                         code: 404,
                         message: "No users found for this activity status!",
                     },
+                    users: [],
+                    length: 0,
                     report_a_bug: {
                         email: "abbaskhurram255@gmail.com",
                         phone: "+92 301 296 5459",
@@ -3269,6 +3330,8 @@ app.all("/:number", (req, res) => {
                         code: 404,
                         message: "No users found for this age!",
                     },
+                    users: [],
+                    length: 0,
                     report_a_bug: {
                         email: "abbaskhurram255@gmail.com",
                         phone: "+92 301 296 5459",
@@ -3349,6 +3412,8 @@ app.all("/:number", (req, res) => {
                         code: 404,
                         message: "No users found for this sex!",
                     },
+                    users: [],
+                    length: 0,
                     report_a_bug: {
                         email: "abbaskhurram255@gmail.com",
                         phone: "+92 301 296 5459",
@@ -3446,6 +3511,8 @@ app.all("/:number", (req, res) => {
                         code: 404,
                         message: "No users found for this id!",
                     },
+                    users: [],
+                    length: 0,
                     report_a_bug: {
                         email: "abbaskhurram255@gmail.com",
                         phone: "+92 301 296 5459",
@@ -3457,6 +3524,8 @@ app.all("/:number", (req, res) => {
             if (!Number(number)) {
                 res.status(400).json({
                     error: { code: 400, message: "Bad request" },
+                    users: [],
+                    length: 0,
                     report_a_bug: {
                         email: "abbaskhurram255@gmail.com",
                         phone: "+92 301 296 5459",
@@ -3551,6 +3620,8 @@ app.all("/:number", (req, res) => {
                     message:
                         "Either bad paramaters, or user with the same id was found!",
                 },
+                users: [],
+                length: 0,
                 report_a_bug: {
                     email: "abbaskhurram255@gmail.com",
                     phone: "+92 301 296 5459",
@@ -3659,6 +3730,8 @@ app.all("/:number", (req, res) => {
                     message:
                         "Either bad paramaters, or NO USER with the same id was found!",
                 },
+                users: [],
+                length: 0,
                 report_a_bug: {
                     email: "abbaskhurram255@gmail.com",
                     phone: "+92 301 296 5459",
@@ -3685,7 +3758,7 @@ app.all("/:number", (req, res) => {
         foreigners = foreigners.filter((u) => u.id != id);
         foreigners.push(newUserData);
         res.status(200).json({
-            message: `Userdata PUT successful! New userdata was added to: (now) ${newUserData.name.full} from ${newUserData.country}`,
+            message: `User data PUT successfully! New userdata was added to: (now) ${newUserData.name.full} from (then) ${newUserData.country}`,
             userWithChanges: newUserData,
             report_a_bug: {
                 email: "abbaskhurram255@gmail.com",
@@ -3857,8 +3930,10 @@ app.all("/:number", (req, res) => {
             res.status(404).json({
                 error: {
                     code: 404,
-                    message: "Such an id does not exist on the server!",
+                    message: "No such id on the server!",
                 },
+                users: [],
+                length: 0,
                 report_a_bug: {
                     email: "abbaskhurram255@gmail.com",
                     phone: "+92 301 296 5459",
@@ -3880,6 +3955,8 @@ app.get("/*", (req, res) => {
             email: "abbaskhurram255@gmail.com",
             phone: "+92 301 296 5459",
         },
+        users: [],
+        length: 0,
         success: false,
     });
 });
@@ -3892,6 +3969,8 @@ app.use((err, res) => {
             email: "abbaskhurram255@gmail.com",
             phone: "+92 301 296 5459",
         },
+        users: [],
+        length: 0,
         success: false,
     });
 });
@@ -3899,7 +3978,10 @@ app.use((err, res) => {
 let PORT = parseInt(process.env.PORT) || 3002;
 app.listen(PORT, (err) => {
     if (err) {
-        throw new Error("Failed to start server, failed with error:", err);
+        throw new Error(
+            "Failed to start the server, responded with error:",
+            err
+        );
     }
     console.log(`listening on port ${PORT}`);
 });
